@@ -14,27 +14,27 @@ var authFacade = require(__libpath + '/models/facade/auth_facade');
  * @param {Function} next ネクスト
  */
 router.get('/', function(req, res, next) {
-    var redirectUrl = '/top';
-    if (mode == "local") {
-        // sessionに保存
-        req.session.user = {
-            "id": 1,
-            "employee_id": "TEST",
-            "employee_type": 1,
-            "company": "テスト",
-            "email": "test@test.co.jp"
-        };
-        res.redirect(redirectUrl);
-        return;
-    }
-    if (req.session.user) {
-        res.redirect(redirectUrl);
-        return;
-    }
-    redirectUrl = casso.authUrl+
-                "?response_type=code&client_id="+casso.clientId+
-                "&redirect_uri="+casso.callbackUrl+
-                "&scope=openid%20email%20profile";
+    var redirectUrl = '/auth/twitter';
+    // if (mode == "local") {
+    //     // sessionに保存
+    //     req.session.user = {
+    //         "id": 1,
+    //         "employee_id": "TEST",
+    //         "employee_type": 1,
+    //         "company": "テスト",
+    //         "email": "test@test.co.jp"
+    //     };
+    //     res.redirect(redirectUrl);
+    //     return;
+    // }
+    // if (req.session.user) {
+    //     res.redirect(redirectUrl);
+    //     return;
+    // }
+    // redirectUrl = casso.authUrl+
+    //             "?response_type=code&client_id="+casso.clientId+
+    //             "&redirect_uri="+casso.callbackUrl+
+    //             "&scope=openid%20email%20profile";
     console.log(redirectUrl);
     res.redirect(redirectUrl);
 });

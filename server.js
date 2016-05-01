@@ -20,7 +20,6 @@ var bodyParser = require('body-parser');
 var _ = require('underscore');
 var dateformat = require('dateformat');
 
-
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
@@ -36,6 +35,11 @@ app.use(expressLayouts);
 app.locals._ = _;
 app.locals.dateformat = dateformat;
 
+
+// passport-twitter用
+var passport = require('./lib/middleware/platform/twitter').passport;
+app.use(passport.initialize()); 
+app.use(passport.session()); 
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -65,12 +69,21 @@ var routes = require('./routes/index');
 var auth = require('./routes/auth');
 var error = require('./routes/error');
 var top = require('./routes/top');
-var reserved = require('./routes/reserved');
-app.use('/', routes);
+// var reserved = require('./routes/reserved');
+app.use('/', routes); 
 app.use('/auth', auth);
+app.get('/auth/twitter', passport.authenticate('twitter'));
+app.get('/auth/twitter/callback', 
+  passport.authenticate('twitter', 
+    {
+      successRedirect: '/',
+      failureRedirect: '/auth'
+    }
+  )
+);
 app.use('/error', error);
 app.use('/top', top);
-app.use('/reserved', reserved);
+// app.use('/reserved', reserved);
 
 //Attached some objects and vars to request object.
 app.use(function(req, res, next){
