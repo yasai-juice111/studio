@@ -69,20 +69,13 @@ var routes = require('./routes/index');
 var auth = require('./routes/auth');
 var error = require('./routes/error');
 var top = require('./routes/top');
+var logout = require('./routes/logout');
 // var reserved = require('./routes/reserved');
 app.use('/', routes); 
 app.use('/auth', auth);
-app.get('/auth/twitter', passport.authenticate('twitter'));
-app.get('/auth/twitter/callback', 
-  passport.authenticate('twitter', 
-    {
-      successRedirect: '/',
-      failureRedirect: '/auth'
-    }
-  )
-);
 app.use('/error', error);
 app.use('/top', top);
+app.use('/logout', logout);
 // app.use('/reserved', reserved);
 
 //Attached some objects and vars to request object.
@@ -129,6 +122,10 @@ app.use(function(err, req, res, next) {
     message: err.message,
     error: {}
   });
+});
+
+process.on('uncaughtException', function(err) {
+    console.log(err);
 });
 
 // listen

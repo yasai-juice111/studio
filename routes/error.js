@@ -5,6 +5,8 @@ var router = express.Router();
 router.get('/', function(req, res, error) {
     res.status(500);
     var e = null;
+    console.log(req);
+    console.log(res);
     console.log(error);
     if (error instanceof Error) {
         e = error;

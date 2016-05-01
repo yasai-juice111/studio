@@ -7,6 +7,11 @@
 		"consumerSecret": "AQXQSSWnuLpPJaJ1J6ecfarzAOmUcywfzyWn16NZGKYBeVpuca",
 		"callbackUrl": "http://localhost:3000/auth/twitter/callback"
 	},
+	"facebook" : {
+		"clientId": "267178249975240",
+		"clientSecret": "8bd853c264f8a402b539565c162138ef",
+		"callbackUrl": "http://localhost:3000/auth/facebook/callback"
+	},
 	"mysqlConf" : {
 		"host": "localhost",
 		"user": "root",
