@@ -3,7 +3,15 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+	console.log(req.session.studio);
+	if (req.session.studio) {
+        res.redirect('/calendar');
+		return;		
+	}
+	var result = {
+		studio : req.session.studio
+	};
+	res.render('index', result);
 });
 
 module.exports = router;

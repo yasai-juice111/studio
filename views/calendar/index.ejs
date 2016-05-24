@@ -3,7 +3,6 @@
 		<div id="studioList">
 			<h3>スタジオ一覧</h3>
 			<ul>
-				<li class="price"><strong><%= studio.name %></strong></li>
 				<% _.each(studio.studioAreaList, function(studioArea) {  %>
 					<li class="price" style="margin-left:20px"><strong><%= studioArea.name %></strong></li>
 					<% _.each(studioArea.studioAreaRoomList, function(studioAreaRoom) {  %>

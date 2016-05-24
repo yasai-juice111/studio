@@ -21,7 +21,7 @@
 	},
 	"mongodbConf" : {
 		"secret": "studio",
-		"host": "mongodb://localhost:27017/user",
+		"host": "mongodb://localhost:27017/studio",
 		"collection" : "session"
 	},
 	"logger": {

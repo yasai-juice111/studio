@@ -6,7 +6,7 @@ var validator = require('validator');
 var dateformat = require('dateformat');
 
 // facade
-var calendarFacade = require(__libpath + '/models/facade/calendar_facade');
+var studioFacade = require(__libpath + '/models/facade/studio_facade');
 
 /**
  * TOP
@@ -16,24 +16,21 @@ var calendarFacade = require(__libpath + '/models/facade/calendar_facade');
  * @param {Function} next ネクスト
  */
 router.get('/', function(req, res, next) {
-console.log(req.session.studio);
 	if (!req.session.studio) {
         res.redirect('/');
 		return;		
 	}
-	var currentDatetime = req.currentDatetime || new Date();
+	var studioId = req.session.studio.id;
 
-	calendarFacade.index(req, {
-		"id": req.session.studio.id,
-		"currentDatetime": currentDatetime
+	studioFacade.index(req, {
+		"studioId": studioId
 	},function(error, result) {
 		if (error) {
 		  	res.redirect('/error');
 			return
 		}
 		result.studio = req.session.studio;
-console.log(result);
-		res.render('calendar/index', result);
+		res.render('studio/index', result);
 	});
 });
 

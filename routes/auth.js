@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var http = require('superagent');
+var validator = require('validator');
 
 // facade
 var authFacade = require(__libpath + '/models/facade/auth_facade');
@@ -37,6 +38,37 @@ router.get('/', function(req, res, next) {
                 "&scope=openid%20email%20profile";
     res.redirect(redirectUrl);
 });
+
+/**
+ * 認証
+ *
+ * @param {Object} req リクエスト
+ * @param {Object} res レスポンス
+ * @param {Function} next ネクスト
+ */
+router.post('/confirm', function(req, res, next) {
+    var id = validator.escape(req.param('id'));
+    var passward = validator.escape(req.param('passward'));
+    // 認証
+    authFacade.confirm(req, {
+        "id": id,
+        "passward": passward
+    },function(error, result) {
+        if (error) {
+            res.redirect('/error');
+            return
+        }
+        var redirectUrl = '/';
+        if (result.enableLoginFlag) {
+            // sessionに保存
+            req.session.studio = result.studio; 
+            res.redirect('/calendar');
+            return;
+        }
+        res.redirect(redirectUrl);
+    });
+});
+
 
 /**
  * 認証コールバック

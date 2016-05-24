@@ -1,7 +1,7 @@
 <header>
 	<div class="wrapper">
 		<a href="index.html"><img src="../img/02_ui/logo.png" class="logo" alt="" titl=""/></a>
-		<% if (true) { %>
+		<% if (studio) { %>
 			<a href="#" class="hamburger"></a>
 			<nav class="responsive">
 				<ul>
@@ -10,15 +10,15 @@
 					<li id="menu_compact" class="icon studio menu__single">
 						<a href="#">管理</a>
 						<ul class="menu__second-level">
-	            			<li><a href="shopManagement.html">店舗管理</a></li>
+	            			<li><a href="/studio">店舗管理</a></li>
 	            			<li><a href="studioManagement.html">スタジオ管理</a></li>
 	            			<li><a href="#">備品管理</a></li>
 	        			</ul>
 					</li>
-					<li class="menu_spread"><a href="shopManagement.html">店舗管理</a></li>
+					<li class="menu_spread"><a href="/studio">店舗管理</a></li>
 	            	<li class="menu_spread"><a href="studioManagement.html">スタジオ管理</a></li>
 	            	<li class="menu_spread"><a href="#">備品管理</a></li>
-	                <li class="icon user"><a href="userManagement.html">studio worcle</a></li>
+	                <li class="icon user"><a href="#"><%= studio.name %></a></li>
 				</ul>
 			</nav>
 		<% } else { %>
@@ -30,18 +30,20 @@
 </header>
 
 <div class="remodal" data-remodal-id="login" id="modal-area">
-	<!-- モーダルのタイトル -->
-	<h2>ログイン</h2>
-	<div id="form">
-    	<p>ID</p>
-    	<input type="text">
-    	<p>PASSWORD</p>
-    	<input type="text">
-	</div>
-	<!-- キャンセルボタン -->
-	<a class="remodal-cancel" href="#" data-remodal-action="cancel">Cancel</a>
-	<!-- OKボタン -->
-	<a class="remodal-confirm" href="#" data-remodal-action="confirm">OK</a>
+    <form action="/auth/confirm" method="POST" name="form" accept-charset="utf-8">
+		<!-- モーダルのタイトル -->
+		<h2>ログイン</h2>
+		<div id="form">
+	    	<p>ID</p>
+	    	<input type="text" name="id">
+	    	<p>PASSWORD</p>
+	    	<input type="password" size="50" maxlength="12" name="passward">
+		</div>
+		<!-- キャンセルボタン -->
+		<a class="remodal-cancel" href="#" data-remodal-action="cancel">Cancel</a>
+		<!-- OKボタン -->
+        <a href="javascript:void(0)" onclick="document.form.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">OK</a>
+	</form>
 </div>
 <script>
 	// modalが残ってる可能性があるので、初期表示でモーダルを閉じる
