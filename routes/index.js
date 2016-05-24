@@ -3,9 +3,6 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	console.log('///////////sesion//////////');
-	console.log(req.session);
-	console.log('///////////sesion//////////');
   res.render('index', { title: 'Express' });
 });
 

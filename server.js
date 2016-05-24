@@ -5,20 +5,25 @@ var time = require('time')(Date);
 var d = new Date();
 d.setTimezone('Asia/Tokyo');
 
-// third party
-var express = require('express');
-var app = express();
-
 // global variable
 require('./lib/util/global');
 
+
+// third party
+var express = require('express');
 var expressLayouts = require('express-ejs-layouts');
+var expressValidator = require('express-validator')
 var path = require('path');
 var http = require('http');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var _ = require('underscore');
 var dateformat = require('dateformat');
+var multer = require('multer');
+
+// app
+var app = express();
+
 
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
@@ -36,13 +41,17 @@ app.locals._ = _;
 app.locals.dateformat = dateformat;
 
 
-// passport-twitter用
-var passport = require('./lib/middleware/platform/twitter').passport;
-app.use(passport.initialize()); 
-app.use(passport.session()); 
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(multer({
+  dest:__dirname+'/resource/csv/',
+  onFileUploadData:function(file, data, req, res){
+      //dataはBufferオブジェクト。何も指定しないとutf-8でデコードされます。
+      console.log(data.toString());
+  }
+}
+
+  ).any());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -56,9 +65,13 @@ app.use(session({
     collection: mongodbConf.collection
   }),
   cookie: {
-    httpOnly: false
+    httpOnly: false,
+    maxAge: 60 * 60 * 1000 // ms
   }
 }));
+// validator
+// app.use(expressValidator);
+
 
 // logger
 var logger = require('./lib/util/logger');
@@ -68,15 +81,18 @@ app.use(logger.express);
 var routes = require('./routes/index');
 var auth = require('./routes/auth');
 var error = require('./routes/error');
-var top = require('./routes/top');
-var logout = require('./routes/logout');
-// var reserved = require('./routes/reserved');
-app.use('/', routes); 
+var calendar = require('./routes/calendar');
+
+// admin mode時にrequire
+// var admin = require('./routes/admin');
+
+app.use('/', routes);
 app.use('/auth', auth);
 app.use('/error', error);
-app.use('/top', top);
-app.use('/logout', logout);
-// app.use('/reserved', reserved);
+app.use('/calendar', calendar);
+
+// admin mode時にrequire
+// app.use('/admin', admin);
 
 //Attached some objects and vars to request object.
 app.use(function(req, res, next){
@@ -122,10 +138,6 @@ app.use(function(err, req, res, next) {
     message: err.message,
     error: {}
   });
-});
-
-process.on('uncaughtException', function(err) {
-    console.log(err);
 });
 
 // listen
