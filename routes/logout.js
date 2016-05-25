@@ -4,7 +4,7 @@ var router = require('express').Router();
 router.get('/', function(req, res, next) {
   	req.session.destroy();
   	console.log('deleted sesstion');
-	res.render('logout/index', {});
+	res.redirect('/');
 });
 
 module.exports = router;

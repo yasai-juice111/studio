@@ -89,7 +89,122 @@ router.post('/regist/execute', function(req, res, next) {
 		  	res.redirect('/error');
 			return
 		}
-		res.redirect('/studio/');
+		res.redirect('/studio');
+	});
+});
+
+/**
+ * 登録編集
+ *
+ * @param {Object} req リクエスト
+ * @param {Object} res レスポンス
+ * @param {Function} next ネクスト
+ */
+router.get('/edit', function(req, res, next) {
+    if (!req.session.studio) {
+        res.redirect('/');
+        return;
+    }
+	var studioId = req.session.studio.id;
+    var studioAreaId = validator.escape(req.param('studioAreaId'));
+
+	studioFacade.edit(req, {
+		"studioId": studioId,
+		"studioAreaId": studioAreaId
+	},function(error, result) {
+		if (error) {
+		  	res.redirect('/error');
+			return
+		}
+		result.studio = req.session.studio;
+		res.render('studio/edit', result);
+	});
+});
+
+/**
+ * 登録変更
+ *
+ * @param {Object} req リクエスト
+ * @param {Object} res レスポンス
+ * @param {Function} next ネクスト
+ */
+router.post('/edit/execute', function(req, res, next) {
+    if (!req.session.studio) {
+        res.redirect('/');
+        return;
+    }
+
+    // TODO validationError
+    var studioAreaId = validator.escape(req.param('studioAreaId'));
+    var studioAreaName = validator.escape(req.param('studioAreaName'));
+    var tel = validator.toInt(req.param('tel'));
+    var studioStation = validator.escape(req.param('studioStation'));
+    var studioAddress = validator.escape(req.param('studioAddress'));
+    var studioPayment = validator.escape(req.param('studioPayment'));
+    var studioRemarks = validator.escape(req.param('studioRemarks'));
+
+	studioFacade.editExecute(req, {
+		"studioId": req.session.studio.id,
+		"studioAreaId": studioAreaId,
+		"name": studioAreaName,
+		"tel": tel,
+		"nearStation": studioStation,
+		"address": studioAddress,
+		"paymentMethod": studioPayment,
+		"remark": studioRemarks,
+		"imagePath": '/img/test001.png'
+	},function(error, result) {
+		if (error) {
+		  	res.redirect('/error');
+			return
+		}
+		res.redirect('/studio');
+	});
+});
+
+
+/**
+ * 登録編集
+ *
+ * @param {Object} req リクエスト
+ * @param {Object} res レスポンス
+ * @param {Function} next ネクスト
+ */
+router.get('/edit/execute', function(req, res, next) {
+    if (!req.session.studio) {
+        res.redirect('/');
+        return;
+    }
+	var result = {
+		studio : req.session.studio
+	};
+	res.render('studio/regist_edit', result);
+});
+
+/**
+ * 登録編集
+ *
+ * @param {Object} req リクエスト
+ * @param {Object} res レスポンス
+ * @param {Function} next ネクスト
+ */
+router.get('/delete', function(req, res, next) {
+    if (!req.session.studio) {
+        res.redirect('/');
+        return;
+    }
+    // TODO validationError
+    var studioAreaId = validator.escape(req.param('studioAreaId'));
+
+	studioFacade.delete(req, {
+		"studioId": req.session.studio.id,
+		"studioAreaId": studioAreaId
+	},function(error, result) {
+		if (error) {
+		  	res.redirect('/error');
+			return
+		}
+		res.redirect('/studio');
 	});
 });
 
