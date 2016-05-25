@@ -59,28 +59,38 @@ router.get('/regist', function(req, res, next) {
  * @param {Object} res レスポンス
  * @param {Function} next ネクスト
  */
-router.post('/regist/excute', function(req, res, next) {
+router.post('/regist/execute', function(req, res, next) {
     if (!req.session.studio) {
         res.redirect('/');
         return;
     }
-    console.log(req.param('studioArea'));
-    console.log(req.param('tel'));
-    console.log(req.param('studioStation'));
-    console.log(req.param('studioAddress'));
-    console.log(req.param('studioPayment'));
-    console.log(req.param('studioRemarks'));
-	res.render('studio/index', {});
-	// studioFacade.registExcute(req, {
-	// 	"studioId": studioId
-	// },function(error, result) {
-	// 	if (error) {
-	// 	  	res.redirect('/error');
-	// 		return
-	// 	}
-	// 	result.studio = req.session.studio;
-	// 	res.render('studio/index', result);
-	// });
+
+    // TODO validationError
+    var studioAreaName = validator.escape(req.param('studioAreaName'));
+    var tel = validator.toInt(req.param('tel'));
+    var studioStation = validator.escape(req.param('studioStation'));
+    var studioAddress = validator.escape(req.param('studioAddress'));
+    var studioPayment = validator.escape(req.param('studioPayment'));
+    var studioRemarks = validator.escape(req.param('studioRemarks'));
+
+	studioFacade.registExecute(req, {
+		"studioId": req.session.studio.id,
+		"name": studioAreaName,
+		"tel": tel,
+		"nearStation": studioStation,
+		"address": studioAddress,
+		"paymentMethod": studioPayment,
+		"remark": studioRemarks,
+		"imagePath": '/img/test001.png'
+	},function(error, result) {
+		console.log(error);
+		console.log(result);
+		if (error) {
+		  	res.redirect('/error');
+			return
+		}
+		res.redirect('/studio/');
+	});
 });
 
 module.exports = router;
