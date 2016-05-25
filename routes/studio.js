@@ -41,35 +41,46 @@ router.get('/', function(req, res, next) {
  * @param {Object} res レスポンス
  * @param {Function} next ネクスト
  */
-router.post('/regist', function(req, res, next) {
-    // if (!req.session.user) {
-    //     res.redirect('/auth');
-    //     return;
-    // }
-    console.log('////////////');
-    console.log('きてる？');
-    console.log('////////////');
-    console.log(req.param('title'));
-    console.log(req.param('startDate'));
-    console.log(req.param('startTime'));
-    console.log(req.param('endDate'));
-    console.log(req.param('endTime'));
-    console.log(req.param('booking'));
-    console.log(req.param('rental'));
-	var currentDatetime = req.currentDatetime || new Date();
+router.get('/regist', function(req, res, next) {
+    if (!req.session.studio) {
+        res.redirect('/');
+        return;
+    }
+	var result = {
+		studio : req.session.studio
+	};
+	res.render('studio/regist', result);
+});
 
-	calendarFacade.index(req, {
-		"id": 1,
-		"currentDatetime": currentDatetime
-	},function(error, result) {
-		console.log(error);
-		console.log(result);
-		if (error) {
-		  	res.redirect('/error');
-			return
-		}
-		res.render('calendar/index', result);
-	});
+/**
+ * 登録実行
+ *
+ * @param {Object} req リクエスト
+ * @param {Object} res レスポンス
+ * @param {Function} next ネクスト
+ */
+router.post('/regist/excute', function(req, res, next) {
+    if (!req.session.studio) {
+        res.redirect('/');
+        return;
+    }
+    console.log(req.param('studioArea'));
+    console.log(req.param('tel'));
+    console.log(req.param('studioStation'));
+    console.log(req.param('studioAddress'));
+    console.log(req.param('studioPayment'));
+    console.log(req.param('studioRemarks'));
+	res.render('studio/index', {});
+	// studioFacade.registExcute(req, {
+	// 	"studioId": studioId
+	// },function(error, result) {
+	// 	if (error) {
+	// 	  	res.redirect('/error');
+	// 		return
+	// 	}
+	// 	result.studio = req.session.studio;
+	// 	res.render('studio/index', result);
+	// });
 });
 
 module.exports = router;

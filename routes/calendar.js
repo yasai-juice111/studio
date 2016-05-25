@@ -16,7 +16,6 @@ var calendarFacade = require(__libpath + '/models/facade/calendar_facade');
  * @param {Function} next ネクスト
  */
 router.get('/', function(req, res, next) {
-console.log(req.session.studio);
 	if (!req.session.studio) {
         res.redirect('/');
 		return;		
@@ -32,7 +31,6 @@ console.log(req.session.studio);
 			return
 		}
 		result.studio = req.session.studio;
-console.log(result);
 		res.render('calendar/index', result);
 	});
 });
