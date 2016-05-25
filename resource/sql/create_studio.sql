@@ -17,6 +17,6 @@ CREATE TABLE IF NOT EXISTS studio (
   KEY (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='スタジオ';
 
-insert into studio (name, login_id, login_passward, email, insert_datetime, update_datetime) values ('Canary(キャナリー)', 'test','test','test@test.co.jp', now(), now());
-insert into studio (name, login_id, login_passward, email, insert_datetime, update_datetime) values ('studio worcle', 'test','test','test@test.co.jp', now(), now());
-insert into studio (name, login_id, login_passward, email, insert_datetime, update_datetime) values ('vintom', 'test','test','test@test.co.jp', now(), now());
+insert into studio (name, login_id, login_passward, email, insert_datetime, update_datetime) values ('Canary(キャナリー)', 'canary','canary','test@test.co.jp', now(), now());
+insert into studio (name, login_id, login_passward, email, insert_datetime, update_datetime) values ('studio worcle', 'worcle','worcle','test@test.co.jp', now(), now());
+insert into studio (name, login_id, login_passward, email, insert_datetime, update_datetime) values ('vintom', 'vintom','vintom','test@test.co.jp', now(), now());

@@ -1,0 +1,23 @@
+<div id="contents">
+	<div id="main">
+		<h2>スタジオ一覧</h2>
+		<div id="shopList">
+			<% _.each(studioData.studioAreaList, function(studioArea) {  %>
+				<div class="studio_list">
+					<div><%= studioArea.name %><a href="/studio_area/regist?studioAreaId=<%= studioArea.id %>" class="add_button">新規登録</a></div>
+					<% if (studioArea.studioAreaRoomList.length > 0) { %>
+						<ul>
+							<% _.each(studioArea.studioAreaRoomList, function(studioAreaRoom) {  %>
+								<li>
+									<span><%= studioAreaRoom.name %></span>
+									<input type="button" class="edit_button" value="編集" onClick="location.href='/studio_area/edit?studioAreaRoomId=<%= studioAreaRoom.id %>'">
+									<input type="button" class="delete_button" value="削除" onClick="location.href='/studio_area/delete?studioAreaRoomId=<%= studioAreaRoom.id %>'">
+								</li>
+							<% }); %>
+						</ul>
+					<% } %>
+				</div>
+			<% }); %>
+		</div>
+	</div>
+</div>

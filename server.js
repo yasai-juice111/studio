@@ -83,6 +83,7 @@ var auth = require('./routes/auth');
 var error = require('./routes/error');
 var calendar = require('./routes/calendar');
 var studio = require('./routes/studio');
+var studio_area = require('./routes/studio_area');
 
 // admin mode時にrequire
 // var admin = require('./routes/admin');
@@ -92,6 +93,7 @@ app.use('/auth', auth);
 app.use('/error', error);
 app.use('/calendar', calendar);
 app.use('/studio', studio);
+app.use('/studio_area', studio_area);
 
 // admin mode時にrequire
 // app.use('/admin', admin);
