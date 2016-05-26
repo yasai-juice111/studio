@@ -1,13 +1,13 @@
 body {
 	font-family: "YuGothic"
 }
-#contents {
+#managementContents {
 	width: 100%;
 	display: -webkit-box;　/* Safari,Google Chrome用 */
 	display: -moz-box;　/* Firefox用 */
 }
 
-#main {
+#managementContents #main {
 	width: 100%;
 	padding-left: 12%;
 	padding-right: 100px;
@@ -16,38 +16,38 @@ body {
 	-moz-box-flex: 1;　/* Firefox用 */
 }
 
-h4 {
+#managementContents h4 {
 	margin-top: 20px;
 	margin-bottom: 10px;
 }
 
-h2 {
+#managementContents h2 {
 	display: inline-block;
 	vertical-align: middle;
 }
 
-.contents {
+#managementContents .contents {
 	width: 100%;
 	overflow: hidden;
 	height: 650px;
 }
 
-.left_content {
+#managementContents .left_content {
 	float: left;
 	width: 50%;
 }
 
-.right_content {
+#managementContents .right_content {
 	overflow: hidden;
 	width: 50%;
 }
 
-#picture {
+#managementContents #picture {
 	max-height: 200px;
 }
 
-.clearfix { display: inline-table; } 
-.clearfix:after {  
+#managementContents .clearfix { display: inline-table; } 
+#managementContents .clearfix:after {  
   content: ".";   
   display: block;   
   height: 0;   
@@ -55,7 +55,7 @@ h2 {
   visibility: hidden;  
 } 
 
-.add_button {
+#managementContents .add_button {
 	width: 100px;
 	padding: 4px;
 	text-align: center;
@@ -66,7 +66,7 @@ h2 {
 	margin-left: 10px;
 }
 
-.edit_button {
+#managementContents .edit_button {
 	width: 100px;
 	padding: 5px;
 	text-align: center;
@@ -77,7 +77,7 @@ h2 {
 	margin-left: 10px;
 }
 
-.delete_button {
+#managementContents .delete_button {
 	width: 100px;
 	padding: 5px;
 	text-align: center;
@@ -88,7 +88,7 @@ h2 {
 	margin-left: 10px;
 }
 
-.execute_button {
+#managementContents .execute_button {
 	width: 100px;
 	padding: 4px;
 	text-align: center;
@@ -99,23 +99,23 @@ h2 {
 	margin-top: 20px;
 }
 
-input {
+#managementContents input {
 	width: 80%;
 }
 
-textarea {
+#managementContents textarea {
 	width: 80%;
 }
 
-#shopList ul {
+#managementContents #shopList ul {
 	margin-top: 20px;
 }
 
-#shopList ul li {
+#managementContents #shopList ul li {
 	margin-bottom: 20px;
 }
 
-#shopList ul li a {
+#managementContents #shopList ul li a {
 	display: inline-block;
 	color: #626262;
 	font-size: 20px;
@@ -124,18 +124,18 @@ textarea {
     vertical-align: middle;
 }
 
-table.user_info {
+#managementContents table.user_info {
     border-collapse: separate;
     border-spacing: 0px 15px;
     font-size: 15px;
 }
  
-table.user_info th,
-table.user_info td {
+#managementContents table.user_info th,
+#managementContents table.user_info td {
     padding: 10px;
 }
  
-table.user_info th {
+#managementContents table.user_info th {
     background: #626262;
     vertical-align: middle;
     text-align: left;
@@ -147,7 +147,7 @@ table.user_info th {
     font-size: 16px;
 }
  
-table.user_info th:after {
+#managementContents table.user_info th:after {
     left: 100%;
     top: 50%;
     border: solid transparent;
@@ -179,27 +179,27 @@ table.user_info th:after {
     }
 }
  
-table.user_info td {
+#managementContents table.user_info td {
     background: #f8f8f8;
     padding-left: 20px;
     line-height: 20px;
 }
 
 @media (max-width:840px){
-#main {
+#managementContents #main {
 	padding-left: 20px;
 	padding-right: 20px;
 }
 
-.contents {
+#managementContents .contents {
 	height: 100%;
 }
 
-.left_content {
+#managementContents .left_content {
 	float: none;
 	width: 100%;
 }
 
-.right_content {
+#managementContents .right_content {
 	width: 100%;
 }

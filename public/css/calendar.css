@@ -1,53 +1,53 @@
 body {
 	font-family: "YuGothic"
 }
-#contents {
+#calendarContents {
 	width: 100%;
 	display: -webkit-box;　/* Safari,Google Chrome用 */
 	display: -moz-box;　/* Firefox用 */
 }
-#sub {
+#calendarContents #sub {
 	width: 300px;
 }
 
-#studioList {
+#calendarContents #studioList {
 	padding-left: 20px;
 	padding-top: 50px;
 }
 
-#studioList ul {
+#calendarContents #studioList ul {
 	/*margin-left: 10px;*/
 }
 
-#studioList ul li {
+#calendarContents #studioList ul li {
 	margin-bottom: 10px;
 	list-style-type: none;
 }
 
-#studioList ul li.place {
+#calendarContents #studioList ul li.place {
 	font-size: 18px;
 	margin-top: 10px;
 	margin-left:0px;
 }
 
-#studioList ul li a {
+#calendarContents #studioList ul li a {
 	text-decoration: none;
 	color: #626262;
 }
 
-#main {
+#calendarContents #main {
 	padding-right: 100px;
 	padding-bottom: 100px;
 	-webkit-box-flex: 1;　/* Safari,Google Chrome用 */
 	-moz-box-flex: 1;　/* Firefox用 */
 }
 
-#studioName {
+#calendarContents #studioName {
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
 
-#calendar {
+#calendarContents #calendar {
 	
 }
 /* 1行目の曜日 or 日にち */
@@ -62,11 +62,11 @@ body {
 
 
 @media (max-width:840px){
-#main {
+#calendarContents #main {
 	padding-left: 20px;
 	padding-right: 20px;
 }
-#sub {
+#calendarContents #sub {
 	display: none;
 }
     /* 1行目の曜日 or 日にち */
