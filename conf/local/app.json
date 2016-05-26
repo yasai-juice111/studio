@@ -15,7 +15,7 @@
 	"mysqlConf" : {
 		"host": "localhost",
 		"user": "root",
-		"password": "root",
+		"password": "Mine1819",
 		"database": "studio",
 		"connectTimeout" : 5000
 	},
