@@ -2,20 +2,183 @@
 	<div id="main">
 		<h2>スタジオ登録</h2>
 	    <div id="form">
-	        <form action="/studio_area/regist/execute" method="POST" name="studioAreaRegist">
+	        <form class="management_form" action="/studio_area/regist/execute" method="POST" name="studioAreaRegist">
 				<input type="hidden" name="studioAreaId" value="<%= studioArea.id %>"></input>
-				<h4>スタジオ名</h4>
-				<input type="text" name="name" value="101"></input>
-				<h4>店舗：<%= studioArea.name %></h4>
-				<h4>料金</h4>
-				<textarea name="price" rows="4" cols="40"></textarea>
-				<h4>間取り</h4>
+				<h4>【店舗】：<%= studioArea.name %></h4>
+				<h4>【スタジオ名】</h4>
+				<input type="text" name="name" value=""></input>
+				<h4>【広さ】</h4>
 				<textarea name="roomSize" rows="4" cols="40"></textarea>
-				<h4>写真</h4>
+				<h4>【写真】</h4>
 				<p><img id="picture"></p>
 				<input type="file" name="room_image" accept="image/jpeg,image/png">
-				<h4>備考</h4>
+				<h4>【備考】</h4>
 				<textarea name="explanation" rows="4" cols="40"></textarea>
+
+
+				<h4>【料金】</h4>
+				<textarea name="price" rows="4" cols="40"></textarea>
+
+
+			<h1>【後で消す】ここより下は新しく追加された要素</h1>
+			<!-- 　新しく追加された要素 ここから -->
+			<h4>【最大人数】</h4>
+			<input type="text" name="studio_max_people" value=""></input>
+			<h4>【鏡】</h4>
+			<textarea name="studio_mirror" rows="4" cols="40"></textarea>
+			<h4>【床材】</h4>
+			<select>
+				<option value="flooring">フローリング</option>
+				<option value="linoleum">リノリウム</option>
+			</select>
+			<h4>【スピーカー】</h4>
+			<textarea name="studio_speaker" rows="4" cols="40"></textarea>
+			<h4>【ミキサー】</h4>
+			<textarea name="studio_mixer" rows="4" cols="40"></textarea>
+			<h4>【CD】</h4>
+			<input type="radio" name="studio_cd" value="">可
+			<input type="radio" name="studio_cd" value="" checked>不可
+			<h4>【MD】</h4>
+			<input type="radio" name="studio_md" value="">可
+			<input type="radio" name="studio_md" value="" checked>不可
+			<h4>【mp3】</h4>
+			<input type="radio" name="studio_mp3" value="">可
+			<input type="radio" name="studio_mp3" value="" checked>不可
+			<h4>【その他音響】</h4>
+			<textarea name="studio_other_acoustic" rows="4" cols="40"></textarea>
+			<h4>【照明調光】</h4>
+			<input type="radio" name="studio_illumination" value="">有
+			<input type="radio" name="studio_illumination" value="" checked>無
+			<h4>【Wi-Fi】</h4>
+			<input type="radio" name="studio_illumination" value="">有
+			<input type="radio" name="studio_illumination" value="" checked>無
+			<h4>【写真】</h4>
+			<p>
+				<img id="picture">
+			</p>
+			<input type="file" name="reference_image" accept="image/jpeg,image/png">
+			<h4>【特徴】</h4>
+			<textarea name="studio_feature" rows="4" cols="40"></textarea>
+
+			<div id="prices">
+				<h4>【料金プラン1】</h4>
+				<h6>■曜日</h6>
+				<select name="youbi">
+					<option value="heijitu">平日</option>
+					<option value="kyujitu">休日</option>
+					<option value="syukujitu">祝日</option>
+					<option value="kyusyukujitu">休日・祝日</option>
+					<option value="monday">月曜</option>
+					<option value="tuesday">火曜</option>
+					<option value="wednesday">水曜</option>
+					<option value="thursday">木曜</option>
+					<option value="friday">金曜</option>
+					<option value="saturday">土曜</option>
+					<option value="sunday">日曜</option>
+				</select>
+
+				<h6>■時間帯</h6>
+				<select name="since_hour">
+				  <option value="00">00</option>
+				  <option value="01">01</option>
+				  <option value="02">02</option>
+				  <option value="03">03</option>
+				  <option value="04">04</option>
+				  <option value="05">05</option>
+				  <option value="06">06</option>
+				  <option value="07">07</option>
+				  <option value="08">08</option>
+				  <option value="09">09</option>
+				  <option value="10">10</option>
+				  <option value="11">11</option>
+				  <option value="12">12</option>
+				  <option value="13">13</option>
+				  <option value="14">14</option>
+				  <option value="15">15</option>
+				  <option value="16">16</option>
+				  <option value="17">17</option>
+				  <option value="18">18</option>
+				  <option value="19">19</option>
+				  <option value="20">20</option>
+				  <option value="21">21</option>
+				  <option value="22">22</option>
+				  <option value="23">23</option>
+				</select>
+
+				<select name="since_minutes">
+				  <option value="00">00</option>
+				  <option value="05">05</option>
+				  <option value="10">10</option>
+				  <option value="15">15</option>
+				  <option value="20">20</option>
+				  <option value="25">25</option>
+				  <option value="30">30</option>
+				  <option value="35">35</option>
+				  <option value="40">40</option>
+				  <option value="45">45</option>
+				  <option value="50">50</option>
+				  <option value="55">55</option>
+				</select>
+
+				〜
+
+				<select name="from_hour">
+				  <option value="00">00</option>
+				  <option value="01">01</option>
+				  <option value="02">02</option>
+				  <option value="03">03</option>
+				  <option value="04">04</option>
+				  <option value="05">05</option>
+				  <option value="06">06</option>
+				  <option value="07">07</option>
+				  <option value="08">08</option>
+				  <option value="09">09</option>
+				  <option value="10">10</option>
+				  <option value="11">11</option>
+				  <option value="12">12</option>
+				  <option value="13">13</option>
+				  <option value="14">14</option>
+				  <option value="15">15</option>
+				  <option value="16">16</option>
+				  <option value="17">17</option>
+				  <option value="18">18</option>
+				  <option value="19">19</option>
+				  <option value="20">20</option>
+				  <option value="21">21</option>
+				  <option value="22">22</option>
+				  <option value="23">23</option>
+				</select>
+
+				<select name="from_minutes">
+				  <option value="00">00</option>
+				  <option value="05">05</option>
+				  <option value="10">10</option>
+				  <option value="15">15</option>
+				  <option value="20">20</option>
+				  <option value="25">25</option>
+				  <option value="30">30</option>
+				  <option value="35">35</option>
+				  <option value="40">40</option>
+				  <option value="45">45</option>
+				  <option value="50">50</option>
+				  <option value="55">55</option>
+				</select>
+
+				<h6>■単位時間</h6>
+				<select name="unit_time">
+					<option value="10minutes">10分</option>
+					<option value="15minutes">15分</option>
+					<option value="30minutes">30分</option>
+					<option value="1hour" selected="">1時間</option>
+					<option value="pack">パック</option>
+				</select>
+				<h6>■料金</h6>
+				<input type="text" name="price" value=""></input>
+			</div>
+			<input type="button" id="addPrice" class="add_column_button" value="料金を追加する">
+
+			<!-- 　新しく追加された要素 ここまで -->
+				
 			</form>
 		    <!-- キャンセルボタン -->
 		    <a class="remodal-cancel" href="/studio_area" data-remodal-action="cancel">戻る</a>

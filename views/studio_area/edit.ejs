@@ -2,7 +2,7 @@
 	<div id="main">
 		<h2>スタジオ編集 -<span id="studioName"><%= studioAreaRoom.name %></span>-</h2>
 	    <div id="form">
-	        <form action="/studio_area/edit/execute" method="POST" name="studioAreaEdit">
+	        <form class="management_form" action="/studio_area/edit/execute" method="POST" name="studioAreaEdit">
 				<input type="hidden" name="studioAreaRoomId" value="<%= studioAreaRoom.id %>"></input>
 				<h4>スタジオ名</h4>
 				<input type="text" name="name" value="<%= studioAreaRoom.name %>"></input>

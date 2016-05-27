@@ -7,7 +7,7 @@ body {
 	display: -moz-box;　/* Firefox用 */
 }
 #calendarContents #sub {
-	width: 300px;
+	width: 250px;
 }
 
 #calendarContents #studioList {
