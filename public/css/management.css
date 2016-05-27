@@ -21,6 +21,10 @@ body {
 	margin-bottom: 10px;
 }
 
+#managementContents h3 {
+	display: inline-block;
+}
+
 #managementContents h2 {
 	display: inline-block;
 	vertical-align: middle;
