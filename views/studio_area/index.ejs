@@ -1,10 +1,13 @@
-<div id="contents">
+<div id="managementContents">
 	<div id="main">
 		<h2>スタジオ一覧</h2>
 		<div id="shopList">
 			<% _.each(studioData.studioAreaList, function(studioArea) {  %>
 				<div class="studio_list">
-					<div><%= studioArea.name %><a href="/studio_area/regist?studioAreaId=<%= studioArea.id %>" class="add_button">新規登録</a></div>
+					<h3>
+						<%= studioArea.name %>
+					</h3>
+					<input type="button" class="add_button" value="新規登録" onClick="location.href='/studio_area/regist?studioAreaId=<%= studioArea.id %>'">
 					<% if (studioArea.studioAreaRoomList.length > 0) { %>
 						<ul>
 							<% _.each(studioArea.studioAreaRoomList, function(studioAreaRoom) {  %>

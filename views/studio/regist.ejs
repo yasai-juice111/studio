@@ -1,20 +1,69 @@
-<div id="contents">
+<div id="managementContents">
 	<div id="main">
 		<h2>店舗追加</h2>
 	    <div id="form">
-	        <form action="/studio/regist/execute" method="POST" name="studioRegist">
-				<h4>店舗名</h4>
-				<input type="text" name="studioAreaName" value="vintom"></input>
-				<h4>電話番号</h4>
-				<input type="tel" name="tel" value="08012345678"></input>
-				<h4>最寄駅</h4>
+	        <form class="management_form" action="/studio/regist/execute" method="POST" name="studioRegist">
+				<h4>【店舗名】</h4>
+				<input type="text" name="studioAreaName" value=""></input>
+				<h4>【電話番号】</h4>
+				<input type="tel" name="tel" value=""></input>
+				<h4>【最寄駅】</h4>
 				<textarea name="studioStation" rows="4" cols="40"></textarea>
-				<h4>住所</h4>
+				<h4>【住所】</h4>
 				<textarea name="studioAddress" rows="4" cols="40"></textarea>
-				<h4>お支払い方法</h4>
+				<h4>【お支払い方法】</h4>
 				<textarea name="studioPayment" rows="4" cols="40"></textarea>
-				<h4>備考</h4>
+				<h4>【備考】</h4>
 				<textarea name="studioRemarks" rows="4" cols="40"></textarea>
+
+				<h1>【後で消す】ここより下は新しく追加された要素</h1>
+				<!-- 　新しく追加された要素 ここから -->
+				<div id="stations">
+					<h4>【最寄駅情報1】</h4>
+					<h6>■︎駅名</h6>
+					<input type="text" name="shop_nearest_station" value=""></input>
+					<h6>■徒歩</h6>
+					<textarea name="shop_walking_time" rows="4" cols="40"></textarea>
+				</div>
+				<input type="button" id="addStation" class="add_column_button" value="最寄駅を追加する">
+				
+				<h4>【営業時間】</h4>
+				<textarea name="shop_business_hours" rows="4" cols="40"></textarea>
+				
+				<h4>【スタジオ数】</h4>
+				<input type="tel" neme="studio_count" value=""></input>
+				
+				<h4>【更衣室】</h4>
+				<input type="radio" name="locker_room" value="">有り
+				<input type="radio" name="locker_room" value="" checked>無し
+				
+				<h4>【駐車場】</h4>
+				<input type="radio" name="parking" value="">有り
+				<input type="radio" name="parking" value="" checked>無し
+				
+				<h4>【キャンセル期限】</h4>
+				<textarea name="cancel_limit" rows="4" cols="40"></textarea>
+				
+				<h4>【写真】</h4>
+				<p>
+					<img id="picture">
+				</p>
+				<input type="file" name="reference_image" accept="image/jpeg,image/png">
+				
+				<h4>【支払い方法】</h4>
+				<h5>■現地決済</h5>
+				<input type="radio" name="local_settlement" value="">可
+				<input type="radio" name="local_settlement" value="" checked>不可
+				<h5>■銀行振込</h5>
+				<input type="radio" name="transfer" value="">可
+				<input type="radio" name="transfer" value="" checked>不可
+				<h5>■クレジットカード</h5>
+				<input type="radio" name="credit_card" value="">可
+				<input type="radio" name="credit_card" value="" checked>不可
+				
+				<h4>【特徴】</h4>
+				<textarea name="shop_feature" rows="4" cols="40"></textarea>
+					<!-- 　新しく追加された要素 ここまで -->
 			</form>
 		    <!-- キャンセルボタン -->
 		    <a class="remodal-cancel" href="/studio" data-remodal-action="cancel">戻る</a>
