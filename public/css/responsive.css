@@ -651,6 +651,10 @@ footer .copyrights a.ph_link{
         margin-left: 0;
     }
 
+    header nav.responsive ul li.menu_compact{
+        display: none;
+    }
+
     header nav.responsive ul li a{
         display: block;
         padding: 25px 0;

@@ -25,6 +25,8 @@
 	                        <li><a href="#logout">ログアウト</a></li>
 	                    </ul>
 	                </li>
+	                <li class="menu_spread"><a href="userManagement.html">ユーザー管理</a></li>
+	            	<li class="menu_spread"><a href="#logout">ログアウト</a></li>
 				</ul>
 			</nav>
 		<% } else { %>
@@ -34,6 +36,14 @@
 		<% } %>
 	</div>
 </header>
+<div class="remodal" data-remodal-id="logout" id="modal-area">
+    <!-- モーダルのタイトル -->
+    <h2>ログアウトしますか？</h2>
+    <!-- キャンセルボタン -->
+    <a class="remodal-cancel" href="#" data-remodal-action="cancel">Cancel</a>
+    <!-- OKボタン -->
+    <a class="remodal-confirm" href="#" data-remodal-action="confirm">OK</a>
+</div>
 
 <div class="remodal" data-remodal-id="login" id="modal-area">
     <form action="/auth/confirm" method="POST" name="form" accept-charset="utf-8">

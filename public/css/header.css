@@ -112,7 +112,7 @@ li.menu__single:hover ul.menu__second-level {
     opacity: 1;
 }
 
-.menu_compact {
+#menu_compact {
         display: block;
 }
 
@@ -121,7 +121,7 @@ li.menu__single:hover ul.menu__second-level {
 }
 
 @media (max-width:800px){
-.menu_compact {
+#menu_compact {
     display: none;
 }
 
