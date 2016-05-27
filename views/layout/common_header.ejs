@@ -5,10 +5,17 @@
 			<a href="#" class="hamburger"></a>
 			<nav class="responsive">
 				<ul>
-					<li class="icon calendar"><a href="/calendar">予約カレンダー</a></li>
+					<li>
+						<span class="icon calendar">
+	                		<a class="header_menu" href="/calendar">予約カレンダー</a>
+	                	</span>
+					</li>
 					<!-- <li class="icon search" id="search"><a href="javascript:void(0)">予約検索</a></li> -->
-					<li class="menu_compact icon studio menu__single">
-						<a href="#">管理</a>
+					<li class="menu_compact menu__single">
+						<span class="icon studio">
+	                		<a class="header_menu" href="#">管理</a>
+	                	</span>
+						
 						<ul class="menu__second-level">
 	            			<li><a href="/studio">店舗管理</a></li>
 	            			<li><a href="/studio_area">スタジオ管理</a></li>
@@ -18,8 +25,10 @@
 					<li class="menu_spread"><a href="/studio">店舗管理</a></li>
 	            	<li class="menu_spread"><a href="/studioArea">スタジオ管理</a></li>
 	            	<li class="menu_spread"><a href="#">備品管理</a></li>
-	                <li class="menu_compact icon user menu__single">
-                    	<a href="#"><%= studio.name %>
+	                <li class="menu_compact menu__single">
+	                	<span class="icon user">
+	                		<a class="header_menu" href="#"><%= studio.name %>
+	                	</span>
 	                    <ul class="menu__second-level">
 	                        <li><a href="userManagement.html">ユーザー管理</a></li>
 	                        <li><a href="#logout">ログアウト</a></li>

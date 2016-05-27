@@ -104,6 +104,7 @@ li.menu__single ul.menu__second-level {
     background: #000000;
     -webkit-transition: all .2s ease;
     transition: all .2s ease;
+    padding-top: 20px;
 }
 
 li.menu__single:hover ul.menu__second-level {
@@ -113,19 +114,15 @@ li.menu__single:hover ul.menu__second-level {
 }
 
 #menu_compact {
-        display: block;
+    display: block;
 }
 
 .menu_spread {
-        display: none;
-}
-
-@media (max-width:800px){
-#menu_compact {
     display: none;
 }
 
-.menu_spread {
-    display: block;
+.header_menu {
+    display: inline-block;
+    margin-top: 20px;
 }
-}
+
