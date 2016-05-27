@@ -84,7 +84,7 @@ h1              { font-size: 2em; margin: .67em 0 }
 h2              { font-size: 1.5em; margin: .75em 0 }
 h3              { font-size: 1.17em; margin: .83em 0 }
 h5              { font-size: .83em; margin: 1.5em 0 }
-h6              { font-size: .75em; margin: 1.67em 0 }
+h6              { font-size: .75em; margin: 1.15em 0 }
 h1, h2, h3, h4,
 h5, h6          { font-weight: bolder }
 
@@ -156,9 +156,8 @@ header nav ul{
 
 header nav ul li{
     float: left;
-    margin-left: 50px;
+    margin-left: 20px;
     height: 50px;
-    padding-top: 20px;
 }
 
 header .icon {
@@ -167,24 +166,32 @@ header .icon {
 }
 
 header .calendar {
+    display: inline-block;
+    height: 55px;
     background-image : url("../img/02_ui/calendar.png");
     background-repeat: no-repeat;
     background-position: 3px 10px;
 }
 
 header .search {
+    display: inline-block;
+    height: 55px;
     background-image : url("../img/02_ui/search.png");
     background-repeat: no-repeat;
     background-position: 3px 10px;
 }
 
 header .studio {
+    display: inline-block;
+    height: 55px;
     background-image : url("../img/02_ui/studio.png");
     background-repeat: no-repeat;
     background-position: 3px 10px;
 }
 
 header .user {
+    display: inline-block;
+    height: 55px;
     background-image : url("../img/02_ui/user.png");
     background-repeat: no-repeat;
     background-position: 3px 10px;
@@ -649,6 +656,10 @@ footer .copyrights a.ph_link{
         width: 100%;
         float: none;
         margin-left: 0;
+    }
+
+    header nav.responsive ul li.menu_compact{
+        display: none;
     }
 
     header nav.responsive ul li a{
