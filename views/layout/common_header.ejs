@@ -46,12 +46,14 @@
 	</div>
 </header>
 <div class="remodal" data-remodal-id="logout" id="modal-area">
-    <!-- モーダルのタイトル -->
-    <h2>ログアウトしますか？</h2>
-    <!-- キャンセルボタン -->
-    <a class="remodal-cancel" href="#" data-remodal-action="cancel">Cancel</a>
-    <!-- OKボタン -->
-    <a class="remodal-confirm" href="/logout" data-remodal-action="confirm">OK</a>
+    <form action="/logout" method="GET" name="logout" accept-charset="utf-8">
+		<!-- モーダルのタイトル -->
+    	<h2>ログアウトしますか？</h2>
+		<!-- キャンセルボタン -->
+		<a class="remodal-cancel" href="#" data-remodal-action="cancel">Cancel</a>
+		<!-- OKボタン -->
+        <a href="javascript:void(0)" onclick="document.logout.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">OK</a>
+	</form>
 </div>
 
 <div class="remodal" data-remodal-id="login" id="modal-area">
