@@ -113,6 +113,10 @@ body {
     width: 12px;
 }
 
+#managementContents input.delete_column_button {
+    width: 120px;
+}
+
 #managementContents textarea {
 	width: 80%;
 }
