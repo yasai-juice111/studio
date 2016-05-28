@@ -79,6 +79,7 @@ app.use(logger.express);
 
 // routesSettings
 var routes = require('./routes/index');
+var logout = require('./routes/logout');
 var auth = require('./routes/auth');
 var error = require('./routes/error');
 var calendar = require('./routes/calendar');
@@ -89,6 +90,7 @@ var studio_area = require('./routes/studio_area');
 // var admin = require('./routes/admin');
 
 app.use('/', routes);
+app.use('/logout', logout);
 app.use('/auth', auth);
 app.use('/error', error);
 app.use('/calendar', calendar);
