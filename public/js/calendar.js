@@ -30,13 +30,15 @@ var studio = {
 			id: 100,
 			title: '愛甲 準 様',
 			start: '2016-05-20T16:00:00',
-			end: '2016-05-20T18:00:00'
+			end: '2016-05-20T18:00:00',
+			status: 0
 		},
 		{
 			id: 200,
 			title: '愛甲 準 様',
 			start: '2016-05-20T22:00:00',
 			end: '2016-05-21T02:00:00',
+			status: 1,
 			color: '#E57373',
 			textColor: '#FFFFFF'
 		},
@@ -45,7 +47,7 @@ var studio = {
 			title: '張 巧実 様',
 			start: '2016-05-22T16:00:00',
 			end: '2016-05-22T18:00:00',
-			url: 'https://www.facebook.com/yasai.juice111?fref=ts',
+			// url: 'https://www.facebook.com/yasai.juice111?fref=ts',
 			color: '#81C784',     // an option!
 			textColor: '#FFFFFF'  // an option!
 		},
@@ -54,7 +56,7 @@ var studio = {
 			title: 'よもさん 様',
 			start: '2016-05-21T14:00:00',
 			end: '2016-05-21T18:00:00',
-			url: 'https://www.facebook.com/yasai.juice111?fref=ts',
+			// url: 'https://www.facebook.com/yasai.juice111?fref=ts',
 			color: '#E57373',
 			textColor: '#FFFFFF'
 		},
@@ -63,7 +65,7 @@ var studio = {
 			title: '予約可能',
 			start: '2016-05-22T10:00:00',
 			end: '2016-05-22T14:00:00',
-			url: 'https://www.facebook.com/yasai.juice111?fref=ts',
+			// url: 'https://www.facebook.com/yasai.juice111?fref=ts',
 			color: '#E57373',
 			textColor: '#FFFFFF'
 		}
@@ -141,44 +143,76 @@ $(document).ready(function() {
             //     start: '2016-05-10T11:00:00',
             //     end: '2016-05-10T13:00:00'
             // }]);
-            $('[data-remodal-id=event]').remodal().open();
+            $("[data-remodal-id=event_add]").remodal().open();
            	var selectedDate = new Date(date)
            	var year = selectedDate.getFullYear()
            	var month = selectedDate.getMonth() + 1
            	var day = selectedDate.getDate()
            	var youbi = week[selectedDate.getDay()]
-            $("#eventDate").text(month + "月" + day + "日（" + youbi + "）");
+            $("#eventAdd h3").text(month + "月" + day + "日（" + youbi + "）");
 
             var fullMonthString = fullString(month);
             var fullDayString = fullString(day);
             var dateString = year + "-" + fullMonthString + "-" + fullDayString
-            $("#eventStartDate").val(dateString)
-            $("#eventEndDate").val(dateString)
+            $("#eventAdd input[name='startDate']").val(dateString)
+            $("#eventAdd input[name='endDate']").val(dateString)
 
             var hour = selectedDate.getHours() - 9 >= 0 ? selectedDate.getHours() - 9 : 24+(selectedDate.getHours() - 9) 
             console.log(hour)
             var minutes = selectedDate.getMinutes();
-            $("#eventStartTime").val(fullString(hour) + ":" + fullString(minutes))
+            $("#eventAdd input[name='startTime']").val(fullString(hour) + ":" + fullString(minutes))
             
             if (hour + defaultSettingHour > 23) {
             	var overHour = fullString(hour + defaultSettingHour - 24)
-            	$('#eventEndTime').val(overHour + ":" + minutes)
+            	$("#eventAdd input[name='endTime']").val(overHour + ":" + minutes)
             	var fullDayString = fullString(day + 1);
             	var dateString = year + "-" + fullMonthString + "-" + fullDayString
-            	$("#eventEndDate").val(dateString)
+            	$("#eventAdd input[name='endDate']").val(dateString)
             } else {
-            	$('#eventEndTime').val(fullString(hour + defaultSettingHour) + ":" + fullString(minutes))	
+            	$("#eventAdd input[name='endTime']").val(fullString(hour + defaultSettingHour) + ":" + fullString(minutes))	
             }
             
 
         },
-        // イベントをクリックしたらタイトルをhogeに変える
         eventClick: function(calEvent, jsEvent, view) {
             // calEvent.title = '峰岸 啓人 様';
             // calEvent.start = '2016-04-12T17:00:00'
             // calEvent.end = '2016-04-12T19:00:00'
             // $('#calendar').fullCalendar('updateEvent', calEvent);
-            alert("ここでスケジュール更新用ポップアップを表示する")
+
+            var title = calEvent.title;
+        	$("[data-remodal-id=event_edit]").remodal().open();
+         	$("#eventEdit input[name='title']").val(title);
+
+         	var selectedDate = calEvent.start._d;
+
+         	var year = selectedDate.getFullYear()
+         	var month = selectedDate.getMonth() + 1
+           	var day = selectedDate.getDate()
+           	var youbi = week[selectedDate.getDay()]
+           	console.log(year)
+            $("#eventEdit h3").text(month + "月" + day + "日（" + youbi + "）");
+
+            var fullMonthString = fullString(month);
+            var fullDayString = fullString(day);
+            var dateString = year + "-" + fullMonthString + "-" + fullDayString
+            $("#eventEdit input[name='startDate']").val(dateString)
+            $("#eventEdit input[name='endDate']").val(dateString)
+
+            var hour = selectedDate.getHours() - 9 >= 0 ? selectedDate.getHours() - 9 : 24+(selectedDate.getHours() - 9) 
+            console.log(hour)
+            var minutes = selectedDate.getMinutes();
+            $("#eventEdit input[name='startTime']").val(fullString(hour) + ":" + fullString(minutes))
+            
+            if (hour + defaultSettingHour > 23) {
+            	var overHour = fullString(hour + defaultSettingHour - 24)
+            	$("#eventEdit input[name='endTime']").val(overHour + ":" + minutes)
+            	var fullDayString = fullString(day + 1);
+            	var dateString = year + "-" + fullMonthString + "-" + fullDayString
+            	$("#eventEdit input[name='endDate']").val(dateString)
+            } else {
+            	$("#eventEdit input[name='endTime']").val(fullString(hour + defaultSettingHour) + ":" + fullString(minutes))	
+            }  
         }
 	});
 

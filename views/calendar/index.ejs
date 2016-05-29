@@ -16,23 +16,51 @@
 		<h2 id="studioName">スタジオ名</h2>
 		<div id="calendar"></div>
 	</div>
-	<div class="remodal" data-remodal-id="event" id="modal-area">
+	<div class="remodal" data-remodal-id="event_add">
 	    <!-- モーダルのタイトル -->
 	    <h2>登録</h2>
-	    <div id="form">
+	    <div id="eventAdd" class="form">
 	        <form action="/calendar/regist" method="POST" name="form" accept-charset="utf-8">
-		    	<h3 id="eventDate"></h3>
+		    	<h3></h3>
 		    	<p>タイトル</p>
-		    	<input type="text" name="title" value="title">
-				<p>開始日時</p>
-		    	<input id="eventStartDate" type="date" name="startDate" value="startDate">
-		    	<input id="eventStartTime" type="time" name="startTime" value="startTime">
-		    	<p>終了日時</p>
-		    	<input id="eventEndDate" type="date" name="endDate" value="endDate">
-		    	<input id="eventEndTime" type="time" name="endTime" value="endTime">
+		    	<input type="text" name="title" value="">
 		    	<p>タイプ</p>
-		    	<input type="radio" name="booking" value="booking" checked> 予約可能
-				<input type="radio" name="rental" value="rental"> 貸し出し
+		    	<input type="radio" name="rental" value="busy" checked> 予定あり
+		    	<input type="radio" name="booking" value="free"> 予約可能
+				<input type="radio" name="booking" value="temporary"> 仮予約
+				<input type="radio" name="rental" value="fixed"> 本予約
+		    	<p>開始日時</p>
+		    	<input type="date" name="startDate" value="">
+		    	<input type="time" name="startTime" value="">
+		    	<p>終了日時</p>
+		    	<input type="date" name="endDate" value="">
+		    	<input type="time" name="endTime" value="">
+			</form>
+	    </div>
+	    <!-- キャンセルボタン -->
+	    <a class="remodal-cancel" href="#" data-remodal-action="cancel">Cancel</a>
+	    <!-- OKボタン -->
+        <a href="javascript:void(0)" onclick="document.form.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">OK</a>
+	</div>
+	<div class="remodal" data-remodal-id="event_edit">
+	    <!-- モーダルのタイトル -->
+	    <h2>編集</h2>
+	    <div id="eventEdit" class="form">
+	        <form action="/calendar/regist" method="POST" name="form" accept-charset="utf-8">
+		    	<h3></h3>
+		    	<p>タイトル</p>
+		    	<input type="text" name="title" value="">
+		    	<p>タイプ</p>
+		    	<input type="radio" name="rental" value="busy" checked> 予定あり
+		    	<input type="radio" name="booking" value="free"> 予約可能
+				<input type="radio" name="booking" value="temporary"> 仮予約
+				<input type="radio" name="rental" value="fixed"> 本予約
+				<p>開始日時</p>
+		    	<input type="date" name="startDate" value="">
+		    	<input type="time" name="startTime" value="">
+		    	<p>終了日時</p>
+		    	<input type="date" name="endDate" value="">
+		    	<input type="time" name="endTime" value="">
 			</form>
 	    </div>
 	    <!-- キャンセルボタン -->
