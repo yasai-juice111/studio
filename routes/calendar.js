@@ -22,8 +22,14 @@ router.get('/', function(req, res, next) {
 	}
 	var currentDatetime = req.currentDatetime || new Date();
 
+    var studioAreaRoomId = null;
+	if (req.param('studioAreaRoomId')) {
+		studioAreaRoomId = validator.toInt(req.param('studioAreaRoomId'));
+	}
+
 	calendarFacade.index(req, {
 		"id": req.session.studio.id,
+		"studioAreaRoomId": studioAreaRoomId,
 		"currentDatetime": currentDatetime
 	},function(error, result) {
 		if (error) {
@@ -31,6 +37,7 @@ router.get('/', function(req, res, next) {
 			return
 		}
 		result.studio = req.session.studio;
+console.log(result);
 		res.render('calendar/index', result);
 	});
 });
@@ -47,20 +54,29 @@ router.post('/regist', function(req, res, next) {
     //     res.redirect('/auth');
     //     return;
     // }
-    console.log('////////////');
-    console.log('きてる？');
-    console.log('////////////');
-    console.log(req.param('title'));
-    console.log(req.param('startDate'));
-    console.log(req.param('startTime'));
-    console.log(req.param('endDate'));
-    console.log(req.param('endTime'));
-    console.log(req.param('booking'));
-    console.log(req.param('rental'));
+    var studioAreaRoomId = validator.toInt(req.param('studioAreaRoomId'));
+    var title = validator.escape(req.param('title'));
+    var startDate = validator.escape(req.param('startDate'));
+    var startTime = validator.escape(req.param('startTime'));
+    var endDate = validator.escape(req.param('endDate'));
+    var endTime = validator.escape(req.param('endTime'));
+
+    var status = null;
+    if (req.param('status')) {
+		status = req.param('status');
+    }
+
 	var currentDatetime = req.currentDatetime || new Date();
 
-	calendarFacade.index(req, {
-		"id": 1,
+	calendarFacade.regist(req, {
+		"studioId": req.session.studio.id,
+		"studioAreaRoomId": studioAreaRoomId,
+		"title": title,
+		"startDate": startDate,
+		"startTime": startTime,
+		"endDate": endDate,
+		"endTime": endTime,
+		"status": status,
 		"currentDatetime": currentDatetime
 	},function(error, result) {
 		console.log(error);
@@ -69,7 +85,56 @@ router.post('/regist', function(req, res, next) {
 		  	res.redirect('/error');
 			return
 		}
-		res.render('calendar/index', result);
+	    res.redirect('/calendar');
+	});
+});
+
+/**
+ * 編集
+ *
+ * @param {Object} req リクエスト
+ * @param {Object} res レスポンス
+ * @param {Function} next ネクスト
+ */
+router.post('/edit', function(req, res, next) {
+    // if (!req.session.user) {
+    //     res.redirect('/auth');
+    //     return;
+    // }
+    var studioAreaRoomReserveId = validator.toInt(req.param('studioAreaRoomReserveId'));
+    var studioAreaRoomId = validator.toInt(req.param('studioAreaRoomId'));
+    var title = validator.escape(req.param('title'));
+    var startDate = validator.escape(req.param('startDate'));
+    var startTime = validator.escape(req.param('startTime'));
+    var endDate = validator.escape(req.param('endDate'));
+    var endTime = validator.escape(req.param('endTime'));
+
+    var status = null;
+    if (req.param('status')) {
+		status = req.param('status');
+    }
+
+	var currentDatetime = req.currentDatetime || new Date();
+
+	calendarFacade.edit(req, {
+		"studioId": req.session.studio.id,
+		"studioAreaRoomReserveId": studioAreaRoomReserveId,
+		"studioAreaRoomId": studioAreaRoomId,
+		"title": title,
+		"startDate": startDate,
+		"startTime": startTime,
+		"endDate": endDate,
+		"endTime": endTime,
+		"status": status,
+		"currentDatetime": currentDatetime
+	},function(error, result) {
+		console.log(error);
+		console.log(result);
+		if (error) {
+		  	res.redirect('/error');
+			return
+		}
+	    res.redirect('/calendar');
 	});
 });
 

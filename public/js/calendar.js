@@ -1,26 +1,3 @@
-// var studios = [
-// {
-// 	"place": "渋谷店",
-// 	"info": [
-// 		{"id": "100", 
-// 		 "name": "A101"},
-// 		{"id": "200",
-// 		"name": "A102"},
-//     	{"id": "300",
-//     	"name": "B101"}
-// 	]
-// },
-// {
-// 	"place": "恵比寿店",
-// 	"info": [
-// 		{"id": "400",
-// 		"name": "1号室"},
-//     	{"id": "500",
-//     	"name": "2号室"}
-// 	]
-// }];
-
-
 var studio = {
 	"id": "100",
 	"name": "A101",
@@ -77,7 +54,7 @@ var week = [ "日", "月", "火", "水", "木", "金", "土"]
 var defaultSettingHour = 2
 
 $(document).ready(function() {
-	$("#studioName").text(studio.place + " " + studio.name) ;
+	// $("#studioName").text(studio.place + " " + studio.name) ;
 
 	// for(var i in studios){
  //    	$("#studioList ul").append("<li class='place'><strong>" + studios[i].place + "</strong></li>");
