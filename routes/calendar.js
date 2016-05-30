@@ -37,7 +37,6 @@ router.get('/', function(req, res, next) {
 			return
 		}
 		result.studio = req.session.studio;
-console.log(result);
 		res.render('calendar/index', result);
 	});
 });
