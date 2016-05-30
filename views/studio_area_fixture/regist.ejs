@@ -1,0 +1,28 @@
+<div id="managementContents">
+	<div id="main">
+		<h2>スタジオ登録</h2>
+	    <div id="form">
+	        <form class="management_form" action="/studio_area_fixture/regist/execute" method="POST" name="studioAreaFixtureRegist">
+				<input type="hidden" name="studioAreaId" value="<%= studioArea.id %>"></input>
+				<h4>【店舗】：<%= studioArea.name %></h4>
+				<h4>【備品名】</h4>
+				<input type="text" name="name" value=""></input>
+				<h4>【備品説明】</h4>
+				<textarea name="explanation" rows="4" cols="40"></textarea>
+				<h4>【単位時間】</h4>
+				<select name="term">
+					<option value="10minutes">10分</option>
+					<option value="15minutes">15分</option>
+					<option value="30minutes">30分</option>
+					<option value="1hour" selected="">1時間</option>
+				</select>
+				<h4>【料金】</h4>
+				<textarea name="price" rows="4" cols="40"></textarea>
+			</form>
+		    <!-- キャンセルボタン -->
+		    <a class="remodal-cancel" href="/studio_area_fixture" data-remodal-action="cancel">戻る</a>
+		    <!-- OKボタン -->
+		    <a href="javascript:void(0)" onclick="document.studioAreaFixtureRegist.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">登録</a>
+		</div>
+	</div>
+</div>
