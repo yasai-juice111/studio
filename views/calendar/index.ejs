@@ -16,14 +16,15 @@
 		<h2 id="studioName"><%= showStudioArea.name %> <%= showStudioAreaRoom.name %></h2>
 		<div id="calendar"></div>
 	</div>
-	<div class="remodal" data-remodal-id="event_add">
+	<div id="eventAdd"  class="remodal" data-remodal-id="event_add">
 	    <!-- モーダルのタイトル -->
 	    <h2>登録</h2>
-	    <div id="eventAdd" class="form">
+	    <div class="form">
 	        <form action="/calendar/regist" method="POST" name="regist" accept-charset="utf-8">
 		    	<h3></h3>
 		    	<p>タイトル</p>
 		    	<input type="text" name="title" value="">
+		    	<p class="error hidden">タイトルは必須です</p>
 		    	<p>タイプ</p>
 		    	<input type="radio" name="status" value="busy" checked> 予定あり
 		    	<input type="radio" name="status" value="free"> 予約可能
@@ -41,12 +42,12 @@
 	    <!-- キャンセルボタン -->
 	    <a class="remodal-cancel" href="#" data-remodal-action="cancel">Cancel</a>
 	    <!-- OKボタン -->
-        <a href="javascript:void(0)" onclick="document.regist.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">OK</a>
+        <a href="javascript:void(0)" class="remodal-confirm" style="display:inline-block">OK</a>
 	</div>
-	<div class="remodal" data-remodal-id="event_edit">
+	<div id="eventEdit" class="remodal" data-remodal-id="event_edit">
 	    <!-- モーダルのタイトル -->
 	    <h2>編集</h2>
-	    <div id="eventEdit" class="form">
+	    <div class="form">
 	        <form action="/calendar/edit" method="POST" name="edit" accept-charset="utf-8">
 		    	<h3></h3>
 		    	<p>タイトル</p>
@@ -78,10 +79,10 @@
         <a href="javascript:void(0)" onclick="document.edit.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">OK</a>
 	</div>
 	<!-- 承認用モーダル -->
-	<div class="remodal" data-remodal-id="event_accept">
+	<div id="eventAccept" class="remodal" data-remodal-id="event_accept">
 	    <!-- モーダルのタイトル -->
 	    <h2>予約承認</h2>
-	    <div id="eventAccept" class="form">
+	    <div class="form">
 	        <form action="/calendar/edit" method="POST" name="edit" accept-charset="utf-8">
 		    	<h3></h3>
 		    	<p>タイトル</p>
@@ -325,5 +326,14 @@
 		function fullString(defaultString) {
 	    	return (defaultString < 10 ? "0" : "")  + defaultString;
 	    }
+
+	    $("#eventAdd .remodal-confirm").on("click", function(e) {
+	    	var title = $("#eventAdd input[name='title']").val();
+	    	if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
+	    		$("#eventAdd .error").removeClass("hidden");
+  			} else {
+  				document.regist.submit();
+  			}
+	    })
 	});
 </script>
