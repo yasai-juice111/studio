@@ -182,6 +182,25 @@ router.get('/edit/execute', function(req, res, next) {
 });
 
 /**
+ * 管理
+ *
+ * @param {Object} req リクエスト
+ * @param {Object} res レスポンス
+ * @param {Function} next ネクスト
+ */
+router.get('/manage', function(req, res, next) {
+    if (!req.session.studio) {
+        res.redirect('/');
+        return;
+    }
+	var result = {
+		studio : req.session.studio
+	};
+	console.log(result);
+	res.render('studio/manage', result);
+});
+
+/**
  * 登録編集
  *
  * @param {Object} req リクエスト

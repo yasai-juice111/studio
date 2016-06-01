@@ -19,22 +19,22 @@
 						<ul class="menu__second-level">
 	            			<li><a href="/studio">店舗管理</a></li>
 	            			<li><a href="/studio_area">スタジオ管理</a></li>
-	            			<li><a href="#">備品管理</a></li>
+	            			<li><a href="/studio_area_fixture">備品管理</a></li>
 	        			</ul>
 					</li>
 					<li class="menu_spread"><a href="/studio">店舗管理</a></li>
-	            	<li class="menu_spread"><a href="/studioArea">スタジオ管理</a></li>
-	            	<li class="menu_spread"><a href="#">備品管理</a></li>
+	            	<li class="menu_spread"><a href="/studio_area">スタジオ管理</a></li>
+	            	<li class="menu_spread"><a href="/studio_area_fixture">備品管理</a></li>
 	                <li class="menu_compact menu__single">
 	                	<span class="icon user">
 	                		<a class="header_menu" href="#"><%= studio.name %>
 	                	</span>
 	                    <ul class="menu__second-level">
-	                        <li><a href="userManagement.html">ユーザー管理</a></li>
+	                        <li><a href="/studio/manage">ユーザー管理</a></li>
 	                        <li><a href="#logout">ログアウト</a></li>
 	                    </ul>
 	                </li>
-	                <li class="menu_spread"><a href="userManagement.html">ユーザー管理</a></li>
+	                <li class="menu_spread"><a href="/studio/manage">ユーザー管理</a></li>
 	            	<li class="menu_spread"><a href="#logout">ログアウト</a></li>
 				</ul>
 			</nav>
@@ -56,7 +56,7 @@
 	</form>
 </div>
 
-<div class="remodal" data-remodal-id="login" id="modal-area">
+<div class="remodal" data-remodal-id="login">
     <form action="/auth/confirm" method="POST" name="form" accept-charset="utf-8">
 		<!-- モーダルのタイトル -->
 		<h2>ログイン</h2>

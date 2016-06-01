@@ -1,0 +1,26 @@
+<div id="managementContents">
+	<div id="main">
+		<h2>ユーザー情報</h2>
+		<input type="button" class="add_button" value="編集" onClick="location.href='/studio/manage_edit'">
+		<table class="user_info">
+	    <tbody>
+	        <tr>
+	            <th class="arrow_box">会社名</div></th>
+	            <td><%= studio.name %></td>
+	        </tr>
+	        <tr>
+	            <th>ID</th>
+	            <td><%= studio.loginId %></td>
+	        </tr>
+	        <tr>
+	            <th>代表電話</th>
+	            <td><%= studio.tel %></td>
+	        </tr>
+	        <tr>
+	            <th class="arrow_box">メールアドレス</th>
+	            <td><%= studio.email %></td>
+	        </tr>
+	    </tbody>
+	</table>		
+	</div>
+</div>
