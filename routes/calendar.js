@@ -114,6 +114,7 @@ router.post('/edit', function(req, res, next) {
     }
 
 	var currentDatetime = req.currentDatetime || new Date();
+
 	calendarFacade.edit(req, {
 		"studioId": req.session.studio.id,
 		"studioAreaRoomReserveId": studioAreaRoomReserveId,
