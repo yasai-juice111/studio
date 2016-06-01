@@ -135,4 +135,35 @@ router.post('/edit', function(req, res, next) {
 	});
 });
 
+/**
+ * 削除
+ *
+ * @param {Object} req リクエスト
+ * @param {Object} res レスポンス
+ * @param {Function} next ネクスト
+ */
+router.post('/delete', function(req, res, next) {
+    // if (!req.session.user) {
+    //     res.redirect('/auth');
+    //     return;
+    // }
+    var studioAreaRoomReserveId = validator.toInt(req.param('studioAreaRoomReserveId'));
+    var studioAreaRoomId = validator.toInt(req.param('studioAreaRoomId'));
+
+	var currentDatetime = req.currentDatetime || new Date();
+
+	calendarFacade.delete(req, {
+		"studioId": req.session.studio.id,
+		"studioAreaRoomReserveId": studioAreaRoomReserveId,
+		"studioAreaRoomId": studioAreaRoomId,
+		"currentDatetime": currentDatetime
+	},function(error, result) {
+		if (error) {
+		  	res.redirect('/error');
+			return
+		}
+	    res.redirect('/calendar');
+	});
+});
+
 module.exports = router;

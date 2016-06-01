@@ -65,9 +65,15 @@
 				<input type="hidden" name="studioAreaRoomReserveId" value=""></input>
 				<input type="hidden" name="studioAreaRoomId" value="<%= showStudioAreaRoom.id %>"></input>
 			</form>
+	        <form action="/calendar/delete" method="POST" name="delete" accept-charset="utf-8">
+				<input type="hidden" name="studioAreaRoomReserveId" value=""></input>
+				<input type="hidden" name="studioAreaRoomId" value="<%= showStudioAreaRoom.id %>"></input>
+			</form>
 	    </div>
 	    <!-- キャンセルボタン -->
 	    <a class="remodal-cancel" href="#" data-remodal-action="cancel">Cancel</a>
+	    <!-- 削除 -->
+		<a href="javascript:void(0)" onclick="document.delete.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">削除</a>
 	    <!-- OKボタン -->
         <a href="javascript:void(0)" onclick="document.edit.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">OK</a>
 	</div>

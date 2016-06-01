@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS studio_area_room_reserve (
   status               varchar(255)          NOT NULL                  COMMENT 'ステータス',
   insert_datetime      DATETIME 				     NOT NULL				           COMMENT '作成日時',
   update_datetime      DATETIME              NOT NULL                  COMMENT '更新日時',
+  delete_flag          boolean               NOT NULL                  COMMENT '削除フラグ',
   PRIMARY KEY (id),
   KEY (studio_area_room_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='スタジオ予約';
