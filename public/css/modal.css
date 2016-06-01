@@ -32,3 +32,14 @@
 	width: 150px;
 	height: 20px;
 }
+
+.hidden {
+	display: none;
+}
+
+p.error {
+	font-size: 12px;
+	font-weight: normal;
+	color: red;
+	margin-top: 5px;
+}
