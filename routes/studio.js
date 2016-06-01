@@ -4,6 +4,7 @@ var router = express.Router();
 // third party
 var validator = require('validator');
 var dateformat = require('dateformat');
+var _ = require('underscore');
 
 // facade
 var studioFacade = require(__libpath + '/models/facade/studio_facade');
@@ -64,10 +65,24 @@ router.post('/regist/execute', function(req, res, next) {
         res.redirect('/');
         return;
     }
-
-    // TODO validationError
+    var validationErrorFlag = false;
     var studioAreaName = validator.escape(req.param('studioAreaName'));
-    var tel = validator.toInt(req.param('tel'));
+
+    if (!studioAreaName.match(/\S/g)) {
+    	validationErrorFlag = true;
+    }
+
+    tel = validator.toInt(req.param('tel'));
+
+    if (_.isNaN(tel)) {
+    	validationErrorFlag = true;
+    }
+	// var errors = req.validationErrors();
+    if (validationErrorFlag) {
+	  	res.redirect('/error');
+        return;
+    }
+
     var studioStation = validator.escape(req.param('studioStation'));
     var studioAddress = validator.escape(req.param('studioAddress'));
     var studioPayment = validator.escape(req.param('studioPayment'));

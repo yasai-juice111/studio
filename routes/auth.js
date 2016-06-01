@@ -47,8 +47,10 @@ router.get('/', function(req, res, next) {
  * @param {Function} next ネクスト
  */
 router.post('/confirm', function(req, res, next) {
+    
     var id = validator.escape(req.param('id'));
     var passward = validator.escape(req.param('passward'));
+
     // 認証
     authFacade.confirm(req, {
         "id": id,

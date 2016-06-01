@@ -20,12 +20,18 @@ router.get('/', function(req, res, next) {
         res.redirect('/');
 		return;		
 	}
-	var currentDatetime = req.currentDatetime || new Date();
-
     var studioAreaRoomId = null;
+
+	if (req.session.studioAreaRoom) {
+		studioAreaRoomId = req.session.studioAreaRoom.studioAreaRoomId;
+		delete req.session.studioAreaRoom;
+	}
+
 	if (req.param('studioAreaRoomId')) {
 		studioAreaRoomId = validator.toInt(req.param('studioAreaRoomId'));
 	}
+
+	var currentDatetime = req.currentDatetime || new Date();
 
 	calendarFacade.index(req, {
 		"id": req.session.studio.id,
@@ -83,6 +89,9 @@ router.post('/regist', function(req, res, next) {
 		if (error) {
 		  	res.redirect('/error');
 			return
+		}
+		req.session.studioAreaRoom = {
+			"studioAreaRoomId": studioAreaRoomId
 		}
 	    res.redirect('/calendar');
 	});
