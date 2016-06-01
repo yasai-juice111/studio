@@ -114,7 +114,6 @@ router.post('/edit', function(req, res, next) {
     }
 
 	var currentDatetime = req.currentDatetime || new Date();
-
 	calendarFacade.edit(req, {
 		"studioId": req.session.studio.id,
 		"studioAreaRoomReserveId": studioAreaRoomReserveId,
@@ -127,8 +126,6 @@ router.post('/edit', function(req, res, next) {
 		"status": status,
 		"currentDatetime": currentDatetime
 	},function(error, result) {
-		console.log(error);
-		console.log(result);
 		if (error) {
 		  	res.redirect('/error');
 			return
