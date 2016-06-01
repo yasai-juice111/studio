@@ -62,14 +62,38 @@
 		    	<p>終了日時</p>
 		    	<input type="date" name="endDate" value="">
 		    	<input type="time" name="endTime" value="">
-				<input type="hidden" name="studioAreaRoomReserveId" value=""></input>
-				<input type="hidden" name="studioAreaRoomId" value="<%= showStudioAreaRoom.id %>"></input>
+				<input type="hidden" name="studioAreaRoomId" value=""></input>
+				<input type="hidden" name="studioAreaRoomReserveId" value="<%= showStudioAreaRoom.id %>"></input>
 			</form>
 	    </div>
 	    <!-- キャンセルボタン -->
 	    <a class="remodal-cancel" href="#" data-remodal-action="cancel">Cancel</a>
 	    <!-- OKボタン -->
         <a href="javascript:void(0)" onclick="document.edit.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">OK</a>
+	</div>
+	<!-- 承認用モーダル -->
+	<div class="remodal" data-remodal-id="event_accept">
+	    <!-- モーダルのタイトル -->
+	    <h2>予約承認</h2>
+	    <div id="eventAccept" class="form">
+	        <form action="/calendar/edit" method="POST" name="edit" accept-charset="utf-8">
+		    	<h3></h3>
+		    	<p>タイトル</p>
+		    	<span class="title"></span>
+		    	<p>開始日時</p>
+		    	<span class="startDate"></span>
+		    	<span class="startTime"></span>
+		    	<p>終了日時</p>
+		    	<span class="endDate"></span>
+		    	<span class="endTime"></span>
+				<input type="hidden" name="studioAreaRoomId" value=""></input>
+				<input type="hidden" name="studioAreaRoomReserveId" value="<%= showStudioAreaRoom.id %>"></input>
+			</form>
+	    </div>
+	    <!-- キャンセルボタン -->
+	    <a class="remodal-cancel" href="#" data-remodal-action="cancel">Cancel</a>
+	    <!-- OKボタン -->
+        <a href="javascript:void(0)" onclick="document.edit.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">予約承認</a>
 	</div>
 </div>
 <script>
@@ -93,7 +117,7 @@
 			title : studioAreaRoomReserve.title,
 			start : studioAreaRoomReserve.start,
 			end : studioAreaRoomReserve.end,
-			status: 1,
+			status: studioAreaRoomReserve.status,
 			color: color,
 			textColor: '#000000'
 		});
@@ -162,7 +186,7 @@
 			axisFormat: 'H:mm',
 			// 時間の書式
 			timeFormat: 'H:mm',
-			scrollTime: first_scroll_time,
+			//scrollTime: first_scroll_time,
 			// 初期表示の日付
 			//defaultDate: '2016-01-12',
 			editable: false,
@@ -191,7 +215,6 @@
 	            $("#eventAdd input[name='endDate']").val(dateString)
 
 	            var hour = selectedDate.getHours() - 9 >= 0 ? selectedDate.getHours() - 9 : 24+(selectedDate.getHours() - 9) 
-	            console.log(hour)
 	            var minutes = selectedDate.getMinutes();
 	            $("#eventAdd input[name='startTime']").val(fullString(hour) + ":" + fullString(minutes))
 	            
@@ -212,40 +235,84 @@
 	            // calEvent.start = '2016-04-12T17:00:00'
 	            // calEvent.end = '2016-04-12T19:00:00'
 	            // $('#calendar').fullCalendar('updateEvent', calEvent);
-	            var title = calEvent.title;
-	        	$("[data-remodal-id=event_edit]").remodal().open();
-	         	$("#eventEdit input[name='studioAreaRoomReserveId']").val(calEvent.id);
-	         	$("#eventEdit input[name='title']").val(title);
+	            switch(calEvent.status) {
+	            	case 'busy':
+	            	case 'free':
+	            	case 'fixed': {
+	            		var title = calEvent.title;
+			        	$("[data-remodal-id=event_edit]").remodal().open();
+			         	$("#eventEdit input[name='studioAreaRoomId']").val(calEvent.id);
+			         	$("#eventEdit input[name='title']").val(title);
 
-	         	var selectedDate = calEvent.start._d;
+			         	var selectedDate = calEvent.start._d;
 
-	         	var year = selectedDate.getFullYear()
-	         	var month = selectedDate.getMonth() + 1
-	           	var day = selectedDate.getDate()
-	           	var youbi = week[selectedDate.getDay()]
-	           	console.log(year)
-	            $("#eventEdit h3").text(month + "月" + day + "日（" + youbi + "）");
+			         	var year = selectedDate.getFullYear()
+			         	var month = selectedDate.getMonth() + 1
+			           	var day = selectedDate.getDate()
+			           	var youbi = week[selectedDate.getDay()]
+			           	$("#eventEdit h3").text(month + "月" + day + "日（" + youbi + "）");
 
-	            var fullMonthString = fullString(month);
-	            var fullDayString = fullString(day);
-	            var dateString = year + "-" + fullMonthString + "-" + fullDayString
-	            $("#eventEdit input[name='startDate']").val(dateString)
-	            $("#eventEdit input[name='endDate']").val(dateString)
+			            var fullMonthString = fullString(month);
+			            var fullDayString = fullString(day);
+			            var dateString = year + "-" + fullMonthString + "-" + fullDayString
+			            $("#eventEdit input[name='startDate']").val(dateString)
+			            $("#eventEdit input[name='endDate']").val(dateString)
 
-	            var hour = selectedDate.getHours() - 9 >= 0 ? selectedDate.getHours() - 9 : 24+(selectedDate.getHours() - 9) 
-	            console.log(hour)
-	            var minutes = selectedDate.getMinutes();
-	            $("#eventEdit input[name='startTime']").val(fullString(hour) + ":" + fullString(minutes))
+			            var hour = selectedDate.getHours() - 9 >= 0 ? selectedDate.getHours() - 9 : 24+(selectedDate.getHours() - 9) 
+			            var minutes = selectedDate.getMinutes();
+			            $("#eventEdit input[name='startTime']").val(fullString(hour) + ":" + fullString(minutes))
+			            
+			            if (hour + defaultSettingHour > 23) {
+			            	var overHour = fullString(hour + defaultSettingHour - 24)
+			            	$("#eventEdit input[name='endTime']").val(overHour + ":" + minutes)
+			            	var fullDayString = fullString(day + 1);
+			            	var dateString = year + "-" + fullMonthString + "-" + fullDayString
+			            	$("#eventEdit input[name='endDate']").val(dateString)
+			            } else {
+			            	$("#eventEdit input[name='endTime']").val(fullString(hour + defaultSettingHour) + ":" + fullString(minutes))	
+			            }  
+			            break;
+	            	}
+	            	case 'temporary': {
+	            		
+	            		$("[data-remodal-id=event_accept]").remodal().open();
+	            		
+	            		var selectedDate = calEvent.start._d;
+	            		var year = selectedDate.getFullYear()
+			         	var month = selectedDate.getMonth() + 1
+			           	var day = selectedDate.getDate()
+			           	var youbi = week[selectedDate.getDay()]
+			           	$("#eventAccept h3").text(month + "月" + day + "日（" + youbi + "）");
+
+	            		var title = calEvent.title;
+	            		$("#eventAccept .title").text(title);
+
+	            		var fullMonthString = fullString(month);
+			            var fullDayString = fullString(day);
+			            var dateString = year + "年" + fullMonthString + "月" + fullDayString + "日"
+			            $("#eventAccept .startDate").text(dateString)
+			            $("#eventAccept .endDate").text(dateString)
+	            		
+			            var hour = selectedDate.getHours() - 9 >= 0 ? selectedDate.getHours() - 9 : 24+(selectedDate.getHours() - 9) 
+			            var minutes = selectedDate.getMinutes();
+			            $("#eventAccept .startTime").text(fullString(hour) + ":" + fullString(minutes))
+			            
+			            if (hour + defaultSettingHour > 23) {
+			            	var overHour = fullString(hour + defaultSettingHour - 24)
+			            	$("#eventAccept .endTime").text(overHour + ":" + minutes)
+			            	var fullDayString = fullString(day + 1);
+			            	var dateString = year + "年" + fullMonthString + "月" + fullDayString　+ "日"
+			            	$("#eventAccept .endDate").text(dateString)
+			            } else {
+			            	$("#eventAccept .endTime").text(fullString(hour + defaultSettingHour) + ":" + fullString(minutes))	
+			            }  
+			         	
+	            		break;
+	            	}
+	            }
+
+	         
 	            
-	            if (hour + defaultSettingHour > 23) {
-	            	var overHour = fullString(hour + defaultSettingHour - 24)
-	            	$("#eventEdit input[name='endTime']").val(overHour + ":" + minutes)
-	            	var fullDayString = fullString(day + 1);
-	            	var dateString = year + "-" + fullMonthString + "-" + fullDayString
-	            	$("#eventEdit input[name='endDate']").val(dateString)
-	            } else {
-	            	$("#eventEdit input[name='endTime']").val(fullString(hour + defaultSettingHour) + ":" + fullString(minutes))	
-	            }  
 	        }
 		});
 
