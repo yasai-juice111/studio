@@ -62,8 +62,8 @@
 		    	<p>終了日時</p>
 		    	<input type="date" name="endDate" value="">
 		    	<input type="time" name="endTime" value="">
-				<input type="hidden" name="studioAreaRoomId" value=""></input>
-				<input type="hidden" name="studioAreaRoomReserveId" value="<%= showStudioAreaRoom.id %>"></input>
+				<input type="hidden" name="studioAreaRoomReserveId" value=""></input>
+				<input type="hidden" name="studioAreaRoomId" value="<%= showStudioAreaRoom.id %>"></input>
 			</form>
 	        <form action="/calendar/delete" method="POST" name="delete" accept-charset="utf-8">
 				<input type="hidden" name="studioAreaRoomReserveId" value=""></input>
@@ -247,7 +247,7 @@
 	            	case 'fixed': {
 	            		var title = calEvent.title;
 			        	$("[data-remodal-id=event_edit]").remodal().open();
-			         	$("#eventEdit input[name='studioAreaRoomId']").val(calEvent.id);
+			         	$("#eventEdit input[name='studioAreaRoomReserveId']").val(calEvent.id);
 			         	$("#eventEdit input[name='title']").val(title);
 
 			         	var selectedDate = calEvent.start._d;

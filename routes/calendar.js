@@ -167,6 +167,7 @@ router.post('/delete', function(req, res, next) {
 		"studioAreaRoomId": studioAreaRoomId,
 		"currentDatetime": currentDatetime
 	},function(error, result) {
+		console.log(error);
 		if (error) {
 		  	res.redirect('/error');
 			return
