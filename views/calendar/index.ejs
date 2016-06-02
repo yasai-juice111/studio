@@ -52,6 +52,7 @@
 		    	<h3></h3>
 		    	<p>タイトル</p>
 		    	<input type="text" name="title" value="">
+		    	<p class="error hidden">タイトルは必須です</p>
 		    	<p>タイプ</p>
 		    	<input type="radio" name="status" value="busy" checked> 予定あり
 		    	<input type="radio" name="status" value="free"> 予約可能
@@ -76,14 +77,14 @@
 	    <!-- 削除 -->
 		<a href="javascript:void(0)" onclick="document.delete.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">削除</a>
 	    <!-- OKボタン -->
-        <a href="javascript:void(0)" onclick="document.edit.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">OK</a>
+        <a href="javascript:void(0)" class="remodal-confirm" style="display:inline-block">OK</a>
 	</div>
 	<!-- 承認用モーダル -->
 	<div id="eventAccept" class="remodal" data-remodal-id="event_accept">
 	    <!-- モーダルのタイトル -->
 	    <h2>予約承認</h2>
 	    <div class="form">
-	        <form action="/calendar/edit" method="POST" name="edit" accept-charset="utf-8">
+	        <form action="/calendar/edit" method="POST" name="accept" accept-charset="utf-8">
 		    	<h3></h3>
 		    	<p>タイトル</p>
 		    	<span class="title"></span>
@@ -333,6 +334,15 @@
 	    		$("#eventAdd .error").removeClass("hidden");
   			} else {
   				document.regist.submit();
+  			}
+	    })
+
+	    $("#eventEdit .remodal-confirm").on("click", function(e) {
+	    	var title = $("#eventEdit input[name='title']").val();
+	    	if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
+	    		$("#eventEdit .error").removeClass("hidden");
+  			} else {
+  				document.edit.submit();
   			}
 	    })
 	});
