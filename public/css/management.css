@@ -185,6 +185,14 @@ body {
     width: 100px;
 }
 
+#managementContents p.error {
+	font-size: 12px;
+	font-weight: normal;
+	color: red;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
 /* firefox */
 @-moz-document url-prefix() {
     table.user_info th::after {

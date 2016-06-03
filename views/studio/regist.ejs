@@ -1,9 +1,10 @@
 <div id="managementContents">
 	<div id="main">
 		<h2>店舗追加</h2>
-	    <div id="form">
+	    <div id="studioRegistForm">
 	        <form class="management_form" action="/studio/regist/execute" method="POST" name="studioRegist">
 				<h4>【店舗名】</h4>
+				<p class="error hidden">タイトルは必須です</p>
 				<input type="text" name="studioAreaName" value=""></input>
 				<h4>【電話番号】</h4>
 				<input type="tel" name="tel" value=""></input>
@@ -68,7 +69,7 @@
 		    <!-- キャンセルボタン -->
 		    <a class="remodal-cancel" href="/studio" data-remodal-action="cancel">戻る</a>
 		    <!-- OKボタン -->
-		    <a href="javascript:void(0)" onclick="document.studioRegist.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">OK</a>
+		    <a href="javascript:void(0)"  class="remodal-confirm"   style="display:inline-block">OK</a>
 		</div>
 	</div>
 </div>
