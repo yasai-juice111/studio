@@ -47,27 +47,28 @@ router.get('/', function(req, res, next) {
  * @param {Function} next ネクスト
  */
 router.post('/confirm', function(req, res, next) {
-    
     var id = validator.escape(req.param('id'));
-    var passward = validator.escape(req.param('passward'));
-
+    var password = validator.escape(req.param('password'));
     // 認証
     authFacade.confirm(req, {
         "id": id,
-        "passward": passward
+        "password": password
     },function(error, result) {
         if (error) {
             res.redirect('/error');
             return
         }
-        var redirectUrl = '/';
         if (result.enableLoginFlag) {
             // sessionに保存
             req.session.studio = result.studio; 
             res.redirect('/calendar');
             return;
         }
-        res.redirect(redirectUrl);
+        res.send({
+            status : 500,
+            message : "ID・PASSWORDが一致しません",
+            result : result
+        });
     });
 });
 

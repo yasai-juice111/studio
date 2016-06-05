@@ -56,21 +56,18 @@
 	</form>
 </div>
 
-<div class="remodal" data-remodal-id="login">
-    <form action="/auth/confirm" method="POST" name="form" accept-charset="utf-8">
-		<!-- モーダルのタイトル -->
-		<h2>ログイン</h2>
-		<div class="form">
-	    	<p>ID</p>
-	    	<input type="text" name="id">
-	    	<p>PASSWORD</p>
-	    	<input type="password" size="50" maxlength="12" name="passward">
-		</div>
-		<!-- キャンセルボタン -->
-		<a class="remodal-cancel" href="#" data-remodal-action="cancel">Cancel</a>
-		<!-- OKボタン -->
-        <a href="javascript:void(0)" onclick="document.form.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">OK</a>
-	</form>
+<div id="login" class="remodal" data-remodal-id="login">
+	<h2>ログイン</h2>
+	<div class="form">
+    	<p>ID</p>
+    	<input type="text" name="id">
+    	<p>PASSWORD</p>
+    	<input type="password" size="50" maxlength="12" name="password">
+	</div>
+	<!-- キャンセルボタン -->
+	<a class="remodal-cancel" href="#" data-remodal-action="cancel">Cancel</a>
+	<!-- OKボタン -->
+    <a href="javascript:void(0)" id="actionLogin" class="remodal-confirm" style="display:inline-block">OK</a>
 </div>
 <script>
 	// modalが残ってる可能性があるので、初期表示でモーダルを閉じる
@@ -91,5 +88,24 @@
 
 	$("#search").on("click", function() {
    		$('[data-remodal-id=search]').remodal().open();
-   	});   	
+   	});
+
+    $("#actionLogin").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "/auth/confirm",
+            data: {
+                "id": $("#login input[name='id']").val(),
+                "password": $("#login input[name='password']").val()
+            },
+            success: function(data){
+            	console.log(data);
+            	if (data.status == 500) {
+            		alert('ここにアペンド');
+            	}
+
+                // 処理を記述
+            }
+        });
+    });
 </script>
