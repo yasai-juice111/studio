@@ -28,6 +28,7 @@ router.get('/', function(req, res, next) {
 			return;
 		}
 		result.studio = req.session.studio;
+console.log(result);
 		res.render('studio_feestructure/index', result);
 	});
 });
@@ -54,6 +55,7 @@ router.get('/regist', function(req, res, next) {
 			return
 		}
 		result.studio = req.session.studio;
+console.log(result);
 		res.render('studio_feestructure/regist', result);
 	});
 });
@@ -70,15 +72,20 @@ router.post('/regist/execute', function(req, res, next) {
         res.redirect('/');
         return;
     }
-
     // TODO validationError
     var studioAreaRoomId = validator.toInt(req.param('studioAreaRoomId'));
-    var startTime = validator.escape(req.param('startTime'));
-    var endTime = validator.escape(req.param('endTime'));
     var price = validator.toInt(req.param('price')) || 1000;
     var priceTypeId = validator.toInt(req.param('priceTypeId'));
     var dayTypeId = validator.toInt(req.param('dayTypeId'));
     var remark = validator.escape(req.param('remark'));
+
+    var startHour = validator.escape(req.param('startHour'));
+    var startMinutes = validator.escape(req.param('startMinutes'));
+    var endHour = validator.escape(req.param('endHour'));
+    var endMinutes = validator.escape(req.param('endMinutes'));
+
+    var startTime = startHour + ':' + startMinutes;
+    var endTime = endHour + ':' + endMinutes;
 
 	studioFeestructureFacade.registExecute(req, {
 		"studioId": req.session.studio.id,
@@ -121,6 +128,7 @@ router.get('/edit', function(req, res, next) {
 			return
 		}
 		result.studio = req.session.studio;
+console.log(result);
 		res.render('studio_feestructure/edit', result);
 	});
 });
@@ -137,23 +145,31 @@ router.post('/edit/execute', function(req, res, next) {
         res.redirect('/');
         return;
     }
-
     // TODO validationError
-    var studioAreaFixtureId = validator.toInt(req.param('studioAreaFixtureId'));
-    var name = validator.escape(req.param('name'));
-    var explanation = validator.escape(req.param('explanation'));
-    var term = validator.escape(req.param('term'));
-    var price = validator.escape(req.param('price'));
+    var studioAreaRoomFeestructureId = validator.toInt(req.param('studioAreaRoomFeestructureId'));
+    var price = validator.toInt(req.param('price')) || 1000;
+    var priceTypeId = validator.toInt(req.param('priceTypeId'));
+    var dayTypeId = validator.toInt(req.param('dayTypeId'));
+    var remark = validator.escape(req.param('remark'));
+
+    var startHour = validator.escape(req.param('startHour'));
+    var startMinutes = validator.escape(req.param('startMinutes'));
+    var endHour = validator.escape(req.param('endHour'));
+    var endMinutes = validator.escape(req.param('endMinutes'));
+
+    var startTime = startHour + ':' + startMinutes;
+    var endTime = endHour + ':' + endMinutes;
 
 	studioFeestructureFacade.editExecute(req, {
 		"studioId": req.session.studio.id,
-		"studioAreaFixtureId": studioAreaFixtureId,
-		"name": name,
-		"explanation": explanation,
-		"term": term,
-		"price": price
+		"studioAreaRoomFeestructureId": studioAreaRoomFeestructureId,
+		"startTime": startTime,
+		"endTime": endTime,
+		"price": price,
+		"priceTypeId": priceTypeId,
+		"dayTypeId": dayTypeId,
+		"remark": remark
 	},function(error, result) {
-		console.log(error);
 		if (error) {
 		  	res.redirect('/error');
 			return
@@ -176,12 +192,13 @@ router.get('/delete', function(req, res, next) {
         return;
     }
     // TODO validationError
-    var studioAreaFixtureId = validator.escape(req.param('studioAreaFixtureId'));
+    var studioAreaRoomFeestructureId = validator.toInt(req.param('studioAreaRoomFeestructureId'));
 
 	studioFeestructureFacade.delete(req, {
 		"studioId": req.session.studio.id,
-		"studioAreaFixtureId": studioAreaFixtureId
+		"studioAreaRoomFeestructureId": studioAreaRoomFeestructureId
 	},function(error, result) {
+		console.log(error);
 		if (error) {
 		  	res.redirect('/error');
 			return
