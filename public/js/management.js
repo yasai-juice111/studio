@@ -46,4 +46,14 @@ $(document).ready(function() {
            document.studioEdit.submit();
         }
     });
+
+    // スタジオ登録のイベント
+    $("#studioAreaRegistForm .remodal-confirm").on("click",function(e) {
+        var title = $("#studioAreaRegistForm input[name='name']").val();
+        if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
+            $("#studioAreaRegistForm .error").removeClass("hidden");
+        } else {
+           document.studioAreaRegist.submit();
+        }
+    }); 
 });
