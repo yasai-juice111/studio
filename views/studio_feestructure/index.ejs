@@ -4,7 +4,7 @@
 		<input type="button" class="add_button" value="新規登録" onClick="location.href='/studio/regist'">
 		<div id="shopList">
 			<ul>
-				<% _.each([], function(studioArea) { %>
+				<% _.each(studioAreaList, function(studioArea) { %>
 					<li>
 						<span><%= studioArea.name %></span>
 						<input type="button" class="edit_button" value="編集" onClick="location.href='/studio/edit?studioAreaId=<%= studioArea.id %>'">

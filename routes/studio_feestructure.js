@@ -20,21 +20,16 @@ router.get('/', function(req, res, next) {
         res.redirect('/');
 		return;		
 	}
-	// studioFeestructureFacade.index(req, {
-	// 	"studioId": req.session.studio.id
-	// },function(error, result) {
-	// 	console.log(error);
-	// 	if (error) {
-	// 	  	res.redirect('/error');
-	// 		return
-	// 	}
-	// 	result.studio = req.session.studio;
-	// 	res.render('studio_area_fixture/index', result);
-	// });
-	var result = {};
-	result.studio = req.session.studio;
-	res.render('studio_feestructure/index', result);
-
+	studioFeestructureFacade.index(req, {
+		"studioId": req.session.studio.id
+	},function(error, result) {
+		if (error) {
+		  	res.redirect('/error');
+			return;
+		}
+		result.studio = req.session.studio;
+		res.render('studio_feestructure/index', result);
+	});
 });
 
 /**
@@ -59,7 +54,7 @@ router.get('/regist', function(req, res, next) {
 			return
 		}
 		result.studio = req.session.studio;
-		res.render('studio_area_fixture/regist', result);
+		res.render('studio_feestructure/regist', result);
 	});
 });
 
@@ -96,7 +91,7 @@ router.post('/regist/execute', function(req, res, next) {
 		  	res.redirect('/error');
 			return
 		}
-		res.redirect('/studio_area_fixture');
+		res.redirect('/studio_feestructure');
 	});
 });
 
@@ -122,7 +117,7 @@ router.get('/edit', function(req, res, next) {
 			return
 		}
 		result.studio = req.session.studio;
-		res.render('studio_area_fixture/edit', result);
+		res.render('studio_feestructure/edit', result);
 	});
 });
 
@@ -159,7 +154,7 @@ router.post('/edit/execute', function(req, res, next) {
 		  	res.redirect('/error');
 			return
 		}
-		res.redirect('/studio_area_fixture');
+		res.redirect('/studio_feestructure');
 	});
 });
 
@@ -187,7 +182,7 @@ router.get('/delete', function(req, res, next) {
 		  	res.redirect('/error');
 			return
 		}
-		res.redirect('/studio_area_fixture');
+		res.redirect('/studio_feestructure');
 	});
 });
 
