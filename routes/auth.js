@@ -54,19 +54,21 @@ router.post('/confirm', function(req, res, next) {
         "id": id,
         "password": password
     },function(error, result) {
-        if (error) {
+            if (error) {
             res.redirect('/error');
             return
         }
+        var status = 500;
+        var message = "ID・PASSWORDが一致しません";
         if (result.enableLoginFlag) {
+            status = 200;
+            message = "OK";
             // sessionに保存
             req.session.studio = result.studio; 
-            res.redirect('/calendar');
-            return;
         }
         res.send({
-            status : 500,
-            message : "ID・PASSWORDが一致しません",
+            status : status,
+            message : message,
             result : result
         });
     });
