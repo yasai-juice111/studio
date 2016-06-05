@@ -566,13 +566,13 @@ footer .copyrights a.ph_link{
         position: absolute;
         display: none;
         width: 92.72727272727273%;
-        top: 95px;
+        top: 55px;
         left: 3.636363636363636%;
         float: none;
         z-index: 20;
         overflow: hidden;
         background: #fff;
-        border-top: 5px solid #bfd9f2;
+        border-top: 5px solid #000;
     }
 
     header nav.responsive.active{
@@ -610,7 +610,7 @@ footer .copyrights a.ph_link{
 
     header nav.responsive ul li a{
         display: block;
-        padding: 25px 0;
+        padding: 25px 0px 15px 0px;
         border-bottom: 1px solid #f2f3f3;
 
         transition: background .2s linear;
