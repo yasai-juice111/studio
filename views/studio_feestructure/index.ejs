@@ -1,17 +1,31 @@
 <div id="managementContents">
 	<div id="main">
-		<h2>店舗一覧</h2>
-		<input type="button" class="add_button" value="新規登録" onClick="location.href='/studio/regist'">
-		<div id="shopList">
-			<ul>
-				<% _.each(studioAreaList, function(studioArea) { %>
-					<li>
-						<span><%= studioArea.name %></span>
-						<input type="button" class="edit_button" value="編集" onClick="location.href='/studio/edit?studioAreaId=<%= studioArea.id %>'">
-						<input type="button" class="delete_button" value="削除" onClick="location.href='/studio/delete?studioAreaId=<%= studioArea.id %>'">
-					</li>
-				<% }); %>
-			</ul>
+		<h2>料金一覧</h2>
+		<div id="feeStuructureList">
+			<% _.each(studioAreaList, function(studioArea) { %>
+				<div class="studio_list">
+					<h3><%= studioArea.name %></h3>
+					<ul>
+						<% _.each(studioArea.studioAreaRoomList, function(studioAreaRoom) { %>
+							<li>
+								<span><%= studioAreaRoom.name %></span>
+								<input type="button" class="add_button" value="新規登録" onClick="location.href='/studio_feestructure/regist?studioAreaRoomId=<%= studioAreaRoom.id %>'">
+								<ul>
+									<% _.each(studioAreaRoom.studioAreaRoomFeestructureList, function(studioAreaRoomFeestructure) { %>
+										<li>
+											<a href="studioEdit.html">
+												料金体系1
+											</a>
+											<input type="button" class="edit_button" value="編集" onClick="/studio_feestructure/edit?studioAreaRoomFeestructureId=<%= studioAreaRoomFeestructure.id %>'">
+											<input type="button" class="delete_button" value="削除" onClick="/studio_feestructure/delete?studioAreaRoomFeestructureId=<%= studioAreaRoomFeestructure.id %>'">
+										</li>
+									<% }); %>
+								</ul>
+							</li>
+						<% }); %>
+					</ul>
+				</div>
+			<% }); %>
 		</div>
 	</div>
 </div>
