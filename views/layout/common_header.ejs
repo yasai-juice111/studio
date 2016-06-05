@@ -111,6 +111,8 @@
             	if (data.status == 500) {
             		// data.messageを表示
             		$('#login .error').text(data.message).removeClass('hidden');
+            		$("#login input[name=id]").val('');
+            		$("#login input[name=password]").val('');
             	} else if (data.status == 200) {
             		location.href = '/calendar'
             	}
