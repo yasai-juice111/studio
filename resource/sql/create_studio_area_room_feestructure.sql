@@ -8,7 +8,7 @@ SET CHARSET utf8;
 CREATE TABLE IF NOT EXISTS studio_area_room_feestructure (
   id                   BIGINT(20)   UNSIGNED NOT NULL  AUTO_INCREMENT  COMMENT 'ID',
   studio_area_room_id  int(20)      UNSIGNED NOT NULL  				         COMMENT 'スタジオエリアID',
-  day_type_id          varchar(255)          NOT NULL                  COMMENT '曜日ID',
+  day_type_id          int(10)               NOT NULL                  COMMENT '曜日ID',
   start_time           TIME                  NOT NULL                  COMMENT '開始時',
   end_time             TIME                  NOT NULL                  COMMENT '終了時',
   price                int(10)               NOT NULL                  COMMENT '金額',

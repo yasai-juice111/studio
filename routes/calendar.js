@@ -60,12 +60,11 @@ router.post('/regist', function(req, res, next) {
     //     return;
     // }
     var studioAreaRoomId = validator.toInt(req.param('studioAreaRoomId'));
-    var title = validator.escape(req.param('title'));
+    var title = validator.toString(req.param('title'));
     var startDate = validator.escape(req.param('startDate'));
     var startTime = validator.escape(req.param('startTime'));
     var endDate = validator.escape(req.param('endDate'));
     var endTime = validator.escape(req.param('endTime'));
-
     var status = null;
     if (req.param('status')) {
 		status = req.param('status');
@@ -111,7 +110,7 @@ router.post('/edit', function(req, res, next) {
     // }
     var studioAreaRoomReserveId = validator.toInt(req.param('studioAreaRoomReserveId'));
     var studioAreaRoomId = validator.toInt(req.param('studioAreaRoomId'));
-    var title = validator.escape(req.param('title'));
+    var title = validator.toString(req.param('title'));
     var startDate = validator.escape(req.param('startDate'));
     var startTime = validator.escape(req.param('startTime'));
     var endDate = validator.escape(req.param('endDate'));
@@ -139,6 +138,9 @@ router.post('/edit', function(req, res, next) {
 		if (error) {
 		  	res.redirect('/error');
 			return
+		}
+		req.session.studioAreaRoom = {
+			"studioAreaRoomId": studioAreaRoomId
 		}
 	    res.redirect('/calendar');
 	});

@@ -13,11 +13,11 @@
 								<ul>
 									<% _.each(studioAreaRoom.studioAreaRoomFeestructureList, function(studioAreaRoomFeestructure) { %>
 										<li>
-											<a href="studioEdit.html">
-												料金体系1
-											</a>
-											<input type="button" class="edit_button" value="編集" onClick="/studio_feestructure/edit?studioAreaRoomFeestructureId=<%= studioAreaRoomFeestructure.id %>'">
-											<input type="button" class="delete_button" value="削除" onClick="/studio_feestructure/delete?studioAreaRoomFeestructureId=<%= studioAreaRoomFeestructure.id %>'">
+											<%= dayTypeMap[studioAreaRoomFeestructure.dayTypeId].name %> 
+											<%= studioAreaRoomFeestructure.startTime %> ~ <%= studioAreaRoomFeestructure.endTime %>
+											¥<%= studioAreaRoomFeestructure.price %> (<%= priceTypeMap[studioAreaRoomFeestructure.priceTypeId].name  %>)
+											<input type="button" class="edit_button" value="編集" onClick="location.href='/studio_feestructure/edit?studioAreaRoomFeestructureId=<%= studioAreaRoomFeestructure.id %>'">
+											<input type="button" class="delete_button" value="削除" onClick="location.href='/studio_feestructure/delete?studioAreaRoomFeestructureId=<%= studioAreaRoomFeestructure.id %>'">
 										</li>
 									<% }); %>
 								</ul>
