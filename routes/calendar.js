@@ -65,7 +65,6 @@ router.post('/regist', function(req, res, next) {
     var startTime = validator.escape(req.param('startTime'));
     var endDate = validator.escape(req.param('endDate'));
     var endTime = validator.escape(req.param('endTime'));
-console.log(title);
     var status = null;
     if (req.param('status')) {
 		status = req.param('status');
@@ -139,6 +138,9 @@ router.post('/edit', function(req, res, next) {
 		if (error) {
 		  	res.redirect('/error');
 			return
+		}
+		req.session.studioAreaRoom = {
+			"studioAreaRoomId": studioAreaRoomId
 		}
 	    res.redirect('/calendar');
 	});
