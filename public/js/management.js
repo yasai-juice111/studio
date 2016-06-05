@@ -43,7 +43,7 @@ $(document).ready(function() {
         if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
             $("#studioEditorm .error").removeClass("hidden");
         } else {
-           document.studioRegist.submit();
+           document.studioEdit.submit();
         }
     });
 });
