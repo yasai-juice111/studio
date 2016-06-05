@@ -54,7 +54,7 @@ router.post('/confirm', function(req, res, next) {
         "id": id,
         "password": password
     },function(error, result) {
-            if (error) {
+        if (error) {
             res.redirect('/error');
             return
         }
