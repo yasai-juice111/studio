@@ -4,18 +4,19 @@
 	    <div id="studioEditorm">
 	        <form class="management_form" action="/studio/edit/execute" method="POST" name="studioEdit">
 				<input type="hidden" name="studioAreaId" value="<%= studioArea.id %>"></input>
-				<h4>店舗名</h4>
+				<h4>【店舗名】</h4>
 				<p class="error hidden">店舗名は必須です</p>
 				<input type="text" name="studioAreaName" value="<%= studioArea.name %>"></input>
-				<h4>電話番号</h4>
+				<h4>【電話番号】(ハイフンなし)</h4>
+				<p class="error hidden">電話番号(数字のみ)は必須です</p>
 				<input type="tel" name="tel" value="<%= studioArea.tel %>"></input>
-				<h4>最寄駅</h4>
+				<h4>【最寄駅】</h4>
 				<textarea name="studioStation" rows="4" cols="40"><%= studioArea.nearStation %></textarea>
-				<h4>住所</h4>
+				<h4>【住所】</h4>
 				<textarea name="studioAddress" value="" rows="4" cols="40"><%= studioArea.address %></textarea>
-				<h4>お支払い方法</h4>
+				<h4>【お支払い方法】</h4>
 				<textarea name="studioPayment" rows="4" cols="40"><%= studioArea.paymentMethod %></textarea>
-				<h4>備考</h4>
+				<h4>【備考】</h4>
 				<textarea name="studioRemarks" rows="4" cols="40"><%= studioArea.remark %></textarea>	
 
 				<!-- <h1>【後で消す】ここより下は新しく追加された要素</h1> -->

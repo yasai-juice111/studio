@@ -29,20 +29,46 @@ $(document).ready(function() {
 
     // 店舗追加のイベント
     $("#studioRegistForm .remodal-confirm").on("click",function(e) {
+        var titleValid = true;
+        var telValid = true;
+        $("#studioRegistForm input[name='studioAreaName']").prev().addClass("hidden");
+        $("#studioRegistForm input[name='tel']").prev().addClass("hidden");
+
         var title = $("#studioRegistForm input[name='studioAreaName']").val();
+        var tel = $("#studioRegistForm input[name='tel']").val();
         if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
-            $("#studioRegistForm .error").removeClass("hidden");
-        } else {
+            $("#studioRegistForm input[name='studioAreaName']").prev().removeClass("hidden");
+            titleValid = false;
+        } 
+        if(tel == "" || tel.match(/^[ 　\r\n\t]*$/) || !tel.match(/^[0-9]+$/)) {
+            $("#studioRegistForm input[name='tel']").prev().removeClass("hidden");
+            telValid = false;
+        } 
+
+        if(titleValid && telValid) {
            document.studioRegist.submit();
         }
     });
 
     // 店舗編集のイベント
     $("#studioEditorm .remodal-confirm").on("click",function(e) {
+        var titleValid = true;
+        var telValid = true;
+        $("#studioEditorm input[name='studioAreaName']").prev().addClass("hidden");
+        $("#studioEditorm input[name='tel']").prev().addClass("hidden");
+
         var title = $("#studioEditorm input[name='studioAreaName']").val();
+        var tel = $("#studioEditorm input[name='tel']").val();
         if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
-            $("#studioEditorm .error").removeClass("hidden");
-        } else {
+            $("#studioEditorm input[name='studioAreaName']").prev().removeClass("hidden");
+            titleValid = false;
+        } 
+        if(tel == "" || tel.match(/^[ 　\r\n\t]*$/) || !tel.match(/^[0-9]+$/)) {
+            $("#studioEditorm input[name='tel']").prev().removeClass("hidden");
+            telValid = false;
+        } 
+
+        if(titleValid && telValid) {
            document.studioEdit.submit();
         }
     });
