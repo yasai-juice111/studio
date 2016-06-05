@@ -4,9 +4,9 @@
 	    <div id="studioRegistForm">
 	        <form class="management_form" action="/studio_feestructure/regist/execute" method="POST" name="studioFeestructureRegist">
 		    	<input type="hidden" name="studioAreaRoomId" value="<%= studioAreaRoom.id %>">
-				<h5>■店舗: <%= studioArea.name %></h5>
-				<h5>■スタジオ: <%= studioAreaRoom.name %></h5>
-				<h5>■曜日</h5>
+				<h4>【店舗】: <%= studioArea.name %></h4>
+				<h4>【スタジオ】: <%= studioAreaRoom.name %></h4>
+				<h4>【曜日】</h4>
 				<select name="dayTypeId">
 					<% _.each(dayTypeMap, function(dayType) { %>
 						<option value="<%= dayType.id %>"><%= dayType.name %></option>
@@ -14,7 +14,7 @@
 				</select>
 
 				<div id="price">
-					<h5>■時間帯</h5>
+					<h4>【時間帯】</h4>
 					<select name="startHour">
 					  <option value="00">00</option>
 					  <option value="01">01</option>
@@ -99,7 +99,7 @@
 					  <option value="55">55</option>
 					</select>
 
-					<h5>■単位時間あたりの料金</h5>
+					<h4>【単位時間あたりの料金】</h4>
 					<input type="text" name="price" size-"5" value=""></input>
 					<select name="priceTypeId">
 						<% _.each(priceTypeMap, function(priceType) { %>
@@ -107,7 +107,7 @@
 						<% }); %>
 					</select>
 
-					<h5>備考</h5>
+					<h4>【備考】</h4>
 					<textarea name="remark"></textarea>
 				</div>
 			</form>
