@@ -58,6 +58,7 @@
 
 <div id="login" class="remodal" data-remodal-id="login">
 	<h2>ログイン</h2>
+	<p class="error"></p>
 	<div class="form">
     	<p>ID</p>
     	<input type="text" name="id">
@@ -101,7 +102,7 @@
             success: function(data){
             	if (data.status == 500) {
             		// data.messageを表示
-            		alert(data.message);
+            		$('#login error').text(data.message).removeClass('hidden');
             	} else if (data.status == 200) {
             		location.href = '/calendar'
             	}
