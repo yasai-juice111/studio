@@ -13,7 +13,11 @@
 		</div>
 	</div>
 	<div id="main">
-		<h2 id="studioName"><%= showStudioArea.name %> <%= showStudioAreaRoom.name %></h2>
+		<h2 id="studioName">
+			<% if(showStudioArea && showStudioAreaRoom) { %>
+				<%= showStudioArea.name %> <%= showStudioAreaRoom.name %>
+			<% } %>
+		</h2>
 		<div id="calendar"></div>
 	</div>
 	<div id="eventAdd"  class="remodal" data-remodal-id="event_add">
@@ -36,7 +40,9 @@
 		    	<p>終了日時</p>
 		    	<input type="date" name="endDate" value="">
 		    	<input type="time" name="endTime" value="">
-				<input type="hidden" name="studioAreaRoomId" value="<%= showStudioAreaRoom.id %>"></input>
+		    	<% if (showStudioAreaRoom) { %>
+					<input type="hidden" name="studioAreaRoomId" value="<%= showStudioAreaRoom.id %>"></input>
+		    	<% } %>
 			</form>
 	    </div>
 	    <!-- キャンセルボタン -->
@@ -65,11 +71,15 @@
 		    	<input type="date" name="endDate" value="">
 		    	<input type="time" name="endTime" value="">
 				<input type="hidden" name="studioAreaRoomReserveId" value=""></input>
-				<input type="hidden" name="studioAreaRoomId" value="<%= showStudioAreaRoom.id %>"></input>
+				<% if (showStudioAreaRoom) { %>
+					<input type="hidden" name="studioAreaRoomId" value="<%= showStudioAreaRoom.id %>"></input>
+				<% } %>
 			</form>
 	        <form action="/calendar/delete" method="POST" name="delete" accept-charset="utf-8">
 				<input type="hidden" name="studioAreaRoomReserveId" value=""></input>
+				<% if (showStudioAreaRoom) { %>
 				<input type="hidden" name="studioAreaRoomId" value="<%= showStudioAreaRoom.id %>"></input>
+				<% } %>
 			</form>
 	    </div>
 	    <!-- キャンセルボタン -->
@@ -95,7 +105,9 @@
 		    	<span class="endDate"></span>
 		    	<span class="endTime"></span>
 				<input type="hidden" name="studioAreaRoomId" value=""></input>
+				<% if (showStudioAreaRoom) { %>
 				<input type="hidden" name="studioAreaRoomReserveId" value="<%= showStudioAreaRoom.id %>"></input>
+				<% } %>
 			</form>
 	    </div>
 	    <!-- キャンセルボタン -->
@@ -104,6 +116,7 @@
         <a href="javascript:void(0)" onclick="document.edit.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">予約承認</a>
 	</div>
 </div>
+
 <script>
 	serverParams.studio = <%- JSON.stringify(studio); %>
 	serverParams.showStudioArea = <%- JSON.stringify(showStudioArea); %>
@@ -112,6 +125,7 @@
 
 	var events = [];
 	serverParams.studioAreaRoomReserveList.forEach(function(studioAreaRoomReserve, index){
+		console.log('くる？');
 		var color = '#00FFFF';
 		if (studioAreaRoomReserve.status == 'free') {
 		var color = '#AAAAAA'
@@ -140,210 +154,210 @@
 	var week = [ "日", "月", "火", "水", "木", "金", "土"]
 
 	var defaultSettingHour = 2
+	console.log(events);
+	if (events.length > 0) {
+		$(document).ready(function() {
+			// $("#studioName").text(studio.place + " " + studio.name) ;
 
-	$(document).ready(function() {
-		// $("#studioName").text(studio.place + " " + studio.name) ;
+			// for(var i in studios){
+		 //    	$("#studioList ul").append("<li class='place'><strong>" + studios[i].place + "</strong></li>");
+		 //    	for(var j in studios[i].info){
+		 //        	$("#studioList ul").append("<li><a href='calendar.html?studio="+studios[i].info[j].id+"'>" + studios[i].info[j].name + "</a></li>");
+		 //    	}
+			// }
 
-		// for(var i in studios){
-	 //    	$("#studioList ul").append("<li class='place'><strong>" + studios[i].place + "</strong></li>");
-	 //    	for(var j in studios[i].info){
-	 //        	$("#studioList ul").append("<li><a href='calendar.html?studio="+studios[i].info[j].id+"'>" + studios[i].info[j].name + "</a></li>");
-	 //    	}
-		// }
+			// 初期表示を現在時刻にカーソルさせる
+			var current_day = new Date();
+		    var current_hours = current_day.getHours() + 5;
+		    var current_minutes = current_day.getMinutes();
+		    var first_scroll_time = current_hours + ":" + current_minutes + ":00"
 
-		// 初期表示を現在時刻にカーソルさせる
-		var current_day = new Date();
-	    var current_hours = current_day.getHours() + 5;
-	    var current_minutes = current_day.getMinutes();
-	    var first_scroll_time = current_hours + ":" + current_minutes + ":00"
+			// カレンダー周りの設定
+			$('#calendar').fullCalendar({
+				height: 800,
+				defaultView: 'agendaWeek',
+				header: {
+					left: 'prev, next',
+					center: 'title',
+					right: 'month agendaWeek agendaDay'
+				},
+				// ボタン文字列
+				buttonText: {
+				    prev:     '<',
+				    next:     '>',
+				    today:    '今日',
+				    month:    '月',
+				},
+				// 月名称
+				monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+				// 月略称
+				monthNamesShort: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+				// 曜日名称
+				dayNames: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
+				// 曜日略称
+				dayNamesShort: ['日', '月', '火', '水', '木', '金', '土'],
+				// タイトルの書式
+				titleFormat: {
+				    month: 'YYYY年 M月'
+				},
+				// 列の書式
+				columnFormat: {
+				    month: 'ddd',
+				    week: 'D（ddd）'
+				},
+				// 行の時間の書式
+				axisFormat: 'H:mm',
+				// 時間の書式
+				timeFormat: 'H:mm',
+				//scrollTime: first_scroll_time,
+				// 初期表示の日付
+				//defaultDate: '2016-01-12',
+				editable: false,
+				eventLimit: true, // allow "more" link when too many events
+				// APIのレスポンスは以下の形式で
+				events: studio.events,
+				// カレンダーのどこかをクリックしたらイベントを作る
+		        dayClick: function(date, allDay, jsEvent, view) {
+		            // $('#calendar').fullCalendar('addEventSource', [{
+		            //     title: '峰岸 啓人 様',
+		            //     start: '2016-05-10T11:00:00',
+		            //     end: '2016-05-10T13:00:00'
+		            // }]);
+		            $("[data-remodal-id=event_add]").remodal().open();
+		           	var selectedDate = new Date(date)
+		           	var year = selectedDate.getFullYear()
+		           	var month = selectedDate.getMonth() + 1
+		           	var day = selectedDate.getDate()
+		           	var youbi = week[selectedDate.getDay()]
+		            $("#eventAdd h3").text(month + "月" + day + "日（" + youbi + "）");
 
-		// カレンダー周りの設定
-		$('#calendar').fullCalendar({
-			height: 800,
-			defaultView: 'agendaWeek',
-			header: {
-				left: 'prev, next',
-				center: 'title',
-				right: 'month agendaWeek agendaDay'
-			},
-			// ボタン文字列
-			buttonText: {
-			    prev:     '<',
-			    next:     '>',
-			    today:    '今日',
-			    month:    '月',
-			},
-			// 月名称
-			monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-			// 月略称
-			monthNamesShort: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-			// 曜日名称
-			dayNames: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
-			// 曜日略称
-			dayNamesShort: ['日', '月', '火', '水', '木', '金', '土'],
-			// タイトルの書式
-			titleFormat: {
-			    month: 'YYYY年 M月'
-			},
-			// 列の書式
-			columnFormat: {
-			    month: 'ddd',
-			    week: 'D（ddd）'
-			},
-			// 行の時間の書式
-			axisFormat: 'H:mm',
-			// 時間の書式
-			timeFormat: 'H:mm',
-			//scrollTime: first_scroll_time,
-			// 初期表示の日付
-			//defaultDate: '2016-01-12',
-			editable: false,
-			eventLimit: true, // allow "more" link when too many events
-			// APIのレスポンスは以下の形式で
-			events: studio.events,
-			// カレンダーのどこかをクリックしたらイベントを作る
-	        dayClick: function(date, allDay, jsEvent, view) {
-	            // $('#calendar').fullCalendar('addEventSource', [{
-	            //     title: '峰岸 啓人 様',
-	            //     start: '2016-05-10T11:00:00',
-	            //     end: '2016-05-10T13:00:00'
-	            // }]);
-	            $("[data-remodal-id=event_add]").remodal().open();
-	           	var selectedDate = new Date(date)
-	           	var year = selectedDate.getFullYear()
-	           	var month = selectedDate.getMonth() + 1
-	           	var day = selectedDate.getDate()
-	           	var youbi = week[selectedDate.getDay()]
-	            $("#eventAdd h3").text(month + "月" + day + "日（" + youbi + "）");
+		            var fullMonthString = fullString(month);
+		            var fullDayString = fullString(day);
+		            var dateString = year + "-" + fullMonthString + "-" + fullDayString
+		            $("#eventAdd input[name='startDate']").val(dateString)
+		            $("#eventAdd input[name='endDate']").val(dateString)
 
-	            var fullMonthString = fullString(month);
-	            var fullDayString = fullString(day);
-	            var dateString = year + "-" + fullMonthString + "-" + fullDayString
-	            $("#eventAdd input[name='startDate']").val(dateString)
-	            $("#eventAdd input[name='endDate']").val(dateString)
+		            var hour = selectedDate.getHours() - 9 >= 0 ? selectedDate.getHours() - 9 : 24+(selectedDate.getHours() - 9) 
+		            var minutes = selectedDate.getMinutes();
+		            $("#eventAdd input[name='startTime']").val(fullString(hour) + ":" + fullString(minutes))
+		            
+		            if (hour + defaultSettingHour > 23) {
+		            	var overHour = fullString(hour + defaultSettingHour - 24)
+		            	$("#eventAdd input[name='endTime']").val(overHour + ":" + minutes)
+		            	var fullDayString = fullString(day + 1);
+		            	var dateString = year + "-" + fullMonthString + "-" + fullDayString
+		            	$("#eventAdd input[name='endDate']").val(dateString)
+		            } else {
+		            	$("#eventAdd input[name='endTime']").val(fullString(hour + defaultSettingHour) + ":" + fullString(minutes))	
+		            }
+		            
 
-	            var hour = selectedDate.getHours() - 9 >= 0 ? selectedDate.getHours() - 9 : 24+(selectedDate.getHours() - 9) 
-	            var minutes = selectedDate.getMinutes();
-	            $("#eventAdd input[name='startTime']").val(fullString(hour) + ":" + fullString(minutes))
-	            
-	            if (hour + defaultSettingHour > 23) {
-	            	var overHour = fullString(hour + defaultSettingHour - 24)
-	            	$("#eventAdd input[name='endTime']").val(overHour + ":" + minutes)
-	            	var fullDayString = fullString(day + 1);
-	            	var dateString = year + "-" + fullMonthString + "-" + fullDayString
-	            	$("#eventAdd input[name='endDate']").val(dateString)
-	            } else {
-	            	$("#eventAdd input[name='endTime']").val(fullString(hour + defaultSettingHour) + ":" + fullString(minutes))	
-	            }
-	            
+		        },
+		        eventClick: function(calEvent, jsEvent, view) {
+		            // calEvent.title = '峰岸 啓人 様';
+		            // calEvent.start = '2016-04-12T17:00:00'
+		            // calEvent.end = '2016-04-12T19:00:00'
+		            // $('#calendar').fullCalendar('updateEvent', calEvent);
+		            switch(calEvent.status) {
+		            	case 'busy':
+		            	case 'free':
+		            	case 'fixed': {
+		            		var title = calEvent.title;
+				        	$("[data-remodal-id=event_edit]").remodal().open();
+				         	$("#eventEdit input[name='studioAreaRoomReserveId']").val(calEvent.id);
+				         	$("#eventEdit input[name='title']").val(title);
 
-	        },
-	        eventClick: function(calEvent, jsEvent, view) {
-	            // calEvent.title = '峰岸 啓人 様';
-	            // calEvent.start = '2016-04-12T17:00:00'
-	            // calEvent.end = '2016-04-12T19:00:00'
-	            // $('#calendar').fullCalendar('updateEvent', calEvent);
-	            switch(calEvent.status) {
-	            	case 'busy':
-	            	case 'free':
-	            	case 'fixed': {
-	            		var title = calEvent.title;
-			        	$("[data-remodal-id=event_edit]").remodal().open();
-			         	$("#eventEdit input[name='studioAreaRoomReserveId']").val(calEvent.id);
-			         	$("#eventEdit input[name='title']").val(title);
+				         	var selectedDate = calEvent.start._d;
 
-			         	var selectedDate = calEvent.start._d;
+				         	var year = selectedDate.getFullYear()
+				         	var month = selectedDate.getMonth() + 1
+				           	var day = selectedDate.getDate()
+				           	var youbi = week[selectedDate.getDay()]
+				           	$("#eventEdit h3").text(month + "月" + day + "日（" + youbi + "）");
 
-			         	var year = selectedDate.getFullYear()
-			         	var month = selectedDate.getMonth() + 1
-			           	var day = selectedDate.getDate()
-			           	var youbi = week[selectedDate.getDay()]
-			           	$("#eventEdit h3").text(month + "月" + day + "日（" + youbi + "）");
+				            var fullMonthString = fullString(month);
+				            var fullDayString = fullString(day);
+				            var dateString = year + "-" + fullMonthString + "-" + fullDayString
+				            $("#eventEdit input[name='startDate']").val(dateString)
+				            $("#eventEdit input[name='endDate']").val(dateString)
 
-			            var fullMonthString = fullString(month);
-			            var fullDayString = fullString(day);
-			            var dateString = year + "-" + fullMonthString + "-" + fullDayString
-			            $("#eventEdit input[name='startDate']").val(dateString)
-			            $("#eventEdit input[name='endDate']").val(dateString)
+				            var hour = selectedDate.getHours() - 9 >= 0 ? selectedDate.getHours() - 9 : 24+(selectedDate.getHours() - 9) 
+				            var minutes = selectedDate.getMinutes();
+				            $("#eventEdit input[name='startTime']").val(fullString(hour) + ":" + fullString(minutes))
+				            
+				            if (hour + defaultSettingHour > 23) {
+				            	var overHour = fullString(hour + defaultSettingHour - 24)
+				            	$("#eventEdit input[name='endTime']").val(overHour + ":" + minutes)
+				            	var fullDayString = fullString(day + 1);
+				            	var dateString = year + "-" + fullMonthString + "-" + fullDayString
+				            	$("#eventEdit input[name='endDate']").val(dateString)
+				            } else {
+				            	$("#eventEdit input[name='endTime']").val(fullString(hour + defaultSettingHour) + ":" + fullString(minutes))	
+				            }  
+				            break;
+		            	}
+		            	case 'temporary': {
+		            		
+		            		$("[data-remodal-id=event_accept]").remodal().open();
+		            		
+		            		var selectedDate = calEvent.start._d;
+		            		var year = selectedDate.getFullYear()
+				         	var month = selectedDate.getMonth() + 1
+				           	var day = selectedDate.getDate()
+				           	var youbi = week[selectedDate.getDay()]
+				           	$("#eventAccept h3").text(month + "月" + day + "日（" + youbi + "）");
 
-			            var hour = selectedDate.getHours() - 9 >= 0 ? selectedDate.getHours() - 9 : 24+(selectedDate.getHours() - 9) 
-			            var minutes = selectedDate.getMinutes();
-			            $("#eventEdit input[name='startTime']").val(fullString(hour) + ":" + fullString(minutes))
-			            
-			            if (hour + defaultSettingHour > 23) {
-			            	var overHour = fullString(hour + defaultSettingHour - 24)
-			            	$("#eventEdit input[name='endTime']").val(overHour + ":" + minutes)
-			            	var fullDayString = fullString(day + 1);
-			            	var dateString = year + "-" + fullMonthString + "-" + fullDayString
-			            	$("#eventEdit input[name='endDate']").val(dateString)
-			            } else {
-			            	$("#eventEdit input[name='endTime']").val(fullString(hour + defaultSettingHour) + ":" + fullString(minutes))	
-			            }  
-			            break;
-	            	}
-	            	case 'temporary': {
-	            		
-	            		$("[data-remodal-id=event_accept]").remodal().open();
-	            		
-	            		var selectedDate = calEvent.start._d;
-	            		var year = selectedDate.getFullYear()
-			         	var month = selectedDate.getMonth() + 1
-			           	var day = selectedDate.getDate()
-			           	var youbi = week[selectedDate.getDay()]
-			           	$("#eventAccept h3").text(month + "月" + day + "日（" + youbi + "）");
+		            		var title = calEvent.title;
+		            		$("#eventAccept .title").text(title);
 
-	            		var title = calEvent.title;
-	            		$("#eventAccept .title").text(title);
+		            		var fullMonthString = fullString(month);
+				            var fullDayString = fullString(day);
+				            var dateString = year + "年" + fullMonthString + "月" + fullDayString + "日"
+				            $("#eventAccept .startDate").text(dateString)
+				            $("#eventAccept .endDate").text(dateString)
+		            		
+				            var hour = selectedDate.getHours() - 9 >= 0 ? selectedDate.getHours() - 9 : 24+(selectedDate.getHours() - 9) 
+				            var minutes = selectedDate.getMinutes();
+				            $("#eventAccept .startTime").text(fullString(hour) + ":" + fullString(minutes))
+				            
+				            if (hour + defaultSettingHour > 23) {
+				            	var overHour = fullString(hour + defaultSettingHour - 24)
+				            	$("#eventAccept .endTime").text(overHour + ":" + minutes)
+				            	var fullDayString = fullString(day + 1);
+				            	var dateString = year + "年" + fullMonthString + "月" + fullDayString　+ "日"
+				            	$("#eventAccept .endDate").text(dateString)
+				            } else {
+				            	$("#eventAccept .endTime").text(fullString(hour + defaultSettingHour) + ":" + fullString(minutes))	
+				            }  
+				         	
+		            		break;
+		            	}
+		            }
+		        }
+			});
 
-	            		var fullMonthString = fullString(month);
-			            var fullDayString = fullString(day);
-			            var dateString = year + "年" + fullMonthString + "月" + fullDayString + "日"
-			            $("#eventAccept .startDate").text(dateString)
-			            $("#eventAccept .endDate").text(dateString)
-	            		
-			            var hour = selectedDate.getHours() - 9 >= 0 ? selectedDate.getHours() - 9 : 24+(selectedDate.getHours() - 9) 
-			            var minutes = selectedDate.getMinutes();
-			            $("#eventAccept .startTime").text(fullString(hour) + ":" + fullString(minutes))
-			            
-			            if (hour + defaultSettingHour > 23) {
-			            	var overHour = fullString(hour + defaultSettingHour - 24)
-			            	$("#eventAccept .endTime").text(overHour + ":" + minutes)
-			            	var fullDayString = fullString(day + 1);
-			            	var dateString = year + "年" + fullMonthString + "月" + fullDayString　+ "日"
-			            	$("#eventAccept .endDate").text(dateString)
-			            } else {
-			            	$("#eventAccept .endTime").text(fullString(hour + defaultSettingHour) + ":" + fullString(minutes))	
-			            }  
-			         	
-	            		break;
-	            	}
-	            }
+			function fullString(defaultString) {
+		    	return (defaultString < 10 ? "0" : "")  + defaultString;
+		    }
 
-	         
-	            
-	        }
+		    $("#actionAdd").on("click", function(e) {
+		    	var title = $("#eventAdd input[name='title']").val();
+		    	if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
+		    		$("#eventAdd .error").removeClass("hidden");
+	  			} else {
+	  				document.regist.submit();
+	  			}
+		    })
+
+		    $("#actionEdit").on("click", function(e) {
+		    	var title = $("#eventEdit input[name='title']").val();
+		    	if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
+		    		$("#eventEdit .error").removeClass("hidden");
+	  			} else {
+	  				document.edit.submit();
+	  			}
+		    })
 		});
+	}
 
-		function fullString(defaultString) {
-	    	return (defaultString < 10 ? "0" : "")  + defaultString;
-	    }
-
-	    $("#actionAdd").on("click", function(e) {
-	    	var title = $("#eventAdd input[name='title']").val();
-	    	if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
-	    		$("#eventAdd .error").removeClass("hidden");
-  			} else {
-  				document.regist.submit();
-  			}
-	    })
-
-	    $("#actionEdit").on("click", function(e) {
-	    	var title = $("#eventEdit input[name='title']").val();
-	    	if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
-	    		$("#eventEdit .error").removeClass("hidden");
-  			} else {
-  				document.edit.submit();
-  			}
-	    })
-	});
 </script>

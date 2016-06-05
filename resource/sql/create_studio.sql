@@ -21,3 +21,4 @@ CREATE TABLE IF NOT EXISTS studio (
 insert into studio (name, login_id, login_password, tel, email, insert_datetime, update_datetime) values ('Canary(キャナリー)', 'canary','canary', '03-1111-1111', 'test@test.co.jp', now(), now());
 insert into studio (name, login_id, login_password, tel, email, insert_datetime, update_datetime) values ('studio worcle', 'worcle','worcle', '03-2222-2222', 'test@test.co.jp', now(), now());
 insert into studio (name, login_id, login_password, tel, email, insert_datetime, update_datetime) values ('vintom', 'vintom','vintom', '03-3333-3333','test@test.co.jp', now(), now());
+insert into studio (name, login_id, login_password, tel, email, insert_datetime, update_datetime) values ('test', 'test','test', '03-3333-3333','test@test.co.jp', now(), now());
