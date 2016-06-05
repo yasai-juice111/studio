@@ -60,11 +60,13 @@
 		    	<p>タイトル</p>
 		    	<input type="text" name="title" value="">
 		    	<p class="error hidden titleValidate">タイトルは必須です</p>
+		    	<span id="typeForm">
 		    	<p>タイプ</p>
 		    	<input type="radio" name="status" value="busy" checked> 予定あり
 		    	<input type="radio" name="status" value="free"> 予約可能
 				<!-- <input type="radio" name="status" value="temporary"> 仮予約
 				<input type="radio" name="status" value="fixed"> 本予約 -->
+				</span>
 				<p>開始日時</p>
 		    	<input type="date" name="startDate" value="">
 		    	<input type="time" name="startTime" value="">
@@ -259,11 +261,11 @@
 		            // calEvent.start = '2016-04-12T17:00:00'
 		            // calEvent.end = '2016-04-12T19:00:00'
 		            // $('#calendar').fullCalendar('updateEvent', calEvent);
-		            console.log(calEvent);
 		            switch(calEvent.status) {
 		            	case 'busy':
 		            	case 'free':
 		            	case 'fixed': {
+		            		$("#typeForm").removeClass("hidden");
 		            		var title = calEvent.title;
 				        	$("[data-remodal-id=event_edit]").remodal().open();
 				         	$("#eventEdit input[name='studioAreaRoomReserveId']").val(calEvent.id);
@@ -311,7 +313,19 @@
 				            	$("#eventEdit input[name='endDate']").val(endDateString);
 				            } else {
 				            	$("#eventEdit input[name='endTime']").val(fullString(endHour) + ":" + fullString(endMinutes));	
-				            }  
+				            } 
+
+				            switch (calEvent.status) {
+				            	case "busy":
+				            		$('input[name="status"]').val(['busy']);
+				            		break;
+				            	case "free":
+				            		$('input[name="status"]').val(['free']);
+				            		break;
+				            	case "fixed":
+				            		$("#typeForm").addClass("hidden");
+				            }
+
 				            break;
 		            	}
 		            	case 'temporary': {
