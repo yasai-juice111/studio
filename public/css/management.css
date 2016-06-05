@@ -113,6 +113,10 @@ body {
     width: 12px;
 }
 
+#managementContents input[name="price"] {
+	width: 150px;
+}
+
 #managementContents input.delete_column_button {
     width: 120px;
 }

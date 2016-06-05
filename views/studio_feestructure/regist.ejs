@@ -40,7 +40,7 @@
 					  <option value="21">21</option>
 					  <option value="22">22</option>
 					  <option value="23">23</option>
-					</select>
+					</select> :
 
 					<select name="startMinutes">
 					  <option value="00">00</option>
@@ -82,7 +82,7 @@
 					  <option value="21">21</option>
 					  <option value="22">22</option>
 					  <option value="23">23</option>
-					</select>
+					</select> :
 
 					<select name="endMinutes">
 					  <option value="00">00</option>
@@ -99,7 +99,7 @@
 					  <option value="55">55</option>
 					</select>
 
-					<h5>■単位時間</h5>
+					<h5>■単位時間あたりの料金</h5>
 					<input type="text" name="price" size-"5" value=""></input>
 					<select name="priceTypeId">
 						<% _.each(priceTypeMap, function(priceType) { %>
@@ -108,7 +108,7 @@
 					</select>
 
 					<h5>備考</h5>
-					<input type="textarea" name="remark" value=""></input>
+					<textarea name="remark"></textarea>
 				</div>
 			</form>
 		    <!-- キャンセルボタン -->
