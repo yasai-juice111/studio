@@ -257,6 +257,7 @@
 		            // calEvent.start = '2016-04-12T17:00:00'
 		            // calEvent.end = '2016-04-12T19:00:00'
 		            // $('#calendar').fullCalendar('updateEvent', calEvent);
+		            console.log(calEvent);
 		            switch(calEvent.status) {
 		            	case 'busy':
 		            	case 'free':
@@ -266,32 +267,48 @@
 				         	$("#eventEdit input[name='studioAreaRoomReserveId']").val(calEvent.id);
 				         	$("#eventEdit input[name='title']").val(title);
 
-				         	var selectedDate = calEvent.start._d;
+							// 開始情報
+				         	var startDate = calEvent.start._d;
+				           	var startYear = startDate.getFullYear();
+				         	var startMonth = startDate.getMonth() + 1;
+				           	var startDay = startDate.getDate();
+				           	var startYoubi = week[startDate.getDay()];
+				           	// 見出し
+				           	$("#eventEdit h3").text(startMonth + "月" + startDay + "日（" + startYoubi + "）");
+				            // 開始日
+				            var startFullMonthString = fullString(startMonth);
+				            var startFullDayString = fullString(startDay);
+				            var startDateString = startYear + "-" + startFullMonthString + "-" + startFullDayString
+				            $("#eventEdit input[name='startDate']").val(startDateString);
+				            // 開始時間
+				            var startHour = startDate.getHours() - 9 >= 0 ? startDate.getHours() - 9 : 24+(startDate.getHours() - 9);
+				            var startMinutes = startDate.getMinutes();
+				            $("#eventEdit input[name='startTime']").val(fullString(startHour) + ":" + fullString(startMinutes));
 
-				         	var year = selectedDate.getFullYear()
-				         	var month = selectedDate.getMonth() + 1
-				           	var day = selectedDate.getDate()
-				           	var youbi = week[selectedDate.getDay()]
-				           	$("#eventEdit h3").text(month + "月" + day + "日（" + youbi + "）");
 
-				            var fullMonthString = fullString(month);
-				            var fullDayString = fullString(day);
-				            var dateString = year + "-" + fullMonthString + "-" + fullDayString
-				            $("#eventEdit input[name='startDate']").val(dateString)
-				            $("#eventEdit input[name='endDate']").val(dateString)
+				            // 終了情報
+				         	var endDate = calEvent.end._d;
+				         	var endYear = endDate.getFullYear();
+				         	var endMonth = endDate.getMonth() + 1;
+				           	var endDay = endDate.getDate();
+				           	var endYoubi = week[endDate.getDay()];
+				            // 終了日
+				            var endFullMonthString = fullString(endMonth);
+				            var endFullDayString = fullString(endDay);
+				            var endDateString = endYear + "-" + endFullMonthString + "-" + endFullDayString;
+				            $("#eventEdit input[name='endDate']").val(endDateString);
 
-				            var hour = selectedDate.getHours() - 9 >= 0 ? selectedDate.getHours() - 9 : 24+(selectedDate.getHours() - 9) 
-				            var minutes = selectedDate.getMinutes();
-				            $("#eventEdit input[name='startTime']").val(fullString(hour) + ":" + fullString(minutes))
-				            
-				            if (hour + defaultSettingHour > 23) {
-				            	var overHour = fullString(hour + defaultSettingHour - 24)
-				            	$("#eventEdit input[name='endTime']").val(overHour + ":" + minutes)
-				            	var fullDayString = fullString(day + 1);
-				            	var dateString = year + "-" + fullMonthString + "-" + fullDayString
-				            	$("#eventEdit input[name='endDate']").val(dateString)
+				            // 終了時間
+				            var endHour = endDate.getHours() - 9 >= 0 ? endDate.getHours() - 9 : 24+(endDate.getHours() - 9) 
+				            var endMinutes = endDate.getMinutes();
+				            if (endHour > 23) {
+				            	var overHour = fullString(endHour - 24);
+				            	$("#eventEdit input[name='endTime']").val(overHour + ":" + minutes);
+				            	var fullDayString = fullString(endDay + 1);
+				            	var dateString = endYear + "-" + endFullMonthString + "-" + endFullDayString;
+				            	$("#eventEdit input[name='endDate']").val(endDateString);
 				            } else {
-				            	$("#eventEdit input[name='endTime']").val(fullString(hour + defaultSettingHour) + ":" + fullString(minutes))	
+				            	$("#eventEdit input[name='endTime']").val(fullString(endHour) + ":" + fullString(endMinutes));	
 				            }  
 				            break;
 		            	}
@@ -299,34 +316,51 @@
 		            		
 		            		$("[data-remodal-id=event_accept]").remodal().open();
 		            		
-		            		var selectedDate = calEvent.start._d;
-		            		var year = selectedDate.getFullYear()
-				         	var month = selectedDate.getMonth() + 1
-				           	var day = selectedDate.getDate()
-				           	var youbi = week[selectedDate.getDay()]
-				           	$("#eventAccept h3").text(month + "月" + day + "日（" + youbi + "）");
+		            		// 開始に関する情報
+		            		var startDate = calEvent.start._d;
+				           	var startYear = startDate.getFullYear();
+				         	var startMonth = startDate.getMonth() + 1;
+				           	var startDay = startDate.getDate();
+				           	var startYoubi = week[startDate.getDay()];
+				            // 開始日
+				            var startFullMonthString = fullString(startMonth);
+				            var startFullDayString = fullString(startDay);
+				            var startDateString = startYear + "-" + startFullMonthString + "-" + startFullDayString
+				            
+				            var title = calEvent.title;
+				            var startHour = startDate.getHours() - 9 >= 0 ? startDate.getHours() - 9 : 24+(startDate.getHours() - 9);
+				            var startMinutes = startDate.getMinutes();
+				            $("#eventAccept h3").text(startMonth + "月" + startDay + "日（" + startYoubi + "）");
 
-		            		var title = calEvent.title;
 		            		$("#eventAccept .title").text(title);
 
-		            		var fullMonthString = fullString(month);
-				            var fullDayString = fullString(day);
-				            var dateString = year + "年" + fullMonthString + "月" + fullDayString + "日"
-				            $("#eventAccept .startDate").text(dateString)
-				            $("#eventAccept .endDate").text(dateString)
-		            		
-				            var hour = selectedDate.getHours() - 9 >= 0 ? selectedDate.getHours() - 9 : 24+(selectedDate.getHours() - 9) 
-				            var minutes = selectedDate.getMinutes();
-				            $("#eventAccept .startTime").text(fullString(hour) + ":" + fullString(minutes))
+				            $("#eventAccept .startDate").text(startDateString);
 				            
-				            if (hour + defaultSettingHour > 23) {
-				            	var overHour = fullString(hour + defaultSettingHour - 24)
-				            	$("#eventAccept .endTime").text(overHour + ":" + minutes)
-				            	var fullDayString = fullString(day + 1);
-				            	var dateString = year + "年" + fullMonthString + "月" + fullDayString　+ "日"
-				            	$("#eventAccept .endDate").text(dateString)
+				            $("#eventAccept .startTime").text(fullString(startHour) + ":" + fullString(startMinutes))
+				           
+
+				            // 終了に関する情報
+				            var endDate = calEvent.end._d;
+		            		var endYear = endDate.getFullYear();
+				         	var endMonth = endDate.getMonth() + 1;
+				           	var endDay = endDate.getDate();
+				           	 // 終了日
+				            var endFullMonthString = fullString(endMonth);
+				            var endFullDayString = fullString(endDay);
+				            var endDateString = endYear + "-" + endFullMonthString + "-" + endFullDayString
+
+				           	
+				            $("#eventAccept .endDate").text(endDateString)
+				            var endHour = endDate.getHours() - 9 >= 0 ? endDate.getHours() - 9 : 24+(endDate.getHours() - 9);
+				            var endMinutes = endDate.getMinutes();
+				            if (endHour > 23) {
+				            	var overHour = fullString(endHour - 24);
+				            	$("#eventAccept .endTime").text(overHour + ":" + endMinutes);
+				            	var fullDayString = fullString(endDay + 1);
+				            	var dateString = startYear + "年" + fullMonthString + "月" + fullDayString　+ "日"
+				            	$("#eventAccept .endDate").text(dateString);
 				            } else {
-				            	$("#eventAccept .endTime").text(fullString(hour + defaultSettingHour) + ":" + fullString(minutes))	
+				            	$("#eventAccept .endTime").text(fullString(endHour) + ":" + fullString(endMinutes));
 				            }  
 				         	
 		            		break;
@@ -341,6 +375,12 @@
 
 		    $("#actionAdd").on("click", function(e) {
 		    	var title = $("#eventAdd input[name='title']").val();
+		    	
+		    	// var startDate = $("#eventAdd input[name='startDate']").val();
+		    	// var endDate = $("#eventAdd input[name='endDate']").val();
+		    	// var startTime = $("#eventAdd input[name='startTime']").val();
+		    	// var endTime = $("#eventAdd input[name='endTime']").val();
+
 		    	if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
 		    		$("#eventAdd .error").removeClass("hidden");
 	  			} else {
