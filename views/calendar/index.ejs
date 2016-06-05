@@ -28,7 +28,7 @@
 		    	<h3></h3>
 		    	<p>タイトル</p>
 		    	<input type="text" name="title" value="">
-		    	<p class="error hidden">タイトルは必須です</p>
+		    	<p class="error hidden titleValidate">タイトルは必須です</p>
 		    	<p>タイプ</p>
 		    	<input type="radio" name="status" value="busy" checked> 予定あり
 		    	<input type="radio" name="status" value="free"> 予約可能
@@ -40,6 +40,7 @@
 		    	<p>終了日時</p>
 		    	<input type="date" name="endDate" value="">
 		    	<input type="time" name="endTime" value="">
+		    	<p class="error hidden dateValidate">終了日時は開始日時より後にしてください</p>
 		    	<% if (showStudioAreaRoom) { %>
 					<input type="hidden" name="studioAreaRoomId" value="<%= showStudioAreaRoom.id %>"></input>
 		    	<% } %>
@@ -58,18 +59,21 @@
 		    	<h3></h3>
 		    	<p>タイトル</p>
 		    	<input type="text" name="title" value="">
-		    	<p class="error hidden">タイトルは必須です</p>
+		    	<p class="error hidden titleValidate">タイトルは必須です</p>
+		    	<span id="typeForm">
 		    	<p>タイプ</p>
 		    	<input type="radio" name="status" value="busy" checked> 予定あり
 		    	<input type="radio" name="status" value="free"> 予約可能
 				<!-- <input type="radio" name="status" value="temporary"> 仮予約
 				<input type="radio" name="status" value="fixed"> 本予約 -->
+				</span>
 				<p>開始日時</p>
 		    	<input type="date" name="startDate" value="">
 		    	<input type="time" name="startTime" value="">
 		    	<p>終了日時</p>
 		    	<input type="date" name="endDate" value="">
 		    	<input type="time" name="endTime" value="">
+		    	<p class="error hidden dateValidate">終了日時は開始日時より後にしてください</p>
 				<input type="hidden" name="studioAreaRoomReserveId" value=""></input>
 				<% if (showStudioAreaRoom) { %>
 					<input type="hidden" name="studioAreaRoomId" value="<%= showStudioAreaRoom.id %>"></input>
@@ -257,11 +261,11 @@
 		            // calEvent.start = '2016-04-12T17:00:00'
 		            // calEvent.end = '2016-04-12T19:00:00'
 		            // $('#calendar').fullCalendar('updateEvent', calEvent);
-		            console.log(calEvent);
 		            switch(calEvent.status) {
 		            	case 'busy':
 		            	case 'free':
 		            	case 'fixed': {
+		            		$("#typeForm").removeClass("hidden");
 		            		var title = calEvent.title;
 				        	$("[data-remodal-id=event_edit]").remodal().open();
 				         	$("#eventEdit input[name='studioAreaRoomReserveId']").val(calEvent.id);
@@ -309,7 +313,19 @@
 				            	$("#eventEdit input[name='endDate']").val(endDateString);
 				            } else {
 				            	$("#eventEdit input[name='endTime']").val(fullString(endHour) + ":" + fullString(endMinutes));	
-				            }  
+				            } 
+
+				            switch (calEvent.status) {
+				            	case "busy":
+				            		$('input[name="status"]').val(['busy']);
+				            		break;
+				            	case "free":
+				            		$('input[name="status"]').val(['free']);
+				            		break;
+				            	case "fixed":
+				            		$("#typeForm").addClass("hidden");
+				            }
+
 				            break;
 		            	}
 		            	case 'temporary': {
@@ -374,25 +390,64 @@
 		    }
 
 		    $("#actionAdd").on("click", function(e) {
-		    	var title = $("#eventAdd input[name='title']").val();
-		    	
-		    	// var startDate = $("#eventAdd input[name='startDate']").val();
-		    	// var endDate = $("#eventAdd input[name='endDate']").val();
-		    	// var startTime = $("#eventAdd input[name='startTime']").val();
-		    	// var endTime = $("#eventAdd input[name='endTime']").val();
 
+		    	var dateValidate = true;
+		    	var titleValidate = true;
+
+		    	var startDate = $("#eventAdd input[name='startDate']").val();
+		    	var endDate = $("#eventAdd input[name='endDate']").val();
+		    	var startTime = $("#eventAdd input[name='startTime']").val();
+		    	var endTime = $("#eventAdd input[name='endTime']").val();
+
+				var start = new Date(startDate +' '+ startTime);
+				var end = new Date(endDate +' '+ endTime);
+				if (start.getTime() == end.getTime()) {
+					$("#eventAdd .error.dateValidate").removeClass("hidden");
+					dateValidate = false;
+				} else {
+					$("#eventAdd .error.dateValidate").addClass("hidden");
+				}
+
+		    	var title = $("#eventAdd input[name='title']").val();
 		    	if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
-		    		$("#eventAdd .error").removeClass("hidden");
+		    		$("#eventAdd .error.titleValidate").removeClass("hidden");
+		    		titleValidate = false;
 	  			} else {
+	  				$("#eventAdd .error.titleValidate").addClass("hidden");
+	  			}
+
+	  			if (dateValidate && titleValidate){
 	  				document.regist.submit();
 	  			}
 		    })
 
 		    $("#actionEdit").on("click", function(e) {
+		    	var dateValidate = true;
+		    	var titleValidate = true;
+
+		    	var startDate = $("#eventEdit input[name='startDate']").val();
+		    	var endDate = $("#eventEdit input[name='endDate']").val();
+		    	var startTime = $("#eventEdit input[name='startTime']").val();
+		    	var endTime = $("#eventEdit input[name='endTime']").val();
+
+				var start = new Date(startDate +' '+ startTime);
+				var end = new Date(endDate +' '+ endTime);
+				if (start.getTime() == end.getTime()) {
+					$("#eventEdit .error.dateValidate").removeClass("hidden");
+					dateValidate = false;
+				} else {
+					$("#eventEdit .error.dateValidate").addClass("hidden");
+				}
+
 		    	var title = $("#eventEdit input[name='title']").val();
 		    	if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
-		    		$("#eventEdit .error").removeClass("hidden");
+		    		$("#eventEdit .error.titleValidate").removeClass("hidden");
+		    		titleValidate = false;
 	  			} else {
+	  				$("#eventEdit .error.titleValidate").addClass("hidden");
+	  			}
+
+	  			if (dateValidate && titleValidate){
 	  				document.edit.submit();
 	  			}
 		    })
