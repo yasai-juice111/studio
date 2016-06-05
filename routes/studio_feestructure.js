@@ -20,17 +20,21 @@ router.get('/', function(req, res, next) {
         res.redirect('/');
 		return;		
 	}
-	studioFeestructureFacade.index(req, {
-		"studioId": req.session.studio.id
-	},function(error, result) {
-		console.log(error);
-		if (error) {
-		  	res.redirect('/error');
-			return
-		}
-		result.studio = req.session.studio;
-		res.render('studio_area_fixture/index', result);
-	});
+	// studioFeestructureFacade.index(req, {
+	// 	"studioId": req.session.studio.id
+	// },function(error, result) {
+	// 	console.log(error);
+	// 	if (error) {
+	// 	  	res.redirect('/error');
+	// 		return
+	// 	}
+	// 	result.studio = req.session.studio;
+	// 	res.render('studio_area_fixture/index', result);
+	// });
+	var result = {};
+	result.studio = req.session.studio;
+	res.render('studio_feestructure/index', result);
+
 });
 
 /**
