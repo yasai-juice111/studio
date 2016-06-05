@@ -1,11 +1,12 @@
 <div id="managementContents">
 	<div id="main">
 		<h2>スタジオ編集 -<span id="studioName"><%= studioAreaRoom.name %></span>-</h2>
-	    <div id="form">
+	    <div id="studioAreaEditorm">
 	        <form class="management_form" action="/studio_area/edit/execute" method="POST" name="studioAreaEdit">
 				<input type="hidden" name="studioAreaRoomId" value="<%= studioAreaRoom.id %>"></input>
 				<h4>【店舗】：<%= studioArea.name %></h4>
 				<h4>【スタジオ名】</h4>
+				<p class="error hidden">スタジオ名は必須です</p>
 				<input type="text" name="name" value="<%= studioAreaRoom.name %>"></input>
 				
 				<h4>【広さ】</h4>
@@ -181,7 +182,7 @@
 		    <!-- キャンセルボタン -->
 		    <a class="remodal-cancel" href="/studio_area" data-remodal-action="cancel">戻る</a>
 		    <!-- OKボタン -->
-		    <a href="javascript:void(0)" onclick="document.studioAreaEdit.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">登録</a>
+		    <a href="javascript:void(0)" class="remodal-confirm" style="display:inline-block">登録</a>
 		</div>
 	</div>
 </div>
