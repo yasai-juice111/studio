@@ -42,7 +42,7 @@
 	    <!-- キャンセルボタン -->
 	    <a class="remodal-cancel" href="#" data-remodal-action="cancel">Cancel</a>
 	    <!-- OKボタン -->
-        <a href="javascript:void(0)" class="remodal-confirm" style="display:inline-block">OK</a>
+        <a href="javascript:void(0)" id="actionAdd" class="remodal-confirm" style="display:inline-block">OK</a>
 	</div>
 	<div id="eventEdit" class="remodal" data-remodal-id="event_edit">
 	    <!-- モーダルのタイトル -->
@@ -75,9 +75,9 @@
 	    <!-- キャンセルボタン -->
 	    <a class="remodal-cancel" href="#" data-remodal-action="cancel">Cancel</a>
 	    <!-- 削除 -->
-		<a href="javascript:void(0)" onclick="document.delete.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">削除</a>
+		<a href="javascript:void(0)" id="actionEelete" onclick="document.delete.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">削除</a>
 	    <!-- OKボタン -->
-        <a href="javascript:void(0)" class="remodal-confirm" style="display:inline-block">OK</a>
+        <a href="javascript:void(0)" id="actionEdit" class="remodal-confirm" style="display:inline-block">OK</a>
 	</div>
 	<!-- 承認用モーダル -->
 	<div id="eventAccept" class="remodal" data-remodal-id="event_accept">
@@ -328,7 +328,7 @@
 	    	return (defaultString < 10 ? "0" : "")  + defaultString;
 	    }
 
-	    $("#eventAdd .remodal-confirm").on("click", function(e) {
+	    $("#actionAdd").on("click", function(e) {
 	    	var title = $("#eventAdd input[name='title']").val();
 	    	if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
 	    		$("#eventAdd .error").removeClass("hidden");
@@ -337,7 +337,7 @@
   			}
 	    })
 
-	    $("#eventEdit .remodal-confirm").on("click", function(e) {
+	    $("#actionEdit").on("click", function(e) {
 	    	var title = $("#eventEdit input[name='title']").val();
 	    	if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
 	    		$("#eventEdit .error").removeClass("hidden");
