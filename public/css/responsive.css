@@ -73,7 +73,7 @@ body{
     max-width: 100%;
     margin: 0 auto;
     position: relative;
-    padding-left: 250px;
+    padding-left: 100px;
     padding-right: 100px;
 }
 
@@ -535,67 +535,11 @@ footer .copyrights a.ph_link{
 }
 
 
-
-
-
-
-
-
-
-/*  responsive css */
-
-
-@media (max-width:1500px){
-    .hero .caption{
-        top: 40%;
-    }
-}
-
-
-@media (max-width: 1150px){
+@media (max-width:840px){
     .wrapper{
-        padding: 0 40px;
+        padding: 0 20px;
         max-width: 1020px;
     }
-    .search .advanced_search .arrow{
-        top: -8px;
-        right: 46px;
-    }
-
-    .search .advanced_search #check_in_date,
-    .search .advanced_search #check_out_date,
-    .search .advanced_search #min_price,
-    .search .advanced_search #max_price{
-        width: 46.27272727272727%;
-        padding: 0 1.818181818181818%;
-    }
-
-    .search .advanced_search #check_in_date,
-    .search .advanced_search #check_out_date{
-        background: url('../img/02_ui/calendar_icon.png') no-repeat;
-        background-position: 95.08840864440079% 50%;
-    }
-
-    .search .advanced_search #keywords{
-        width: 96.36363636363636%;
-        padding: 0 1.818181818181818%;
-    }
-
-    footer .footer > ul > li{
-        margin-right: 5.454545454545455%;
-    }
-
-    footer .footer > ul > li.links{
-        width: 17.90909090909091%;
-    }
-
-    footer .footer > ul > li.about{
-        width: 29.72727272727273%;
-    }
-}
-
-
-@media (max-width:800px){
     .hero .caption{
         top: 20%;
     }
@@ -727,38 +671,6 @@ footer .copyrights a.ph_link{
         margin-right: 100%;
         overflow: hidden;
         border-top: 1px solid #82abd4;
-    }
-}
-
-
-@media (max-width:700px){
-
-    .search .advanced_search #check_in_date,
-    .search .advanced_search #check_out_date,
-    .search .advanced_search #min_price,
-    .search .advanced_search #max_price{
-        width: 96.36363636363636%;
-        padding: 0 1.818181818181818%;
-        border-bottom: 1px solid #aac8e4;
-    }
-
-    .search .advanced_search #check_in_date,
-    .search .advanced_search #check_out_date{
-        background: url('../img/02_ui/calendar_icon.png') no-repeat;
-        background-position: 95.08840864440079% 50%;
-    }
-
-    .search .advanced_search #keywords{
-        width: 96.36363636363636%;
-        padding: 0 1.818181818181818%;
-    }
-
-    .search .advanced_search .search_fields{
-        border-bottom: 0;
-    }
-
-    .search .advanced_search .field_sep{
-        display: none;
     }
 }
 
