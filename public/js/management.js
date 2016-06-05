@@ -56,4 +56,14 @@ $(document).ready(function() {
            document.studioAreaRegist.submit();
         }
     }); 
+
+    // スタジオ編集のイベント
+    $("#studioAreaEditorm .remodal-confirm").on("click",function(e) {
+        var title = $("#studioAreaEditorm input[name='name']").val();
+        if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
+            $("#studioAreaEditorm .error").removeClass("hidden");
+        } else {
+           document.studioAreaEdit.submit();
+        }
+    });
 });
