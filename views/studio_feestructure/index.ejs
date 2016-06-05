@@ -1,17 +1,97 @@
 <div id="managementContents">
 	<div id="main">
-		<h2>店舗一覧</h2>
-		<input type="button" class="add_button" value="新規登録" onClick="location.href='/studio/regist'">
-		<div id="shopList">
-			<ul>
-				<% _.each([], function(studioArea) { %>
+		<h2>料金一覧</h2>
+		<div id="feeStuructureList">
+			<div class="studio_list">
+				<h3>渋谷店</h3>
+				<ul>
 					<li>
-						<span><%= studioArea.name %></span>
-						<input type="button" class="edit_button" value="編集" onClick="location.href='/studio/edit?studioAreaId=<%= studioArea.id %>'">
-						<input type="button" class="delete_button" value="削除" onClick="location.href='/studio/delete?studioAreaId=<%= studioArea.id %>'">
+						<span>101号室</span>
+						<input type="button" class="add_button" value="新規登録" onClick="location.href='/studio/regist'">
+						<ul>
+							<li>
+								<a href="studioEdit.html">
+									料金体系1
+								</a>
+								<input type="button" class="edit_button" value="編集" onClick="location.href='studioEdit.html'">
+								<input type="button" class="delete_button" value="削除">
+						
+							</li>
+							<li>
+								<a href="studioEdit.html">
+									料金体系2
+								</a>
+								<input type="button" class="edit_button" value="編集" onClick="location.href='studioEdit.html'">
+								<input type="button" class="delete_button" value="削除">
+						
+							</li>
+						</ul>
 					</li>
-				<% }); %>
-			</ul>
+					<li>
+						<span>102号室</span>
+						<input type="button" class="add_button" value="新規登録" onClick="location.href='/studio/regist'">
+						<ul>
+							<li>
+								<a href="studioEdit.html">
+									料金体系1
+								</a>
+								<input type="button" class="edit_button" value="編集" onClick="location.href='studioEdit.html'">
+								<input type="button" class="delete_button" value="削除">
+						
+							</li>
+							<li>
+								<a href="studioEdit.html">
+									料金体系2
+								</a>
+								<input type="button" class="edit_button" value="編集" onClick="location.href='studioEdit.html'">
+								<input type="button" class="delete_button" value="削除">
+						
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="studio_list">
+				<h3>恵比寿店</h3>
+				<ul>
+					<li>
+						<span>Aスタジオ</span>
+						<input type="button" class="add_button" value="新規登録" onClick="location.href='/studio/regist'">
+						<ul>
+							<li>
+								<a href="studioEdit.html">
+									料金体系
+								</a>
+								<input type="button" class="edit_button" value="編集" onClick="location.href='studioEdit.html'">
+								<input type="button" class="delete_button" value="削除">
+						
+							</li>
+						</ul>
+					</li>
+					<li>
+						<span>Bスタジオ<span>
+						<input type="button" class="add_button" value="新規登録" onClick="location.href='/studio/regist'">
+						<ul>
+							<li>
+								<a href="studioEdit.html">
+									料金体系A
+								</a>
+								<input type="button" class="edit_button" value="編集" onClick="location.href='studioEdit.html'">
+								<input type="button" class="delete_button" value="削除">
+						
+							</li>
+							<li>
+								<a href="studioEdit.html">
+									料金体系B
+								</a>
+								<input type="button" class="edit_button" value="編集" onClick="location.href='studioEdit.html'">
+								<input type="button" class="delete_button" value="削除">
+						
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
