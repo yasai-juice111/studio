@@ -160,24 +160,14 @@
 	var defaultSettingHour = 2
 	if (serverParams.showStudioArea && serverParams.showStudioAreaRoom) {
 		$(document).ready(function() {
-			// $("#studioName").text(studio.place + " " + studio.name) ;
-
-			// for(var i in studios){
-		 //    	$("#studioList ul").append("<li class='place'><strong>" + studios[i].place + "</strong></li>");
-		 //    	for(var j in studios[i].info){
-		 //        	$("#studioList ul").append("<li><a href='calendar.html?studio="+studios[i].info[j].id+"'>" + studios[i].info[j].name + "</a></li>");
-		 //    	}
-			// }
-
+			var contentHeight = $(window).height() - 200;
+			
 			// 初期表示を現在時刻にカーソルさせる
-			var current_day = new Date();
-		    var current_hours = current_day.getHours() + 5;
-		    var current_minutes = current_day.getMinutes();
-		    var first_scroll_time = current_hours + ":" + current_minutes + ":00"
+			var first_scroll_time = "22:00"
 
 			// カレンダー周りの設定
 			$('#calendar').fullCalendar({
-				height: 800,
+				contentHeight: contentHeight,
 				defaultView: 'agendaWeek',
 				header: {
 					left: 'prev, next',
@@ -212,7 +202,7 @@
 				axisFormat: 'H:mm',
 				// 時間の書式
 				timeFormat: 'H:mm',
-				//scrollTime: first_scroll_time,
+				scrollTime: first_scroll_time,
 				// 初期表示の日付
 				//defaultDate: '2016-01-12',
 				editable: false,
@@ -384,6 +374,9 @@
 		            }
 		        }
 			});
+
+			// 指定の日付を表示
+			$('#calendar').fullCalendar('gotoDate', '2014-10-01');
 
 			function fullString(defaultString) {
 		    	return (defaultString < 10 ? "0" : "")  + defaultString;
