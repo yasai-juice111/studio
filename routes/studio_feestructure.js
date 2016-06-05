@@ -29,7 +29,6 @@ router.get('/', function(req, res, next) {
 			return
 		}
 		result.studio = req.session.studio;
-console.log(result);
 		res.render('studio_area_fixture/index', result);
 	});
 });
