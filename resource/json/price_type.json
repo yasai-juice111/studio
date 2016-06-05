@@ -1,0 +1,5 @@
+{
+  "1": {"id":1, "code":"fixed", "name":"パック"},
+  "2": {"id":2, "code":"oneHour", "name":"1h"},
+  "3": {"id":3, "code":"halfHour", "name":"30min"}
+}
