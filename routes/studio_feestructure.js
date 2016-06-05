@@ -20,21 +20,16 @@ router.get('/', function(req, res, next) {
         res.redirect('/');
 		return;		
 	}
-	// studioFeestructureFacade.index(req, {
-	// 	"studioId": req.session.studio.id
-	// },function(error, result) {
-	// 	console.log(error);
-	// 	if (error) {
-	// 	  	res.redirect('/error');
-	// 		return
-	// 	}
-	// 	result.studio = req.session.studio;
-	// 	res.render('studio_area_fixture/index', result);
-	// });
-	var result = {};
-	result.studio = req.session.studio;
-	res.render('studio_feestructure/index', result);
-
+	studioFeestructureFacade.index(req, {
+		"studioId": req.session.studio.id
+	},function(error, result) {
+		if (error) {
+		  	res.redirect('/error');
+			return;
+		}
+		result.studio = req.session.studio;
+		res.render('studio_feestructure/index', result);
+	});
 });
 
 /**
@@ -49,9 +44,9 @@ router.get('/regist', function(req, res, next) {
         res.redirect('/');
         return;
     }
-    var studioAreaId = validator.toInt(req.param('studioAreaId'));
+    var studioAreaRoomId = validator.toInt(req.param('studioAreaRoomId'));
 	studioFeestructureFacade.regist(req, {
-		"studioAreaId": studioAreaId
+		"studioAreaRoomId": studioAreaRoomId
 	},function(error, result) {
 		console.log(error);
 		if (error) {
@@ -59,7 +54,7 @@ router.get('/regist', function(req, res, next) {
 			return
 		}
 		result.studio = req.session.studio;
-		res.render('studio_area_fixture/regist', result);
+		res.render('studio_feestructure/regist', result);
 	});
 });
 
@@ -77,26 +72,29 @@ router.post('/regist/execute', function(req, res, next) {
     }
 
     // TODO validationError
-    var studioAreaId = validator.toInt(req.param('studioAreaId'));
-    var name = validator.escape(req.param('name'));
-    var explanation = validator.escape(req.param('explanation'));
-    var term = validator.escape(req.param('term'));
-    var price = validator.escape(req.param('price'));
+    var studioAreaRoomId = validator.toInt(req.param('studioAreaRoomId'));
+    var startTime = validator.escape(req.param('startTime'));
+    var endTime = validator.escape(req.param('endTime'));
+    var price = validator.toInt(req.param('price')) || 1000;
+    var priceTypeId = validator.toInt(req.param('priceTypeId'));
+    var dayTypeId = validator.toInt(req.param('dayTypeId'));
+    var remark = validator.escape(req.param('remark'));
 
 	studioFeestructureFacade.registExecute(req, {
 		"studioId": req.session.studio.id,
-		"studioAreaId": studioAreaId,
-		"name": name,
-		"explanation": explanation,
-		"term": term,
-		"price": price
+		"studioAreaRoomId": studioAreaRoomId,
+		"startTime": startTime,
+		"endTime": endTime,
+		"price": price,
+		"priceTypeId": priceTypeId,
+		"dayTypeId": dayTypeId,
+		"remark": remark
 	},function(error, result) {
-		console.log(error);
 		if (error) {
 		  	res.redirect('/error');
 			return
 		}
-		res.redirect('/studio_area_fixture');
+		res.redirect('/studio_feestructure');
 	});
 });
 
@@ -112,17 +110,18 @@ router.get('/edit', function(req, res, next) {
         res.redirect('/');
         return;
     }
-    var studioAreaFixtureId = validator.toInt(req.param('studioAreaFixtureId'));
+    var studioAreaRoomFeestructureId = validator.toInt(req.param('studioAreaRoomFeestructureId'));
 
 	studioFeestructureFacade.edit(req, {
-		"studioAreaFixtureId": studioAreaFixtureId
+		"studioId": req.session.studio.id,
+		"studioAreaRoomFeestructureId": studioAreaRoomFeestructureId
 	},function(error, result) {
 		if (error) {
 		  	res.redirect('/error');
 			return
 		}
 		result.studio = req.session.studio;
-		res.render('studio_area_fixture/edit', result);
+		res.render('studio_feestructure/edit', result);
 	});
 });
 
@@ -159,7 +158,7 @@ router.post('/edit/execute', function(req, res, next) {
 		  	res.redirect('/error');
 			return
 		}
-		res.redirect('/studio_area_fixture');
+		res.redirect('/studio_feestructure');
 	});
 });
 
@@ -187,7 +186,7 @@ router.get('/delete', function(req, res, next) {
 		  	res.redirect('/error');
 			return
 		}
-		res.redirect('/studio_area_fixture');
+		res.redirect('/studio_feestructure');
 	});
 });
 
