@@ -394,7 +394,7 @@
 
 				var start = new Date(startDate +' '+ startTime);
 				var end = new Date(endDate +' '+ endTime);
-				if (start.getTime() == end.getTime()) {
+				if (start.getTime() >= end.getTime()) {
 					$("#eventAdd .error.dateValidate").removeClass("hidden");
 					dateValidate = false;
 				} else {

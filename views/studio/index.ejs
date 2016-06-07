@@ -8,10 +8,19 @@
 					<li>
 						<span><%= studioArea.name %></span>
 						<input type="button" class="edit_button" value="編集" onClick="location.href='/studio/edit?studioAreaId=<%= studioArea.id %>'">
-						<input type="button" class="delete_button" value="削除" onClick="location.href='/studio/delete?studioAreaId=<%= studioArea.id %>'">
+						<input type="button" class="delete_button" data-id="<%= studioArea.id %>" value="削除" >
 					</li>
 				<% }); %>
 			</ul>
 		</div>
 	</div>
 </div>
+
+<script>
+	$("input.delete_button").on("click", function(e) {
+		var id = $(this).data("id");
+		if(window.confirm("店舗情報および店舗に紐づくすべてのスタジオ情報やスケジュールが削除されますがよろしいですか？")){
+			location.href="/studio/delete?studioAreaId=" + id
+		}
+	})
+</script>
