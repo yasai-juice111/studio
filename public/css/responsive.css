@@ -67,6 +67,7 @@ html {
 body{
     height: 100%;
     background: #fff;
+    font-family: Calibri, 'メイリオ', Meiryo;
 }
 
 .wrapper{
