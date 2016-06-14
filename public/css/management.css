@@ -115,6 +115,26 @@
 	width: 150px;
 }
 
+#managementContents p.genre_list {
+	width: 80%;
+}
+
+#managementContents span.genre {
+	display: inline-block;
+}
+
+#managementContents span.genre_name {
+	display: inline-block;
+	margin-top: 10px;
+}
+
+#managementContents input[type="checkbox"] {
+	width: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 20px;
+}
+
 #managementContents input.delete_column_button {
     width: 120px;
 }
