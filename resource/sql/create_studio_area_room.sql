@@ -10,20 +10,23 @@ CREATE TABLE IF NOT EXISTS studio_area_room (
   studio_area_id  BIGINT(20)  UNSIGNED  NOT NULL  				        COMMENT 'スタジオエリアID',
   name            varchar(255)          NOT NULL                  COMMENT '部屋名',
   price           varchar(255)          NOT NULL                  COMMENT '料金',
-  room_size       varchar(255)          NOT NULL                  COMMENT '間取り',
-  explanation     varchar(255)          NOT NULL                  COMMENT '説明',
-  image_path      varchar(255)          NOT NULL                  COMMENT '画像パス',
+  room_size       varchar(255)          NOT NULL                  COMMENT '間取り・広さ',
+  maximum_number  INT(20)     UNSIGNED  NOT NULL                  COMMENT 'MAX所要人数',
+  mirror          varchar(255)              NULL                  COMMENT '鏡',
+  floor_material  varchar(255)              NULL                  COMMENT '床材',
+  speaker         varchar(255)              NULL                  COMMENT 'スピーカー',
+  mixer           varchar(255)              NULL                  COMMENT 'ミキサー',
+  compact_disc    boolean                   NULL                  COMMENT 'CDフラグ',
+  micro_disc      boolean                   NULL                  COMMENT 'MDフラグ',
+  mp3_Flag        boolean                   NULL                  COMMENT 'mp3フラグ',
+  other_acoustic  varchar(255)              NULL                  COMMENT 'そのた音響',
+  illumination    varchar(255)              NULL                  COMMENT '照明',
+  wifi_flag       boolean                   NULL                  COMMENT 'wifiフラグ',
+  image_path      varchar(255)              NULL                  COMMENT '画像パス',
+  explanation     varchar(255)              NULL                  COMMENT '備考',
   insert_datetime DATETIME 				      NOT NULL				          COMMENT '作成日時',
   update_datetime DATETIME              NOT NULL                  COMMENT '更新日時',
   delete_flag     boolean               NOT NULL                  COMMENT '削除フラグ',
   PRIMARY KEY (id),
   KEY (studio_area_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='スタジオエリアルーム';
-
-insert into studio_area_room (studio_area_id, name, price, room_size, explanation, image_path, insert_datetime, update_datetime, delete_flag) values (1, '101号室', '25m', '3000 1h', 'なし', '/img/test001.jpg',now(), now(), false);
-insert into studio_area_room (studio_area_id, name, price, room_size, explanation, image_path, insert_datetime, update_datetime, delete_flag) values (1, '102号室', '25m', '3000 1h', 'なし', '/img/test002.jpg',now(), now(), false);
-insert into studio_area_room (studio_area_id, name, price, room_size, explanation, image_path, insert_datetime, update_datetime, delete_flag) values (1, '103号室', '25m', '3000 1h', 'なし', '/img/test002.jpg',now(), now(), false);
-insert into studio_area_room (studio_area_id, name, price, room_size, explanation, image_path, insert_datetime, update_datetime, delete_flag) values (2, '101号室', '25m', '3000 1h', 'なし', '/img/test003.jpg',now(), now(), false);
-insert into studio_area_room (studio_area_id, name, price, room_size, explanation, image_path, insert_datetime, update_datetime, delete_flag) values (2, '102号室', '25m', '3000 1h', 'なし', '/img/test003.jpg',now(), now(), false);
-insert into studio_area_room (studio_area_id, name, price, room_size, explanation, image_path, insert_datetime, update_datetime, delete_flag) values (3, '101号室', '25m', '3000 1h', 'なし', '/img/test004.jpg',now(), now(), false);
-insert into studio_area_room (studio_area_id, name, price, room_size, explanation, image_path, insert_datetime, update_datetime, delete_flag) values (4, '101号室', '25m', '3000 1h', 'なし', '/img/test004.jpg',now(), now(), false);

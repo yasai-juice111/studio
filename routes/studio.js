@@ -82,19 +82,34 @@ router.post('/regist/execute', function(req, res, next) {
 	  	res.redirect('/error');
         return;
     }
-
     var studioStation = validator.escape(req.param('studioStation'));
     var studioAddress = validator.escape(req.param('studioAddress'));
     var studioPayment = validator.escape(req.param('studioPayment'));
     var studioRemarks = validator.escape(req.param('studioRemarks'));
+    var lockerRoomFlag = validator.escape(req.param('lockerRoomFlag'));
+    var parkingFlag = validator.toBoolean(req.param('parkingFlag'));
+    var cancelRemark = validator.escape(req.param('cancelRemark'));
+
+    var startHour = validator.escape(req.param('startHour'));
+    var startMinutes = validator.escape(req.param('startMinutes'));
+    var endHour = validator.escape(req.param('endHour'));
+    var endMinutes = validator.escape(req.param('endMinutes'));
+
+    var startDate = startHour + ':' + startMinutes;
+    var endDate = endHour + ':' + endMinutes;
 
 	studioFacade.registExecute(req, {
 		"studioId": req.session.studio.id,
 		"name": studioAreaName,
+		"address": studioAddress,
 		"tel": tel,
 		"nearStation": studioStation,
-		"address": studioAddress,
 		"paymentMethod": studioPayment,
+		"startDate": startDate,
+		"endDate": endDate,
+		"lockerRoomFlag": lockerRoomFlag,
+		"parkingFlag": parkingFlag,
+		"cancelRemark": cancelRemark,
 		"remark": studioRemarks,
 		"imagePath": '/img/test001.png'
 	},function(error, result) {
@@ -148,24 +163,48 @@ router.post('/edit/execute', function(req, res, next) {
         res.redirect('/');
         return;
     }
+    var studioAreaName = validator.escape(req.param('studioAreaName'));
+	if (!studioAreaName.match(/\S/g)) {
+    	validationErrorFlag = true;
+    }
+
+    var tel = validator.toInt(req.param('tel'));
+    if (_.isNaN(tel)) {
+    	validationErrorFlag = true;
+    }
 
     // TODO validationError
-    var studioAreaId = validator.escape(req.param('studioAreaId'));
-    var studioAreaName = validator.escape(req.param('studioAreaName'));
-    var tel = validator.toInt(req.param('tel'));
+    var studioAreaId = validator.toInt(req.param('studioAreaId'));
     var studioStation = validator.escape(req.param('studioStation'));
     var studioAddress = validator.escape(req.param('studioAddress'));
     var studioPayment = validator.escape(req.param('studioPayment'));
     var studioRemarks = validator.escape(req.param('studioRemarks'));
+    var lockerRoomFlag = validator.toBoolean(req.param('lockerRoomFlag'));
+    var parkingFlag = validator.toBoolean(req.param('parkingFlag'));
+    var cancelRemark = validator.escape(req.param('cancelRemark'));
+
+    var startHour = validator.escape(req.param('startHour'));
+    var startMinutes = validator.escape(req.param('startMinutes'));
+    var endHour = validator.escape(req.param('endHour'));
+    var endMinutes = validator.escape(req.param('endMinutes'));
+
+    var startDate = startHour + ':' + startMinutes;
+    var endDate = endHour + ':' + endMinutes;
+
 
 	studioFacade.editExecute(req, {
 		"studioId": req.session.studio.id,
 		"studioAreaId": studioAreaId,
 		"name": studioAreaName,
+		"address": studioAddress,
 		"tel": tel,
 		"nearStation": studioStation,
-		"address": studioAddress,
 		"paymentMethod": studioPayment,
+		"startDate": startDate,
+		"endDate": endDate,
+		"lockerRoomFlag": lockerRoomFlag,
+		"parkingFlag": parkingFlag,
+		"cancelRemark": cancelRemark,
 		"remark": studioRemarks,
 		"imagePath": '/img/test001.png'
 	},function(error, result) {
