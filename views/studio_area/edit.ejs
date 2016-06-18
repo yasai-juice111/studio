@@ -1,96 +1,105 @@
 <div id="managementContents">
 	<div id="main">
 		<h2>スタジオ編集 -<span id="studioName"><%= studioAreaRoom.name %></span>-</h2>
-	    <div id="studioAreaEditorm">
+	    <div id="studioAreaEditForm">
 	        <form class="management_form" action="/studio_area/edit/execute" method="POST" name="studioAreaEdit">
-				<input type="hidden" name="studioAreaId" value="<%= studioArea.id %>"></input>
-				<h4>【店舗名】:<%= studioArea.name %></h4>
-				<p class="error hidden">店舗名は必須です</p>
-				<input type="text" name="studioAreaName" value=""></input>
-				<h4>【電話番号】(ハイフンなし)</h4>
-				<p class="error hidden">電話番号(数字のみ)は必須です</p>
-				<input type="tel" name="tel" value=""><%= studioArea.tel %></input>
-				<h4>【最寄駅】</h4>
-				<textarea name="studioStation" rows="4" cols="40"><%= studioArea.nearStation %></textarea>
-				<h4>【住所】</h4>
-				<textarea name="studioAddress" rows="4" cols="40"><%= studioArea.address %></textarea>
-				<h4>【お支払い方法】</h4>
-				<textarea name="studioPayment" rows="4" cols="40"><%= studioArea.paymentMethod %></textarea>
-				<div id="prices">
-					<h4>【営業時間】</h4>
-					<h6>■時間帯</h6>
-					<select name="startHour">
-					  <option value="00">00</option>
-					  <option value="01">01</option>
-					  <option value="02">02</option>
-					  <option value="03">03</option>
-					  <option value="04">04</option>
-					  <option value="05">05</option>
-					  <option value="06">06</option>
-					  <option value="07">07</option>
-					  <option value="08">08</option>
-					  <option value="09">09</option>
-					  <option value="10">10</option>
-					  <option value="11">11</option>
-					  <option value="12">12</option>
-					  <option value="13">13</option>
-					  <option value="14">14</option>
-					  <option value="15">15</option>
-					  <option value="16">16</option>
-					  <option value="17">17</option>
-					  <option value="18">18</option>
-					  <option value="19">19</option>
-					  <option value="20">20</option>
-					  <option value="21">21</option>
-					  <option value="22">22</option>
-					  <option value="23">23</option>
-					</select>
-					<select name="startMinutes">
-					  <option value="00">00</option>
-					  <option value="30">30</option>
-					</select>
-						〜
-					<select name="endHour">
-					  <option value="00">00</option>
-					  <option value="01">01</option>
-					  <option value="02">02</option>
-					  <option value="03">03</option>
-					  <option value="04">04</option>
-					  <option value="05">05</option>
-					  <option value="06">06</option>
-					  <option value="07">07</option>
-					  <option value="08">08</option>
-					  <option value="09">09</option>
-					  <option value="10">10</option>
-					  <option value="11">11</option>
-					  <option value="12">12</option>
-					  <option value="13">13</option>
-					  <option value="14">14</option>
-					  <option value="15">15</option>
-					  <option value="16">16</option>
-					  <option value="17">17</option>
-					  <option value="18">18</option>
-					  <option value="19">19</option>
-					  <option value="20">20</option>
-					  <option value="21">21</option>
-					  <option value="22">22</option>
-					  <option value="23">23</option>
-					</select>
-					<select name="endMinutes">
-					  <option value="00">00</option>
-					  <option value="30">30</option>
-					</select>
-				</div>
-				<h4>【更衣室】</h4>
-		    	<input type="radio" name="lockerRoomFlag" value="1" checked>ある
-		    	<input type="radio" name="lockerRoomFlag" value="0">ない
-				<h4>【駐車場】</h4>
-		    	<input type="radio" name="parkingFlag" value="1" checked>ある
-		    	<input type="radio" name="parkingFlag" value="0">ない
-				<h4>【キャンセル期間】</h4>
-				<textarea name="cancelRemark" rows="4" cols="40"><%= studioArea.cancelRemark %></textarea>
+				<input type="hidden" name="studioAreaRoomId" value="<%= studioAreaRoom.id %>"></input>
+				<h4>【店舗】：<%= studioArea.name %></h4>
+				<h4>【スタジオ名】</h4>
+				<p class="error hidden">スタジオ名は必須です</p>
+				<input type="text" name="name" value="<%= studioAreaRoom.name %>"></input>
+				<h4>【広さ】</h4>
+				<textarea name="roomSize" rows="4" cols="40"><%= studioAreaRoom.roomSize %></textarea>
+				<h4>【写真】</h4>
+				<p><img id="picture"></p>
+				<input type="file" name="imagePath" accept="image/jpeg,image/png">
+	 			<h4>【最大人数】</h4>
+				<input type="text" name="maximumNumber" value="<%= studioAreaRoom.maximumNumber %>"></input>
+				<h4>【鏡】</h4>
+				<textarea name="mirror" rows="4" cols="40"><%= studioAreaRoom.mirror %></textarea>
+				<h4>【ジャンル】</h4>
+				<p class="genre_list">
+					<span class="genre">
+						<input type="checkbox" name="genre" value="1">
+						<span class="genre_name">ストリートダンス</span>
+					</span>
+					<span class="genre">
+						<input type="checkbox" name="genre" value="2">
+						<span class="genre_name">ブレイクダンス</span>
+					</span>
+					<span class="genre">
+						<input type="checkbox" name="genre" value="3">
+						<span class="genre_name">ジャズ</span>
+					</span>
+					<span class="genre">
+						<input type="checkbox" name="genre" value="4">
+						<span class="genre_name">バレエ</span>
+					</span>
+					<span class="genre">
+						<input type="checkbox" name="genre" value="5">
+						<span class="genre_name">タップ</span>
+					</span>
+					<span class="genre">
+						<input type="checkbox" name="genre" value="6">
+						<span class="genre_name">フラメンコ</span>
+					</span>
+					<span class="genre">
+						<input type="checkbox" name="genre" value="7">
+						<span class="genre_name">社交ダンス</span>
+					</span>
+					<span class="genre">
+						<input type="checkbox" name="genre" value="8">
+						<span class="genre_name">フラダンス</span>
+					</span>
+					<span class="genre">
+						<input type="checkbox" name="genre" value="9">
+						<span class="genre_name">ベリーダンス</span>
+					</span>
+					<span class="genre">
+						<input type="checkbox" name="genre" value="10">
+						<span class="genre_name">ポールダンス</span>
+					</span>
+					<span class="genre">
+						<input type="checkbox" name="genre" value="11">
+						<span class="genre_name">演劇</span>
+					</span>
+					<span class="genre">
+						<input type="checkbox" name="genre" value="12">
+						<span class="genre_name">歌</span>
+					</span>
+					<span class="genre">
+						<input type="checkbox" name="genre" value="13">
+						<span class="genre_name">楽器演奏</span>
+					</span>
+				</p>
+				<h4>【床材】</h4>
+				<select name="floorMaterial">
+					<option value="flooring">フローリング</option>
+					<option value="linoleum">リノリウム</option>
+				</select>
+				<h4>【スピーカー】</h4>
+				<textarea name="speaker" rows="4" cols="40"><%= studioAreaRoom.speaker %></textarea>
+				<h4>【ミキサー】</h4>
+				<textarea name="mixer" rows="4" cols="40"><%= studioAreaRoom.mixer %></textarea>
+				<h4>【CD】</h4>
+				<input type="radio" name="compactDiscFlag" value="">可
+				<input type="radio" name="compactDiscFlag" value="" checked>不可
+				<h4>【MD】</h4>
+				<input type="radio" name="microDiscFlag" value="">可
+				<input type="radio" name="microDiscFlag" value="" checked>不可
+				<h4>【mp3】</h4>
+				<input type="radio" name="mp3Flag" value="">可
+				<input type="radio" name="mp3Flag" value="" checked>不可
+				<h4>【その他音響】</h4>
+				<textarea name="otherAcoustic" rows="4" cols="40"></textarea>
+				<h4>【照明調光】</h4>
+				<input type="radio" name="illumination" value="">有
+				<input type="radio" name="illumination" value="" checked>無
+				<h4>【Wi-Fi】</h4>
+				<input type="radio" name="wifiFlag" value="">有
+				<input type="radio" name="wifiFlag" value="" checked>無
 				<h4>【備考】</h4>
-				<textarea name="studioRemarks" rows="4" cols="40"><%= studioArea.remark %></textarea>
+				<textarea name="explanation" rows="4" cols="40"></textarea>
 			</form>
 		    <!-- キャンセルボタン -->
 		    <a class="remodal-cancel" href="/studio_area" data-remodal-action="cancel">戻る</a>

@@ -84,10 +84,10 @@ $(document).ready(function() {
     }); 
 
     // スタジオ編集のイベント
-    $("#studioAreaEditorm .remodal-confirm").on("click",function(e) {
-        var title = $("#studioAreaEditorm input[name='name']").val();
+    $("#studioAreaEditForm .remodal-confirm").on("click",function(e) {
+        var title = $("#studioAreaEditForm input[name='name']").val();
         if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
-            $("#studioAreaEditorm .error").removeClass("hidden");
+            $("#studioAreaEditForm .error").removeClass("hidden");
         } else {
            document.studioAreaEdit.submit();
         }

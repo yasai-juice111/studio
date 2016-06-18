@@ -73,7 +73,9 @@ router.post('/regist/execute', function(req, res, next) {
     }
 
     tel = validator.toInt(req.param('tel'));
-
+console.log('/////////////////');
+console.log('tel', tel);
+console.log('/////////////////');
     if (_.isNaN(tel)) {
     	validationErrorFlag = true;
     }
@@ -168,11 +170,12 @@ router.post('/edit/execute', function(req, res, next) {
     	validationErrorFlag = true;
     }
 
-    var tel = validator.toInt(req.param('tel'));
-    if (_.isNaN(tel)) {
+    var isTel = validator.isNumeric(req.param('tel'));
+    if (!isTel) {
     	validationErrorFlag = true;
     }
-
+    var tel = req.param('tel');
+console.log('tel', tel);
     // TODO validationError
     var studioAreaId = validator.toInt(req.param('studioAreaId'));
     var studioStation = validator.escape(req.param('studioStation'));

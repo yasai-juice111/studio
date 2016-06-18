@@ -12,15 +12,11 @@
 				<textarea name="roomSize" rows="4" cols="40"></textarea>
 				<h4>【写真】</h4>
 				<p><img id="picture"></p>
-				<input type="file" name="room_image" accept="image/jpeg,image/png">
-				<h4>【備考】</h4>
-				<textarea name="explanation" rows="4" cols="40"></textarea>
-				<h4>【料金】</h4>
-				<textarea name="price" rows="4" cols="40"></textarea>
+				<input type="file" name="imagePath" accept="image/jpeg,image/png">
 	 			<h4>【最大人数】</h4>
-				<input type="text" name="studio_max_people" value=""></input>
+				<input type="text" name="maximumNumber" value=""></input>
 				<h4>【鏡】</h4>
-				<textarea name="studio_mirror" rows="4" cols="40"></textarea>
+				<textarea name="mirror" rows="4" cols="40"></textarea>
 				<h4>【ジャンル】</h4>
 				<p class="genre_list">
 					<span class="genre">
@@ -77,38 +73,33 @@
 					</span>
 				</p>
 				<h4>【床材】</h4>
-				<select>
+				<select name="floorMaterial">
 					<option value="flooring">フローリング</option>
 					<option value="linoleum">リノリウム</option>
 				</select>
 				<h4>【スピーカー】</h4>
-				<textarea name="studio_speaker" rows="4" cols="40"></textarea>
+				<textarea name="speaker" rows="4" cols="40"></textarea>
 				<h4>【ミキサー】</h4>
-				<textarea name="studio_mixer" rows="4" cols="40"></textarea>
+				<textarea name="mixer" rows="4" cols="40"></textarea>
 				<h4>【CD】</h4>
-				<input type="radio" name="studio_cd" value="">可
-				<input type="radio" name="studio_cd" value="" checked>不可
+				<input type="radio" name="compactDiscFlag" value="">可
+				<input type="radio" name="compactDiscFlag" value="" checked>不可
 				<h4>【MD】</h4>
-				<input type="radio" name="studio_md" value="">可
-				<input type="radio" name="studio_md" value="" checked>不可
+				<input type="radio" name="microDiscFlag" value="">可
+				<input type="radio" name="microDiscFlag" value="" checked>不可
 				<h4>【mp3】</h4>
-				<input type="radio" name="studio_mp3" value="">可
-				<input type="radio" name="studio_mp3" value="" checked>不可
+				<input type="radio" name="mp3Flag" value="">可
+				<input type="radio" name="mp3Flag" value="" checked>不可
 				<h4>【その他音響】</h4>
-				<textarea name="studio_other_acoustic" rows="4" cols="40"></textarea>
+				<textarea name="otherAcoustic" rows="4" cols="40"></textarea>
 				<h4>【照明調光】</h4>
-				<input type="radio" name="studio_illumination" value="">有
-				<input type="radio" name="studio_illumination" value="" checked>無
+				<input type="radio" name="illumination" value="">有
+				<input type="radio" name="illumination" value="" checked>無
 				<h4>【Wi-Fi】</h4>
-				<input type="radio" name="studio_illumination" value="">有
-				<input type="radio" name="studio_illumination" value="" checked>無
-				<h4>【写真】</h4>
-				<p>
-					<img id="picture">
-				</p>
-				<input type="file" name="reference_image" accept="image/jpeg,image/png">
+				<input type="radio" name="wifiFlag" value="">有
+				<input type="radio" name="wifiFlag" value="" checked>無
 				<h4>【備考】</h4>
-				<textarea name="remark" rows="4" cols="40"></textarea>
+				<textarea name="explanation" rows="4" cols="40"></textarea>
 			</form>
 		    <!-- キャンセルボタン -->
 		    <a class="remodal-cancel" href="/studio_area" data-remodal-action="cancel">戻る</a>

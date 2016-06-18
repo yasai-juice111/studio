@@ -73,18 +73,39 @@ router.post('/regist/execute', function(req, res, next) {
     // TODO validationError
     var studioAreaId = validator.toInt(req.param('studioAreaId'));
     var name = validator.escape(req.param('name'));
-    var price = validator.escape(req.param('price'));
     var roomSize = validator.escape(req.param('roomSize'));
+    var maximumNumber = validator.toInt(req.param('maximumNumber'));
+    var mirror = validator.escape(req.param('mirror'));
+    var floorMaterial = validator.escape(req.param('floorMaterial'));
+    var speaker = validator.escape(req.param('speaker'));
+    var mixer = validator.escape(req.param('explanation'));
+    var compactDiscFlag = validator.toBoolean(req.param('compactDiscFlag'));
+    var microDiscFlag = validator.toBoolean(req.param('microDiscFlag'));
+    var mp3Flag = validator.toBoolean(req.param('mp3Flag'));
+    var otherAcoustic = validator.escape(req.param('otherAcoustic'));
+    var illumination = validator.escape(req.param('illumination'));
+    var wifiFlag = validator.toBoolean(req.param('wifiFlag'));
+    var imagePath = validator.escape(req.param('imagePath'));
     var explanation = validator.escape(req.param('explanation'));
 
 	studioAreaFacade.registExecute(req, {
 		"studioId": req.session.studio.id,
 		"studioAreaId": studioAreaId,
 		"name": name,
-		"price": price,
 		"roomSize": roomSize,
-		"explanation": explanation,
-		"imagePath": '/img/test001.png'
+		"maximumNumber": maximumNumber,
+		"mirror": mirror,
+		"floorMaterial": floorMaterial,
+		"speaker": speaker,
+		"mixer": mixer,
+		"compactDiscFlag": compactDiscFlag,
+		"microDiscFlag": microDiscFlag,
+		"mp3Flag": mp3Flag,
+		"otherAcoustic": otherAcoustic,
+		"illumination": illumination,
+		"wifiFlag": wifiFlag,
+		"imagePath": '/img/test001.png',
+		"explanation": explanation
 	},function(error, result) {
 		console.log(error);
 		if (error) {
@@ -139,18 +160,39 @@ router.post('/edit/execute', function(req, res, next) {
     // TODO validationError
     var studioAreaRoomId = validator.toInt(req.param('studioAreaRoomId'));
     var name = validator.escape(req.param('name'));
-    var price = validator.escape(req.param('price'));
     var roomSize = validator.escape(req.param('roomSize'));
+    var maximumNumber = validator.toInt(req.param('maximumNumber'));
+    var mirror = validator.escape(req.param('mirror'));
+    var floorMaterial = validator.escape(req.param('floorMaterial'));
+    var speaker = validator.escape(req.param('speaker'));
+    var mixer = validator.escape(req.param('explanation'));
+    var compactDiscFlag = validator.toBoolean(req.param('compactDiscFlag'));
+    var microDiscFlag = validator.toBoolean(req.param('microDiscFlag'));
+    var mp3Flag = validator.toBoolean(req.param('mp3Flag'));
+    var otherAcoustic = validator.escape(req.param('otherAcoustic'));
+    var illumination = validator.escape(req.param('illumination'));
+    var wifiFlag = validator.toBoolean(req.param('wifiFlag'));
+    var imagePath = validator.escape(req.param('imagePath'));
     var explanation = validator.escape(req.param('explanation'));
 
 	studioAreaFacade.editExecute(req, {
 		"studioId": req.session.studio.id,
 		"studioAreaRoomId": studioAreaRoomId,
 		"name": name,
-		"price": price,
 		"roomSize": roomSize,
-		"explanation": explanation,
-		"imagePath": '/img/test001.png'
+		"maximumNumber": maximumNumber,
+		"mirror": mirror,
+		"floorMaterial": floorMaterial,
+		"speaker": speaker,
+		"mixer": mixer,
+		"compactDiscFlag": compactDiscFlag,
+		"microDiscFlag": microDiscFlag,
+		"mp3Flag": mp3Flag,
+		"otherAcoustic": otherAcoustic,
+		"illumination": illumination,
+		"wifiFlag": wifiFlag,
+		"imagePath": '/img/test001.png',
+		"explanation": explanation
 	},function(error, result) {
 		console.log(error);
 		if (error) {
