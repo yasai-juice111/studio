@@ -140,4 +140,30 @@ $(document).ready(function() {
         //    document.studioAreaEdit.submit();
         // }
     });
+
+    // 料金登録のイベント
+    $("#studioAreaRoomFeestructureForm .remodal-confirm").on("click",function(e) {
+        var enableSubmitFlag = true;
+        var price = $("#studioAreaRoomFeestructureForm input[name='price']").val();
+        if (price == "" || price.match(/^[ 　\r\n\t]*$/)) {
+            $("#studioAreaRoomFeestructureForm .priceError").removeClass("hidden");
+            enableSubmitFlag = false;
+        }
+        if (enableSubmitFlag) {
+           document.studioFeestructureRegist.submit();
+        }
+    });
+
+    // 料金編集のイベント
+    $("#studioAreaRoomFeestructureFormEdit .remodal-confirm").on("click",function(e) {
+        var enableSubmitFlag = true;
+        var price = $("#studioAreaRoomFeestructureFormEdit input[name='price']").val();
+        if (price == "" || price.match(/^[ 　\r\n\t]*$/)) {
+            $("#studioAreaRoomFeestructureFormEdit .priceError").removeClass("hidden");
+            enableSubmitFlag = false;
+        }
+        if (enableSubmitFlag) {
+           document.studioFeestructureEdit.submit();
+        }
+    });
 });

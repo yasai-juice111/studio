@@ -21,63 +21,18 @@
 				<textarea name="mirror" rows="4" cols="40"><%= studioAreaRoom.mirror %></textarea>
 				<h4>【ジャンル】</h4>
 				<p class="genre_list">
-					<span class="genre">
-						<input type="checkbox" name="genre" value="1">
-						<span class="genre_name">ストリートダンス</span>
-					</span>
-					<span class="genre">
-						<input type="checkbox" name="genre" value="2">
-						<span class="genre_name">ブレイクダンス</span>
-					</span>
-					<span class="genre">
-						<input type="checkbox" name="genre" value="3">
-						<span class="genre_name">ジャズ</span>
-					</span>
-					<span class="genre">
-						<input type="checkbox" name="genre" value="4">
-						<span class="genre_name">バレエ</span>
-					</span>
-					<span class="genre">
-						<input type="checkbox" name="genre" value="5">
-						<span class="genre_name">タップ</span>
-					</span>
-					<span class="genre">
-						<input type="checkbox" name="genre" value="6">
-						<span class="genre_name">フラメンコ</span>
-					</span>
-					<span class="genre">
-						<input type="checkbox" name="genre" value="7">
-						<span class="genre_name">社交ダンス</span>
-					</span>
-					<span class="genre">
-						<input type="checkbox" name="genre" value="8">
-						<span class="genre_name">フラダンス</span>
-					</span>
-					<span class="genre">
-						<input type="checkbox" name="genre" value="9">
-						<span class="genre_name">ベリーダンス</span>
-					</span>
-					<span class="genre">
-						<input type="checkbox" name="genre" value="10">
-						<span class="genre_name">ポールダンス</span>
-					</span>
-					<span class="genre">
-						<input type="checkbox" name="genre" value="11">
-						<span class="genre_name">演劇</span>
-					</span>
-					<span class="genre">
-						<input type="checkbox" name="genre" value="12">
-						<span class="genre_name">歌</span>
-					</span>
-					<span class="genre">
-						<input type="checkbox" name="genre" value="13">
-						<span class="genre_name">楽器演奏</span>
-					</span>
+					<% _.each(danceGenreTypeMap, function(danceGenreType) { %>
+						<span class="genre">
+							<input type="checkbox" name="genre" value="<%= danceGenreType.id %>" checked="checked">
+							<span class="genre_name"><%= danceGenreType.name %></span>
+						</span>
+					<% }); %>
 				</p>
 				<h4>【床材】</h4>
 				<select name="floorMaterial">
 					<option value="flooring">フローリング</option>
 					<option value="linoleum">リノリウム</option>
+					<option value="other">その他</option>
 				</select>
 				<h4>【スピーカー】</h4>
 				<textarea name="speaker" rows="4" cols="40"><%= studioAreaRoom.speaker %></textarea>

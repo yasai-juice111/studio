@@ -6,7 +6,11 @@
 				<% _.each(studioAreaList, function(studioArea) {  %>
 					<li class="price" style="margin-left:20px"><strong><%= studioArea.name %></strong></li>
 					<% _.each(studioArea.studioAreaRoomList, function(studioAreaRoom) {  %>
-					    <li style="margin-left:40px"><a href="/calendar?studioAreaRoomId=<%= studioAreaRoom.id %>"><%= studioAreaRoom.name %></a></li>
+					    <li style="margin-left:40px">
+					    	<form action="" method="post" accept-charset="utf-8">
+					    		<a href="/calendar?studioAreaRoomId=<%= studioAreaRoom.id %>"><%= studioAreaRoom.name %></a>
+					    	</form>
+				    	</li>
 					<% }); %>
 				<% }); %>
 			</ul>

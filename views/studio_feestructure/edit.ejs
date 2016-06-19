@@ -1,7 +1,7 @@
 <div id="managementContents">
 	<div id="main">
 		<h2>料金追加</h2>
-	    <div id="studioRegistForm">
+	    <div id="studioAreaRoomFeestructureFormEdit">
 	        <form class="management_form" action="/studio_feestructure/edit/execute" method="POST" name="studioFeestructureEdit">
 		    	<input type="hidden" name="studioAreaRoomFeestructureId" value="<%= studioAreaRoomFeestructure.id %>">
 				<h4>【店舗】: <%= studioArea.name %></h4>
@@ -100,7 +100,9 @@
 					</select>
 
 					<h4>【単位時間あたりの料金】</h4>
+					<p class="error priceError hidden">料金を入力して下さい</p>
 					<input type="text" name="price" size-"5" value="<%= studioAreaRoomFeestructure.price %>"></input>
+					<span>/</span>
 					<select name="priceTypeId">
 						<% _.each(priceTypeMap, function(priceType) { %>
 							<option value="<%- priceType.id %>"><%= priceType.name %></option>
@@ -114,7 +116,7 @@
 		    <!-- キャンセルボタン -->
 		    <a class="remodal-cancel" href="/studio_feestructure" data-remodal-action="cancel">戻る</a>
 		    <!-- OKボタン -->
-		    <a href="javascript:void(0)" class="remodal-confirm" onclick="document.studioFeestructureEdit.submit();return false;" style="display:inline-block">OK</a>
+		    <a href="javascript:void(0)" class="remodal-confirm" style="display:inline-block">OK</a>
 		</div>
 	</div>
 </div>

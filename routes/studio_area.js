@@ -69,7 +69,6 @@ router.post('/regist/execute', function(req, res, next) {
         res.redirect('/');
         return;
     }
-
     // TODO validationError
     var studioAreaId = validator.toInt(req.param('studioAreaId'));
     var name = validator.escape(req.param('name'));

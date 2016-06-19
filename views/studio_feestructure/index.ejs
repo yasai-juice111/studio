@@ -13,7 +13,7 @@
 								<ul>
 									<% _.each(studioAreaRoom.studioAreaRoomFeestructureList, function(studioAreaRoomFeestructure) { %>
 										<li>
-											<%= dayTypeMap[studioAreaRoomFeestructure.dayTypeId].name %> 
+											<%= dayTypeMap[studioAreaRoomFeestructure.dayTypeId].name %>
 											<%= studioAreaRoomFeestructure.startTime %> ~ <%= studioAreaRoomFeestructure.endTime %>
 											¥<%= studioAreaRoomFeestructure.price %> (<%= priceTypeMap[studioAreaRoomFeestructure.priceTypeId].name  %>)
 											<input type="button" class="edit_button" value="編集" onClick="location.href='/studio_feestructure/edit?studioAreaRoomFeestructureId=<%= studioAreaRoomFeestructure.id %>'">

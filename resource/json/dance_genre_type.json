@@ -1,0 +1,15 @@
+{
+  "1": {"id":1, "code":"streetDance", "name":"ストリートダンス"},
+  "2": {"id":2, "code":"breakDance", "name":"ブレイクダンス"},
+  "3": {"id":3, "code":"jazz", "name":"ジャズ"},
+  "4": {"id":4, "code":"ballet", "name":"バレエ"},
+  "5": {"id":5, "code":"tapDance", "name":"タップ"},
+  "6": {"id":6, "code":"flamenco", "name":"フラメンコ"},
+  "7": {"id":7, "code":"ballroomDance", "name":"社交ダンス"},
+  "8": {"id":8, "code":"hulaDance", "name":"フラダンス"},
+  "9": {"id":9, "code":"bellyDance", "name":"ベリーダンス"},
+  "10": {"id":10, "code":"poleDance", "name":"ポールダンス"},
+  "11": {"id":11, "code":"theater", "name":"演劇"},
+  "12": {"id":12, "code":"sing", "name":"歌"},
+  "13": {"id":13, "code":"musical", "name":"楽器演奏"}
+}

@@ -4,6 +4,7 @@ var router = express.Router();
 // third party
 var validator = require('validator');
 var dateformat = require('dateformat');
+var _ = require('underscore');
 
 // facade
 var studioFeestructureFacade = require(__libpath + '/models/facade/studio_feestructure_facade');
@@ -28,6 +29,13 @@ router.get('/', function(req, res, next) {
 			return;
 		}
 		result.studio = req.session.studio;
+		_.each(result.studioAreaList, function(studioArea) {
+			_.each(studioArea.studioAreaRoomList, function(studioAreaRoom) {
+				_.each(studioAreaRoom.studioAreaRoomFeestructureList, function(studioAreaRoomFeestructure) {
+					studioAreaRoomFeestructure.price = String(studioAreaRoomFeestructure.price).replace( /^(-?\d+)(\d{3})/, "$1,$2" );
+				});
+			});
+		});
 console.log(result);
 		res.render('studio_feestructure/index', result);
 	});
