@@ -62,10 +62,10 @@
 		    	<p class="error hidden titleValidate">タイトルは必須です</p>
 		    	<span id="typeForm">
 		    	<p>タイプ</p>
-		    	<input type="radio" name="status" value="busy" checked> スケジュール登録
-		    	<input type="radio" name="status" value="free"> 予約可能
-				<!-- <input type="radio" name="status" value="temporary"> 仮予約
-				<input type="radio" name="status" value="fixed"> 本予約 -->
+			    	<input type="radio" name="status" value="busy" checked> スケジュール登録
+			    	<input type="radio" name="status" value="free"> 予約可能
+					<!-- <input type="radio" name="status" value="temporary"> 仮予約
+					<input type="radio" name="status" value="fixed"> 本予約 -->
 				</span>
 				<p>開始日時</p>
 		    	<input type="date" name="startDate" value="">
@@ -258,7 +258,7 @@
 		            	case 'busy':
 		            	case 'free':
 		            	case 'fixed': {
-		            		$("#typeForm").remoClass("hidden");
+		            		// $("#typeForm").remoClass("hidden");
 		            		var title = calEvent.title;
 				        	$("[data-remodal-id=event_edit]").remodal().open();
 				         	$("#eventEdit input[name='studioAreaRoomReserveId']").val(calEvent.id);
