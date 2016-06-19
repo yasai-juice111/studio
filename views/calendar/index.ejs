@@ -123,13 +123,14 @@
 
 <script>
 	serverParams.studio = <%- JSON.stringify(studio); %>
+	serverParams.studioAreaRoom = <%- JSON.stringify(studioAreaRoom); %>
 	serverParams.showStudioArea = <%- JSON.stringify(showStudioArea); %>
 	serverParams.showStudioAreaRoom = <%- JSON.stringify(showStudioAreaRoom); %>
 	serverParams.studioAreaRoomReserveList = <%- JSON.stringify(studioAreaRoomReserveList); %>
+	serverParams.currentDate = <%- JSON.stringify(currentDate); %>
 
 	var events = [];
 	serverParams.studioAreaRoomReserveList.forEach(function(studioAreaRoomReserve, index){
-		console.log('くる？');
 		var color = '#00FFFF';
 		if (studioAreaRoomReserve.status == 'free') {
 		var color = '#AAAAAA'
@@ -163,8 +164,10 @@
 			var contentHeight = $(window).height() - 200;
 			
 			// TODO 初期表示を現在時刻にカーソルさせる
-			var first_scroll_time = "22:00"
-
+			var first_scroll_time = serverParams.currentDate.currentStartTime;
+			if (serverParams.studioAreaRoom) {
+				first_scroll_time = serverParams.studioAreaRoom.startTime;
+			}
 			// カレンダー周りの設定
 			$('#calendar').fullCalendar({
 				contentHeight: contentHeight,
@@ -376,7 +379,11 @@
 			});
 
 			// TODO 指定の日付を表示
-			$('#calendar').fullCalendar('gotoDate', '2014-10-01');
+			var gotoDate = serverParams.currentDate.currentStartDate;
+			if (serverParams.studioAreaRoom) {
+				gotoDate = serverParams.studioAreaRoom.startDate
+			}
+			$('#calendar').fullCalendar('gotoDate', gotoDate);
 
 			function fullString(defaultString) {
 		    	return (defaultString < 10 ? "0" : "")  + defaultString;

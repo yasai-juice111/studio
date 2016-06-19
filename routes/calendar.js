@@ -21,8 +21,9 @@ router.get('/', function(req, res, next) {
 		return;		
 	}
     var studioAreaRoomId = null;
-
+    var studioAreaRoom = null;
 	if (req.session.studioAreaRoom) {
+		studioAreaRoom = req.session.studioAreaRoom;
 		studioAreaRoomId = req.session.studioAreaRoom.studioAreaRoomId;
 		delete req.session.studioAreaRoom;
 	}
@@ -43,6 +44,11 @@ router.get('/', function(req, res, next) {
 			return
 		}
 		result.studio = req.session.studio;
+		result.studioAreaRoom = studioAreaRoom;
+		result.currentDate = {
+			currentStartDate : dateformat(currentDatetime, 'yyyy-mm-dd'),
+			currentStartTime : dateformat(currentDatetime, 'HH-MM')
+		};
 		res.render('calendar/index', result);
 	});
 });
@@ -90,7 +96,9 @@ router.post('/regist', function(req, res, next) {
 			return
 		}
 		req.session.studioAreaRoom = {
-			"studioAreaRoomId": studioAreaRoomId
+			"studioAreaRoomId": studioAreaRoomId,
+			"startDate": startDate,
+			"startTime": startTime
 		}
 	    res.redirect('/calendar');
 	});
