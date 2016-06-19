@@ -2,6 +2,11 @@
 	<div id="main">
 		<h2>備品一覧</h2>
 		<div id="shopList">
+			<% if (studioData.studioAreaList.length == 0) { %>
+				<span style="color: #ff0000;">
+					備品は店舗登録後に追加ができます。最初に店舗の登録をしてください。
+				</span>
+			<% } %>
 			<% _.each(studioData.studioAreaList, function(studioArea) {  %>
 				<div class="studio_list">
 					<h3>

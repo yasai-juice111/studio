@@ -18,7 +18,18 @@
 				<%= showStudioArea.name %> <%= showStudioAreaRoom.name %>
 			<% } %>
 		</h2>
-		<div id="calendar"></div>
+		<div id="calendar">
+			<% if (!showStudioArea) { %>
+				<span style="color: #ff0000;">
+					スタジオは店舗登録後に追加ができます。最初に店舗の登録をしてください。
+				</span>
+			<% } %>
+			<% if (!showStudioAreaRoom) { %>
+				<span style="color: #ff0000;">
+					店舗登録後はスタジオの登録が可能です。スタジオの登録をしてください。
+				</span>
+			<% } %>
+		</div>
 	</div>
 	<div id="eventAdd"  class="remodal" data-remodal-id="event_add">
 	    <!-- モーダルのタイトル -->
