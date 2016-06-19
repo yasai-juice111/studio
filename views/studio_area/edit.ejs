@@ -6,14 +6,16 @@
 				<input type="hidden" name="studioAreaRoomId" value="<%= studioAreaRoom.id %>"></input>
 				<h4>【店舗】：<%= studioArea.name %></h4>
 				<h4>【スタジオ名】</h4>
-				<p class="error hidden">スタジオ名は必須です</p>
+				<p class="error nameError hidden">スタジオ名は必須です</p>
 				<input type="text" name="name" value="<%= studioAreaRoom.name %>"></input>
 				<h4>【広さ】</h4>
+				<p class="error roomError hidden">広さを入力して下さい</p>
 				<textarea name="roomSize" rows="4" cols="40"><%= studioAreaRoom.roomSize %></textarea>
 				<h4>【写真】</h4>
 				<p><img id="picture"></p>
 				<input type="file" name="imagePath" accept="image/jpeg,image/png">
 	 			<h4>【最大人数】</h4>
+				<p class="error maximumError hidden">最大人数を入力して下さい</p>
 				<input type="text" name="maximumNumber" value="<%= studioAreaRoom.maximumNumber %>"></input>
 				<h4>【鏡】</h4>
 				<textarea name="mirror" rows="4" cols="40"><%= studioAreaRoom.mirror %></textarea>

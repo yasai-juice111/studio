@@ -75,21 +75,69 @@ $(document).ready(function() {
 
     // スタジオ登録のイベント
     $("#studioAreaRegistForm .remodal-confirm").on("click",function(e) {
-        var title = $("#studioAreaRegistForm input[name='name']").val();
-        if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
-            $("#studioAreaRegistForm .error").removeClass("hidden");
+        var enableSubmitFlag = true;
+        var name = $("#studioAreaRegistForm input[name='name']").val();
+        var roomSize = $("#studioAreaRegistForm textarea[name='roomSize']").val();
+        var maximumNumber = $("#studioAreaRegistForm input[name='maximumNumber']").val();
+        if (name == "" || name.match(/^[ 　\r\n\t]*$/)) {
+            $("#studioAreaRegistForm .nameError").removeClass("hidden");
+            enableSubmitFlag = false;
         } else {
+            $("#studioAreaRegistForm .nameError").addClass("hidden");
+        }
+
+        if (roomSize == "" || roomSize.match(/^[ 　\r\n\t]*$/)) {
+            $("#studioAreaRegistForm .roomError").removeClass("hidden");
+            enableSubmitFlag = false;
+        } else {
+            $("#studioAreaRegistForm .roomError").addClass("hidden");
+        }
+
+        if (maximumNumber == "" || maximumNumber.match(/^[ 　\r\n\t]*$/)) {
+            $("#studioAreaRegistForm .maximumError").removeClass("hidden");
+            enableSubmitFlag = false;
+        } else {
+            $("#studioAreaRegistForm .maximumError").addClass("hidden");
+        }
+        if (enableSubmitFlag) {
            document.studioAreaRegist.submit();
         }
     }); 
 
     // スタジオ編集のイベント
     $("#studioAreaEditForm .remodal-confirm").on("click",function(e) {
-        var title = $("#studioAreaEditForm input[name='name']").val();
-        if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
-            $("#studioAreaEditForm .error").removeClass("hidden");
+        var enableSubmitFlag = true;
+        var name = $("#studioAreaEditForm input[name='name']").val();
+        var roomSize = $("#studioAreaEditForm textarea[name='roomSize']").val();
+        var maximumNumber = $("#studioAreaEditForm input[name='maximumNumber']").val();
+        if (name == "" || name.match(/^[ 　\r\n\t]*$/)) {
+            $("#studioAreaEditForm .nameError").removeClass("hidden");
+            enableSubmitFlag = false;
         } else {
+            $("#studioAreaEditForm .nameError").addClass("hidden");
+        }
+
+        if (roomSize == "" || roomSize.match(/^[ 　\r\n\t]*$/)) {
+            $("#studioAreaEditForm .roomError").removeClass("hidden");
+            enableSubmitFlag = false;
+        } else {
+            $("#studioAreaEditForm .roomError").addClass("hidden");
+        }
+
+        if (maximumNumber == "" || maximumNumber.match(/^[ 　\r\n\t]*$/)) {
+            $("#studioAreaEditForm .maximumError").removeClass("hidden");
+            enableSubmitFlag = false;
+        } else {
+            $("#studioAreaEditForm .maximumError").addClass("hidden");
+        }
+        if (enableSubmitFlag) {
            document.studioAreaEdit.submit();
         }
+        // var title = $("#studioAreaEditForm input[name='name']").val();
+        // if (title == "" || title.match(/^[ 　\r\n\t]*$/)) {
+        //     $("#studioAreaEditForm .error").removeClass("hidden");
+        // } else {
+        //    document.studioAreaEdit.submit();
+        // }
     });
 });
