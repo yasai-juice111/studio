@@ -104,7 +104,7 @@
 	    <!-- キャンセルボタン -->
 	    <a class="remodal-cancel" href="#" data-remodal-action="cancel">Cancel</a>
 	    <!-- 削除 -->
-		<a href="javascript:void(0)" id="actionEelete" onclick="document.delete.submit();return false;" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">削除</a>
+		<a href="javascript:void(0)" id="actionDelete" class="remodal-confirm" data-remodal-action="confirm" style="display:inline-block">削除</a>
 	    <!-- OKボタン -->
         <a href="javascript:void(0)" id="actionEdit" class="remodal-confirm" style="display:inline-block">OK</a>
 	</div>
@@ -466,6 +466,12 @@
 	  				document.edit.submit();
 	  			}
 		    })
+		});
+
+		$("#actionDelete").on("click", function(e) {
+			if(window.confirm("スケジュールを削除しますか？")){
+     			document.delete.submit();
+     		}		    
 		});
 	}
 
