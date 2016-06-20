@@ -500,6 +500,12 @@ footer a {
 }
 
 @media (max-width:840px){
+    header .logo{
+        width: 300px;
+        margin-top: 15px;
+        float: left;
+    }
+
     footer .container {
         width: 80%;
     }
@@ -686,7 +692,7 @@ footer a {
     }
 
     header .logo{
-        width: 100px;
+        width: 200px;
         margin-top: 20px;
         float: left;
     }
