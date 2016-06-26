@@ -22,9 +22,11 @@ router.get('/', function(req, res, next) {
 	}
     var studioAreaRoomId = null;
     var studioAreaRoom = null;
+    var calendarView = '';
 	if (req.session.studioAreaRoom) {
 		studioAreaRoom = req.session.studioAreaRoom;
 		studioAreaRoomId = req.session.studioAreaRoom.studioAreaRoomId;
+		calendarView = req.session.studioAreaRoom.calendarView;
 		delete req.session.studioAreaRoom;
 	}
 
@@ -49,6 +51,7 @@ router.get('/', function(req, res, next) {
 			currentStartDate : dateformat(currentDatetime, 'yyyy-mm-dd'),
 			currentStartTime : dateformat(currentDatetime, 'HH-MM')
 		};
+		result.calendarView = calendarView;
 		res.render('calendar/index', result);
 	});
 });
@@ -75,7 +78,6 @@ router.post('/regist', function(req, res, next) {
     if (req.param('status')) {
 		status = req.param('status');
     }
-
 	var currentDatetime = req.currentDatetime || new Date();
 
 	calendarFacade.regist(req, {
@@ -98,7 +100,8 @@ router.post('/regist', function(req, res, next) {
 		req.session.studioAreaRoom = {
 			"studioAreaRoomId": studioAreaRoomId,
 			"startDate": startDate,
-			"startTime": startTime
+			"startTime": startTime,
+			"calendarView": validator.escape(req.param('calendarView'))
 		}
 	    res.redirect('/calendar');
 	});
@@ -148,7 +151,8 @@ router.post('/edit', function(req, res, next) {
 			return
 		}
 		req.session.studioAreaRoom = {
-			"studioAreaRoomId": studioAreaRoomId
+			"studioAreaRoomId": studioAreaRoomId,
+			"calendarView": validator.escape(req.param('calendarView'))
 		}
 	    res.redirect('/calendar');
 	});
@@ -181,6 +185,10 @@ router.post('/delete', function(req, res, next) {
 		if (error) {
 		  	res.redirect('/error');
 			return
+		}
+		req.session.studioAreaRoom = {
+			"studioAreaRoomId": studioAreaRoomId,
+			"calendarView": validator.escape(req.param('calendarView'))
 		}
 	    res.redirect('/calendar');
 	});

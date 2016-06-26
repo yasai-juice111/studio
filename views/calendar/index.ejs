@@ -59,6 +59,7 @@
 		    	<% if (showStudioAreaRoom) { %>
 					<input type="hidden" name="studioAreaRoomId" value="<%= showStudioAreaRoom.id %>"></input>
 		    	<% } %>
+				<input type="hidden" name="calendarView" value=""></input>
 			</form>
 	    </div>
 	    <!-- キャンセルボタン -->
@@ -93,12 +94,14 @@
 				<% if (showStudioAreaRoom) { %>
 					<input type="hidden" name="studioAreaRoomId" value="<%= showStudioAreaRoom.id %>"></input>
 				<% } %>
+				<input type="hidden" name="calendarView" value=""></input>
 			</form>
 	        <form action="/calendar/delete" method="POST" name="delete" accept-charset="utf-8">
 				<input type="hidden" name="studioAreaRoomReserveId" value=""></input>
 				<% if (showStudioAreaRoom) { %>
 				<input type="hidden" name="studioAreaRoomId" value="<%= showStudioAreaRoom.id %>"></input>
 				<% } %>
+				<input type="hidden" name="calendarView" value=""></input>
 			</form>
 	    </div>
 	    <!-- キャンセルボタン -->
@@ -142,6 +145,7 @@
 	serverParams.showStudioArea = <%- JSON.stringify(showStudioArea); %>
 	serverParams.showStudioAreaRoom = <%- JSON.stringify(showStudioAreaRoom); %>
 	serverParams.studioAreaRoomReserveList = <%- JSON.stringify(studioAreaRoomReserveList); %>
+	serverParams.calendarView = <%- JSON.stringify(calendarView); %>
 	serverParams.currentDate = <%- JSON.stringify(currentDate); %>
 
 	var events = [];
@@ -183,10 +187,18 @@
 			if (serverParams.studioAreaRoom) {
 				first_scroll_time = serverParams.studioAreaRoom.startTime;
 			}
+			var defaultView = serverParams.calendarView || 'agendaWeek';
+			if (defaultView == '月') {
+				defaultView = 'month';
+			} else if (defaultView == '日') {
+				defaultView = 'agendaDay';
+			} else {
+				defaultView = 'agendaWeek';
+			}
 			// カレンダー周りの設定
 			$('#calendar').fullCalendar({
 				contentHeight: contentHeight,
-				defaultView: 'agendaWeek',
+				defaultView: defaultView,
 				header: {
 					left: 'prev, next',
 					center: 'title',
@@ -261,8 +273,9 @@
 		            } else {
 		            	$("#eventAdd input[name='endTime']").val(fullString(hour + defaultSettingHour) + ":" + fullString(minutes))	
 		            }
-		            
 		            $("#eventAdd input[name='title']").focus();
+		            console.log($(".fc-state-active").html());
+		         	$("#eventAdd input[name='calendarView']").val($(".fc-state-active").html());
 		        },
 		        eventClick: function(calEvent, jsEvent, view) {
 		            // calEvent.title = '峰岸 啓人 様';
@@ -278,6 +291,8 @@
 				        	$("[data-remodal-id=event_edit]").remodal().open();
 				         	$("#eventEdit input[name='studioAreaRoomReserveId']").val(calEvent.id);
 				         	$("#eventEdit input[name='title']").val(title);
+				         	// 
+				         	$("#eventEdit input[name='calendarView']").val($(".fc-state-active").html());
 
 							// 開始情報
 				         	var startDate = calEvent.start._d;
@@ -322,7 +337,6 @@
 				            } else {
 				            	$("#eventEdit input[name='endTime']").val(fullString(endHour) + ":" + fullString(endMinutes));	
 				            } 
-
 				            switch (calEvent.status) {
 				            	case "busy":
 				            		$('input[name="status"]').val(['busy']);
@@ -385,8 +399,7 @@
 				            	$("#eventAccept .endDate").text(dateString);
 				            } else {
 				            	$("#eventAccept .endTime").text(fullString(endHour) + ":" + fullString(endMinutes));
-				            }  
-				         	
+				            }
 		            		break;
 		            	}
 		            }
