@@ -12,6 +12,10 @@
 		"clientSecret": "8bd853c264f8a402b539565c162138ef",
 		"callbackUrl": "http://localhost:3000/auth/facebook/callback"
 	},
+	"yahoo" : {
+		"appId": "dj0zaiZpPThaTVBGMWV4MVc2SyZzPWNvbnN1bWVyc2VjcmV0Jng9ZjU-",
+		"appSecret": "a35ee78e5e1422fe1d9a711cbbf7c9c48082f484"
+	},
 	"mysqlConf" : {
 		"host": "localhost",
 		"user": "root",

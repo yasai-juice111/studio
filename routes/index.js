@@ -10,6 +10,7 @@ router.get('/', function(req, res, next) {
 		  	res.redirect('/error');
 			return
 		}
+console.log(result);
 		res.render('index', result);
 	});
 

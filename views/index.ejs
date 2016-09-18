@@ -27,16 +27,38 @@
 
 <img src="http://www.tokyo-dancelife.com/studio/images/title_studio_tokyo.jpg" alt="東京のレンタルスタジオ" width="690" height="20" id="page-title2">
 <div class="attention">TOKYO DANCE LIFEではレンタルスタジオの予約等は行っておりません。お問い合わせは直接掲載先までお願いします。</div>
+
+<!-- 検索 -->
+<div class="module">
+  <h2>地域から探す</h2>
+  <dl class="table">
+    <dt>都道府県</dt>
+    <dd>
+      <select id="area_pref">
+        <option value="">都道府県を選択してください</option>
+      </select>
+    </dd>
+  </dl>
+  <dl class="table">
+    <dt>市町村</dt>
+    <dd>
+      <select id="area_city">
+        <option value="">市町村を選択してください</option>
+      </select>
+    </dd>
+  </dl>
+</div>
+
 <div id="post-studio-area" class="clearfix">
 
 <div id="ku-area" class="clearfix"><p class="ku-area-left"><a href="http://www.tokyo-dancelife.com/studio/kantou/tokyo/meguro/">目黒区</a></p></div>
 
-<% _.each(studioList, function(studio) { %>
+<% _.each(studioAreaList, function(studioArea) { %>
 <div id="studio1">
   <div id="studio-img">
     <img src="http://www.tokyo-dancelife.com/studio/images/st_noahstudio_toritsu_s.jpg" alt="ノアスタジオ都立大">
   </div>
-  <p class="studio-title"><%= studio.name %></p>
+  <p class="studio-title"><%= studioArea.name %></p>
   <p class="station">都立大学駅</p>
   <div id="studio-text">
     <p class="studio-gaiyou">東急東横線・都立大学駅より徒歩2分の好立地。最大80坪から18坪のスタジオがあり、演劇・ダンス・舞台・ミュージカル等の稽...</p>
