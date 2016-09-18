@@ -1,17 +1,39 @@
 var express = require('express');
 var router = express.Router();
 
+var indexFacade = require(__libpath + '/models/facade/index_facade');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	console.log(req.session.studio);
-	if (req.session.studio) {
-        res.redirect('/calendar');
-		return;		
-	}
-	var result = {
-		studio : req.session.studio
-	};
-	res.render('index', result);
+	indexFacade.index(req, function(error, result) {
+		if (error) {
+		  	res.redirect('/error');
+			return
+		}
+		res.render('index', result);
+	});
+
+});
+
+/* 
+* 詳細
+* 
+* return {callback Object}
+*/
+router.get('/detail', function(req, res, next) {
+
+    var studioId = validator.toInt(req.param('id'));
+
+	indexFacade.detail(req, {
+		studioId : studioId
+	}, function(error, result) {
+		if (error) {
+		  	res.redirect('/error');
+			return
+		}
+		res.render('index', result);
+	});
+
 });
 
 module.exports = router;
